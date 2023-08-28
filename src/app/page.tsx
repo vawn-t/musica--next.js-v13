@@ -16,6 +16,7 @@ export default async function Home() {
 
   return (
     <main>
+      {/* TODO: Just for test. Will be removed soon */}
       Fetch me information from DB
       <p>{me.username}</p>
       <p>{me.email}</p>
