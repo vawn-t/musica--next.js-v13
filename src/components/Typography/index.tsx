@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import classNames from 'classnames';
 
-import { TagType } from '@/constants/common';
+import { TagType } from '@/constants';
 
 type Props = {
-  Tag: TagType;
+  Tag?: TagType;
   children: ReactNode;
   className?: string;
 };
