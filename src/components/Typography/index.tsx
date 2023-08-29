@@ -4,6 +4,7 @@ import { TagType } from '@/constants/common';
 type Props = {
   Tag: TagType;
   children: ReactNode;
+  className: string;
 };
 
 const styleMap: { [key in TagType]: string } = {
@@ -16,10 +17,8 @@ const styleMap: { [key in TagType]: string } = {
   span: 'text-sm'
 };
 
-export const Typography = ({ Tag = TagType.p, children, ...rest }: Props) => {
-  return (
-    <Tag className={styleMap[Tag]} {...rest}>
-      {children}
-    </Tag>
-  );
+const Typography = ({ Tag = TagType.p, children, className }: Props) => {
+  return <Tag className={(styleMap[Tag], className)}>{children}</Tag>;
 };
+
+export default Typography;
