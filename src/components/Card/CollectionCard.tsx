@@ -2,27 +2,26 @@ import { useCallback } from 'react';
 import Image from 'next/image';
 
 import imageLoader, { generateDataURL } from '@/utils/imageLoader';
-import { TagType } from '@/constants/common';
+import { TagType } from '@/constants';
 
 // Components
 import Button from '@/components/Button/index';
 import Typography from '@/components/Typography';
 
 type Props = {
-  alt: string;
   name: string;
-  src: string;
+  thumbnail: string;
 };
 
-const CollectionCard = ({ alt, src, name }: Props) => {
+const CollectionCard = ({ thumbnail, name }: Props) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (
     <div className='group flex w-full h-60 sm:w-56 sm:h-56 cursor-pointer relative truncate rounded-lg'>
       <Image
         className='object-cover w-full h-auto group-hover:scale-110 duration-300'
-        src={src}
-        alt={alt}
+        src={thumbnail}
+        alt={name}
         loader={imageLoader}
         width={224}
         height={224}
