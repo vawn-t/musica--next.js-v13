@@ -5,8 +5,10 @@ specifiers:
   '@types/react': 18.2.21
   '@types/react-dom': 18.2.7
   autoprefixer: 10.4.15
+  classnames: ^2.3.2
   eslint: 8.47.0
   eslint-config-next: 13.4.19
+  iconsax-react: ^0.0.8
   next: 13.4.19
   postcss: 8.4.28
   react: 18.2.0
@@ -19,8 +21,10 @@ dependencies:
   '@types/react': 18.2.21
   '@types/react-dom': 18.2.7
   autoprefixer: 10.4.15_postcss@8.4.28
+  classnames: 2.3.2
   eslint: 8.47.0
   eslint-config-next: 13.4.19_sf2ha5dxxfjuf3a4egfvu5wr24
+  iconsax-react: 0.0.8_react@18.2.0
   next: 13.4.19_biqbaboplfbrettd7655fr4n2y
   postcss: 8.4.28
   react: 18.2.0
@@ -611,6 +615,10 @@ packages:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+    dev: false
+
+  /classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
     dev: false
 
   /client-only/0.0.1:
@@ -1371,6 +1379,15 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+    dev: false
+
+  /iconsax-react/0.0.8_react@18.2.0:
+    resolution: {integrity: sha512-l3dVk4zGtkkJHgvNYqAf0wDKqnKxXykee5/DoESGo2JvSYwaxajJUHSX2YrPRXSov8Hd8ClGFwJxCEaEjrFD1Q==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
     dev: false
 
   /ignore/5.2.4:

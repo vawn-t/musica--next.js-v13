@@ -24,6 +24,14 @@ const config: Config = {
         xl: '20px',
         '2xl': '24px',
         '3xl': '35px'
+      },
+      borderRadius: {
+        DEFAULT: '0.8rem',
+        md: '1rem',
+        lg: '1.25rem',
+        xl: '1.5rem',
+        '2xl': '2rem',
+        '3xl': '2.5rem'
       }
     }
   },
