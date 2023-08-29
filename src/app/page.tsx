@@ -1,3 +1,6 @@
+import { Typography } from '@/components/Typography';
+import { TagType } from '@/constants/common';
+
 const getMe = async () => {
   const res = await fetch(`${process.env.DB_HOST}/users/1?populate=*`, {
     method: 'GET'
@@ -18,7 +21,7 @@ export default async function Home() {
     <main>
       {/* TODO: Just for test. Will be removed soon */}
       Fetch me information from DB
-      <p>{me.username}</p>
+      <Typography Tag={TagType.h1}>{me.username}</Typography>
       <p>{me.email}</p>
     </main>
   );
