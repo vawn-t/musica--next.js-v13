@@ -38,7 +38,7 @@ const CollectionCard = ({ thumbnail, name }: Props) => {
         onClick={handlePlay}
         icon={
           <Image
-            src='/icons/Play.png'
+            src='/icons/play.png'
             alt='Play button'
             width={48}
             height={48}

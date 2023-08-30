@@ -43,7 +43,7 @@ const RowCard = ({ name, thumbnail, duration }: Props) => {
         icon={
           <Image
             className=''
-            src='/icons/Fill-4.png'
+            src='/icons/fill-4.png'
             alt='Play button'
             width={16}
             height={16}

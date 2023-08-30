@@ -1,3 +1,5 @@
+import { Navigation } from '@/models';
+
 export enum TagType {
   h1 = 'h1',
   h2 = 'h2',
@@ -7,3 +9,18 @@ export enum TagType {
   p = 'p',
   span = 'span'
 }
+
+export const NAVIGATION: Navigation[] = [
+  {
+    id: 'app/home',
+    name: 'Home',
+    iconUrl: '/icons/home.png',
+    route: '/'
+  },
+  {
+    id: 'app/collection',
+    name: 'My Collection',
+    iconUrl: '/icons/playlist.png',
+    route: '/collection'
+  }
+];
