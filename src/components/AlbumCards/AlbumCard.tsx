@@ -10,7 +10,7 @@ type Props = {
 };
 
 const AlbumCard = ({ thumbnail, name }: Props) => (
-  <div className='w-40 rounded-md cursor-pointer truncate'>
+  <div className='w-40 cursor-pointer truncate'>
     <div className='rounded-xl overflow-hidden'>
       <Image
         src={thumbnail}
