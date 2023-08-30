@@ -21,26 +21,30 @@ const Song = ({
 }: Props) => (
   <div
     className={classNames(
-      'grid grid-cols-3 grid-rows-2 bg-black/30 text-white rounded px-6 py-4 cursor-pointer',
+      'grid grid-flow-col bg-black/30 text-white rounded px-6 py-2 md:py-4 cursor-pointer',
       {
         ['text-secondary']: isPlaying
       }
     )}
     onClick={onClick}
   >
-    <Typography className='row-span-2 flex items-center'>{index}</Typography>
-    <Typography className='row-span-2 flex items-center'>{title}</Typography>
-    {isPlaying && (
-      <Image
-        className='ml-auto'
-        src='/icons/playing.png'
-        alt='Playing icon'
-        loader={imageLoader}
-        width={12}
-        height={10}
-      />
-    )}
-    <Typography className='ml-auto'>{duration}</Typography>
+    <Typography className='row-span-2 col-span-1 flex items-center'>
+      {index}
+    </Typography>
+    <Typography className='row-span-2 col-span-3 flex items-center'>
+      {title}
+    </Typography>
+    <Image
+      className={classNames('ml-auto sm:ml-0 sm:my-auto sm:col-start-2', {
+        ['invisible']: !isPlaying
+      })}
+      src='/icons/playing.png'
+      alt='Playing icon'
+      loader={imageLoader}
+      width={12}
+      height={10}
+    />
+    <Typography className='ml-auto md:ml-0'>{duration}</Typography>
   </div>
 );
 

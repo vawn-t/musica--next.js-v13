@@ -1,6 +1,7 @@
 'use client';
 
 import Navigation from '../components/Navigation/index';
+import Song from '../components/Songs/song';
 
 // const getMe = async () => {
 //   const res = await fetch(`${process.env.DB_HOST}/albums/1?populate=*`, {
@@ -23,6 +24,20 @@ export default function Home() {
       {/* TODO: Just for test. Will be removed soon */}
       Fetch data from DB
       <Navigation />
+      <Song
+        onClick={() => {}}
+        title='title'
+        index={1}
+        duration='duration'
+        isPlaying
+      />
+      <Song
+        onClick={() => {}}
+        title='title'
+        index={1}
+        duration='duration'
+        isPlaying={false}
+      />
     </main>
   );
 }
