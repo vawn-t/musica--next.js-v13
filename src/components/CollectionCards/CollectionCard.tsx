@@ -12,12 +12,11 @@ type Props = {
   name: string;
   thumbnail: string;
 };
-
 const CollectionCard = ({ thumbnail, name }: Props) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (
-    <div className='group flex w-full h-60 sm:w-56 sm:h-56 cursor-pointer relative truncate rounded-lg'>
+    <div className='group flex w-full h-60 sm:w-56 sm:h-56 cursor-pointer relative truncate rounded-lg [&:nth-child(4)]:break-after-auto'>
       <Image
         className='object-cover w-full h-auto group-hover:scale-110 duration-300'
         src={thumbnail}
