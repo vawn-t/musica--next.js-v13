@@ -1,5 +1,7 @@
 'use client';
 
+import Navigation from '../components/Navigation/index';
+
 // const getMe = async () => {
 //   const res = await fetch(`${process.env.DB_HOST}/albums/1?populate=*`, {
 //     method: 'GET'
@@ -19,7 +21,8 @@ export default function Home() {
   return (
     <main>
       {/* TODO: Just for test. Will be removed soon */}
-      Fetch data from DB \
+      Fetch data from DB
+      <Navigation />
     </main>
   );
 }
