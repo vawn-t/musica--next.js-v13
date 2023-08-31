@@ -5,26 +5,30 @@ import Typography from '@/components/Typography';
 import { TagType } from '@/constants';
 
 type Props = {
-  externalUrl: string;
+  url: string;
+  description: string;
   imgUrl: string;
   title: string;
-  description: string;
-  type: string;
 };
 
-const Banner = ({ description, title, externalUrl, imgUrl, type }: Props) => {
+const Banner = ({ description, title, url, imgUrl }: Props) => {
   return (
-    <Link href={externalUrl}>
+    <Link
+      href={url}
+      className='relative w-full h-[31rem] px-8 pt-8 pb-28 sm:p-12 flex flex-col justify-end sm:justify-center gap-2 rounded-lg sm:rounded-3xl overflow-hidden '
+    >
       <Image
-        src={imgUrl}
         alt='Banner'
-        width={686}
-        height={373}
+        className='absolute object-cover -z-10'
+        src={imgUrl}
+        fill
         loader={imageLoader}
         loading='eager'
+        sizes='100%'
       />
-      <Typography Tag={TagType.h5}>{type}</Typography>
-      <Typography Tag={TagType.h1}>{title}</Typography>
+      <Typography className='font-extrabold' Tag={TagType.h1}>
+        {title}
+      </Typography>
       <Typography Tag={TagType.span}>{description}</Typography>
     </Link>
   );
