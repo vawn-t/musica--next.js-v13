@@ -1,12 +1,27 @@
-export const formatDuration = (seconds: number) => {
+/**
+ * Formats a duration in seconds into a string representation.
+ *
+ * @param {number} seconds - The duration in seconds to format.
+ * @param {boolean} includeHours - Whether to include hours in the formatted duration.
+ * @return {string} The formatted duration string.
+ */
+export const formatDuration = (
+  seconds: number,
+  includeHours: boolean = true
+): string => {
   const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
+  const minutes = includeHours
+    ? Math.floor((seconds % 3600) / 60)
+    : Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
 
-  const formattedHours = hours < 10 ? `0${hours}` : hours;
-  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-  const formattedSeconds =
-    remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
+  const hoursString = hours < 10 ? `0${hours}` : `${hours}`;
+  const minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  const secondsString =
+    remainingSeconds < 10 ? `0${remainingSeconds}` : `${remainingSeconds}`;
 
-  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  if (includeHours) {
+    return `${hoursString}:${minutesString}:${secondsString}`;
+  }
+  return `${minutesString}:${secondsString}`;
 };
