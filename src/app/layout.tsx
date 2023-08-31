@@ -12,8 +12,8 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: METADATA.ROOT.title,
-  description: METADATA.ROOT.description
+  title: METADATA.HOME.title,
+  description: METADATA.HOME.description
 };
 
 export default function RootLayout({

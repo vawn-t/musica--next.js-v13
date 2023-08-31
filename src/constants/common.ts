@@ -15,7 +15,7 @@ export const NAVIGATION: Navigation[] = [
     id: 'app/home',
     name: 'Home',
     iconUrl: '/icons/home.png',
-    route: '/'
+    route: '/home'
   },
   {
     id: 'app/collection',
