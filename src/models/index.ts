@@ -1,2 +1,3 @@
 export * from './card';
-export * from './navgation';
+export * from './navigation';
+export * from './song';
