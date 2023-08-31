@@ -9,8 +9,8 @@ import Button from '@/components/Button/index';
 import { TagType } from '@/constants';
 
 // Utils
-import { formatDuration, generateDataURL } from '@/utils';
 import imageLoader from '@/utils/imageLoader';
+import { formatDuration, generateDataURL } from '@/utils';
 
 type Props = {
   duration: number;

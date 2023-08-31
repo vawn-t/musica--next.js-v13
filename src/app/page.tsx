@@ -1,7 +1,8 @@
 'use client';
 
+import { Song } from '@/models';
 import Navigation from '../components/Navigation/index';
-import Song from '../components/Songs/song';
+import Songs from '../components/Songs/index';
 
 // const getMe = async () => {
 //   const res = await fetch(`${process.env.DB_HOST}/albums/1?populate=*`, {
@@ -19,25 +20,26 @@ import Song from '../components/Songs/song';
 // };
 
 export default function Home() {
+  const songs: Song[] = [
+    {
+      id: 1,
+      title: 'title 1',
+      duration: 100,
+      artist: 'artist 1'
+    },
+    {
+      id: 2,
+      title: 'title 2',
+      duration: 23213,
+      artist: 'artist 2'
+    }
+  ];
   return (
     <main>
       {/* TODO: Just for test. Will be removed soon */}
       Fetch data from DB
       <Navigation />
-      <Song
-        onClick={() => {}}
-        title='title'
-        index={1}
-        duration='duration'
-        isPlaying
-      />
-      <Song
-        onClick={() => {}}
-        title='title'
-        index={1}
-        duration='duration'
-        isPlaying={false}
-      />
+      <Songs songs={songs} />
     </main>
   );
 }

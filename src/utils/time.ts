@@ -7,7 +7,7 @@
  */
 export const formatDuration = (
   seconds: number,
-  includeHours: boolean
+  includeHours: boolean = true
 ): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = includeHours
