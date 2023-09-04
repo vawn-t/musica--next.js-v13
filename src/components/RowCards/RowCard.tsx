@@ -2,15 +2,15 @@ import { useCallback } from 'react';
 import Image from 'next/image';
 
 // Components
-import Typography from '@/components/Typography';
-import Button from '@/components/Button/index';
+import Typography from '@components/Typography';
+import Button from '@components/Button/index';
 
 // Constant
-import { TagType } from '@/constants';
+import { TagType } from '@constants/index';
 
 // Utils
-import imageLoader from '@/utils/imageLoader';
-import { formatDuration, generateDataURL } from '@/utils';
+import imageLoader from '@utils/imageLoader';
+import { formatDuration, generateDataURL } from '@utils/index';
 
 type Props = {
   duration: number;

@@ -2,8 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Quicksand } from 'next/font/google';
 
-import { METADATA } from '@/constants';
-import Navigation from '@/components/Navigation';
+import { METADATA } from '@constants/index';
+import Navigation from '@components/Navigation';
 
 const quicksand = Quicksand({
   weight: '400',

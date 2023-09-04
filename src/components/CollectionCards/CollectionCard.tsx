@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import Image from 'next/image';
 
-import imageLoader, { generateDataURL } from '@/utils/imageLoader';
-import { TagType } from '@/constants';
+import imageLoader, { generateDataURL } from '@utils/imageLoader';
+import { TagType } from '@constants/index';
 
 // Components
-import Button from '@/components/Button/index';
-import Typography from '@/components/Typography';
+import Button from '@components/Button/index';
+import Typography from '@components/Typography';
 
 type Props = {
   name: string;

@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import imageLoader from '@/utils/imageLoader';
-import Typography from '@/components/Typography';
-import { TagType } from '@/constants';
+
+import imageLoader from '@utils/imageLoader';
+import Typography from '@components/Typography';
+import { TagType } from '@constants/index';
 
 type Props = {
   url: string;
@@ -15,7 +16,8 @@ const Banner = ({ description, title, url, imgUrl }: Props) => {
   return (
     <Link
       href={url}
-      className='relative w-full h-[31rem] px-8 pt-8 pb-28 sm:p-12 flex flex-col justify-end sm:justify-center gap-2 rounded-lg sm:rounded-3xl overflow-hidden '
+      className='relative w-full h-[31rem] px-8 pt-8 pb-28 sm:p-12 flex flex-col justify-end sm:justify-center gap-2 rounded-lg sm:rounded-3xl overflow-hidden'
+      target='_blank'
     >
       <Image
         alt='Banner'
@@ -23,7 +25,7 @@ const Banner = ({ description, title, url, imgUrl }: Props) => {
         src={imgUrl}
         fill
         loader={imageLoader}
-        loading='eager'
+        loading='lazy'
         sizes='100%'
       />
       <Typography className='font-extrabold' Tag={TagType.h1}>

@@ -4,11 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Components
-import Button from '@/components/Button/index';
+import Button from '@components/Button/index';
 import Item from './Item';
 
 import { Navigation } from '@/models';
-import { NAVIGATION } from '@/constants';
+import { NAVIGATION } from '@constants/index';
 
 type Props = {};
 

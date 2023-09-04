@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import Typography from '@/components/Typography';
-import { formatDuration } from '@/utils';
-import imageLoader from '@/utils/imageLoader';
+import Typography from '@components/Typography';
+import { formatDuration } from '@utils/index';
+import imageLoader from '@utils/imageLoader';
 
 type Props = {
   title: string;

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { METADATA } from '@/constants';
+import { METADATA } from '@constants/index';
 
 export const metadata: Metadata = {
   title: METADATA.HOME.title,

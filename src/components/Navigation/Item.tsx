@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Typography from '@/components/Typography';
-import { TagType } from '@/constants';
+import Typography from '@components/Typography';
+import { TagType } from '@constants/index';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import classNames from 'classnames';

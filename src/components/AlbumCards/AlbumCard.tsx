@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-import Typography from '@/components/Typography';
-import { TagType } from '@/constants';
-import imageLoader, { generateDataURL } from '@/utils/imageLoader';
+import Typography from '@components/Typography';
+import { TagType } from '@constants/index';
+import imageLoader, { generateDataURL } from '@utils/imageLoader';
 
 type Props = {
   name: string;
