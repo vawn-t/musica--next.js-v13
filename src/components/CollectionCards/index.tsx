@@ -1,8 +1,8 @@
-import { Card } from '@/models';
+import { Album } from '@/models';
 import CollectionCard from './CollectionCard';
 
 type Props = {
-  cards: Card[];
+  cards: Album[];
 };
 
 const CollectionCards = ({ cards }: Props) => (

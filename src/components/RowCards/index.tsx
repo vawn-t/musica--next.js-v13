@@ -1,13 +1,13 @@
-import { Card } from '@/models';
+import { Album } from '@/models';
 import RowCard from './RowCard';
 
 type Props = {
-  items: Card[];
+  items: Album[];
 };
 
 const RowCards = ({ items }: Props) => {
   return (
-    <div className='flex sm:flex-col overflow-auto gap-2 px-3'>
+    <div className='flex sm:flex-col overflow-auto gap-2'>
       {items.map((item) => (
         <RowCard
           key={item.id}

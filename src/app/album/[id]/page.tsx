@@ -1,4 +1,4 @@
 const Album = ({ params }: { params: { id: string } }) => {
-  return <div>Album: {params.id}</div>;
+  return <section>Album: {params.id}</section>;
 };
 export default Album;

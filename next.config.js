@@ -8,7 +8,8 @@ const nextConfig = {
       host: 'res.cloudinary.com',
       port: '',
       pathname: '/**'
-    }
+    },
+    minimumCacheTTL: 60
   }
 };
 

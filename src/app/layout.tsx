@@ -2,6 +2,9 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Quicksand } from 'next/font/google';
 
+import { METADATA } from '@constants/index';
+import Navigation from '@components/Navigation';
+
 const quicksand = Quicksand({
   weight: '400',
   subsets: ['latin'],
@@ -9,9 +12,8 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: 'Musica - Web Player: Unwind with Musica',
-  description:
-    'Musica is a digital music service that gives you access to great albums.'
+  title: METADATA.HOME.title,
+  description: METADATA.HOME.description
 };
 
 export default function RootLayout({
@@ -21,7 +23,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={quicksand.className}>
-      <body>{children}</body>
+      <body>
+        <header className='m-7 sm:fixed'>
+          <Navigation />
+        </header>
+        <main className='mx-7 sm:mx-28 sm:pt-24'>{children}</main>
+      </body>
     </html>
   );
 }

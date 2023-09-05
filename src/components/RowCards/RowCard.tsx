@@ -1,16 +1,18 @@
+'use client';
+
 import { useCallback } from 'react';
 import Image from 'next/image';
 
 // Components
-import Typography from '@/components/Typography';
-import Button from '@/components/Button/index';
+import Typography from '@components/Typography';
+import Button from '@components/Button/index';
 
 // Constant
-import { TagType } from '@/constants';
+import { TagType } from '@constants/index';
 
 // Utils
-import imageLoader from '@/utils/imageLoader';
-import { formatDuration, generateDataURL } from '@/utils';
+import imageLoader from '@utils/imageLoader';
+import { formatDuration, generateDataURL } from '@utils/index';
 
 type Props = {
   duration: number;
@@ -22,16 +24,16 @@ const RowCard = ({ name, thumbnail, duration }: Props) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (
-    <div className='relative flex flex-col sm:flex-row justify-between sm:justify-start gap-4 sm:gap-2 min-w-[20rem] sm:max-w-sm sm:w-full sm:h-24 bg-darkAlt rounded-lg p-4'>
+    <div className='relative flex flex-col sm:flex-row justify-between sm:justify-start gap-4 sm:gap-2 min-w-[20rem] sm:w-full sm:h-24 bg-darkAlt rounded-lg p-4'>
       <Image
-        className='rounded'
+        className='rounded w-24 h-24 sm:w-16 sm:h-16'
         src={thumbnail}
         alt={name}
         loader={imageLoader}
-        width={63}
-        height={63}
+        width={96}
+        height={96}
         loading='lazy'
-        placeholder={`data:image/svg+xml;base64,${generateDataURL(63, 63)}`}
+        placeholder={`data:image/svg+xml;base64,${generateDataURL(96, 96)}`}
       />
       <div className='flex flex-col justify-between gap-8 sm:gap-0'>
         <Typography Tag={TagType.h4}>{name}</Typography>
