@@ -1,5 +1,7 @@
 import { Navigation } from '@/models';
 
+/** ENUMS **/
+
 export enum TagType {
   h1 = 'h1',
   h2 = 'h2',
@@ -9,6 +11,14 @@ export enum TagType {
   p = 'p',
   span = 'span'
 }
+
+export enum AlbumOrderOption {
+  recentlyPlayed = 'recentlyPlayedAt',
+  popularity = 'plays',
+  release = 'publishedAt'
+}
+
+/** CONSTANTS **/
 
 export const NAVIGATION: Navigation[] = [
   {

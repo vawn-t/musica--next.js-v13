@@ -9,7 +9,6 @@ type Props = {
 
 const Button = ({ className = '', label, icon, onClick }: Props) => (
   <button
-    onClick={onClick}
     className={classNames(
       'cursor-pointer',
       {
@@ -18,6 +17,7 @@ const Button = ({ className = '', label, icon, onClick }: Props) => (
       },
       className
     )}
+    onClick={onClick}
   >
     {icon}
     {!!label && <span className='pl-2'>{label}</span>}

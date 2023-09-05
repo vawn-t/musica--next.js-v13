@@ -7,18 +7,8 @@ export const metadata: Metadata = {
   description: METADATA.HOME.description
 };
 
-const HomeLayout = (props: {
-  banner: React.ReactNode;
-  release: React.ReactNode;
-  recentlyPlayed: React.ReactNode;
-}) => {
-  return (
-    <>
-      <section>{props.banner}</section>
-      <section>{props.recentlyPlayed}</section>
-      <section>{props.release}</section>
-    </>
-  );
+const HomeLayout = (props: { children: React.ReactNode }) => {
+  return <>{props.children}</>;
 };
 
 export default HomeLayout;

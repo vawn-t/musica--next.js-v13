@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -23,7 +23,7 @@ const Navigation = ({}: Props) => {
       <div className='flex justify-between'>
         <Link href={NAVIGATION[0].route} className='sm:px-4'>
           <Image
-            className=''
+            priority
             src='/logo.png'
             alt='site-logo'
             width={34}
@@ -58,4 +58,4 @@ const Navigation = ({}: Props) => {
   );
 };
 
-export default Navigation;
+export default memo(Navigation);

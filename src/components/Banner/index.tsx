@@ -4,15 +4,13 @@ import Image from 'next/image';
 import imageLoader from '@utils/imageLoader';
 import Typography from '@components/Typography';
 import { TagType } from '@constants/index';
+import { Banner as BannerType } from '@/models';
 
 type Props = {
-  url: string;
-  description: string;
-  imgUrl: string;
-  title: string;
+  banner: BannerType;
 };
 
-const Banner = ({ description, title, url, imgUrl }: Props) => {
+const Banner = ({ banner: { description, title, url, imgUrl } }: Props) => {
   return (
     <Link
       href={url}
@@ -20,12 +18,12 @@ const Banner = ({ description, title, url, imgUrl }: Props) => {
       target='_blank'
     >
       <Image
+        priority
         alt='Banner'
         className='absolute object-cover -z-10'
         src={imgUrl}
         fill
         loader={imageLoader}
-        loading='lazy'
         sizes='100%'
       />
       <Typography className='font-extrabold' Tag={TagType.h1}>

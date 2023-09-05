@@ -1,2 +1,3 @@
-export * from './skeleton-card';
-export * from './skeleton-page';
+export * from './SkeletonCard';
+export * from './SkeletonPage';
+export * from './SkeletonImage';

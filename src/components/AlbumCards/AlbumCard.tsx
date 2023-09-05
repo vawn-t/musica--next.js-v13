@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 import Typography from '@components/Typography';
@@ -19,7 +21,7 @@ const AlbumCard = ({ thumbnail, name }: Props) => (
         width={160}
         height={160}
         loading='lazy'
-        placeholder={`data:image/svg+xml;base64,${generateDataURL(160, 160)}`}
+        blurDataURL={`data:image/svg+xml;base64,${generateDataURL(160, 160)}`}
         style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
       />
     </div>
