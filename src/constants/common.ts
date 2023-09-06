@@ -1,3 +1,4 @@
+import { Home2, MusicPlaylist } from 'iconsax-react';
 import { Navigation } from '@/models';
 
 /** ENUMS **/
@@ -24,13 +25,13 @@ export const NAVIGATION: Navigation[] = [
   {
     id: 'app/home',
     name: 'Home',
-    iconUrl: '/icons/home.png',
-    route: '/home'
+    route: '/home',
+    icon: Home2
   },
   {
     id: 'app/collection',
     name: 'My Collection',
-    iconUrl: '/icons/playlist.png',
-    route: '/collection'
+    route: '/collection',
+    icon: MusicPlaylist
   }
 ];

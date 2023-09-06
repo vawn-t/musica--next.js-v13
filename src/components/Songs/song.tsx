@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Typography from '@components/Typography';
 import { formatDuration } from '@utils/index';
 import imageLoader from '@utils/imageLoader';
+import { VoiceSquare } from 'iconsax-react';
 
 type Props = {
   title: string;
@@ -34,15 +35,15 @@ const Song = ({
     <Typography className='row-span-2 col-span-4 flex items-center'>
       {title}
     </Typography>
-    <Image
-      className={classNames('ml-auto sm:ml-0 sm:my-auto sm:col-start-2', {
-        ['invisible']: !isPlaying
-      })}
-      src='/icons/playing.png'
-      alt='Playing icon'
-      loader={imageLoader}
-      width={12}
-      height={10}
+    <VoiceSquare
+      className={classNames(
+        'text-secondary ml-auto sm:ml-0 sm:my-auto sm:col-start-2',
+        {
+          ['invisible']: !isPlaying
+        }
+      )}
+      variant='Broken'
+      size={12}
     />
     <Typography className='ml-auto md:ml-0'>
       {formatDuration(duration, false)}

@@ -7,6 +7,7 @@ import { TagType } from '@constants/index';
 // Components
 import Button from '@components/Button/index';
 import Typography from '@components/Typography';
+import { Play } from 'iconsax-react';
 
 type Props = {
   name: string;
@@ -36,15 +37,9 @@ const CollectionCard = ({ thumbnail, name }: Props) => {
       <Button
         className='absolute bottom-6 right-4 sm:hidden group-hover:block hover:scale-125 duration-300'
         onClick={handlePlay}
-        icon={
-          <Image
-            src='/icons/play.png'
-            alt='Play button'
-            width={48}
-            height={48}
-          />
-        }
-      />
+      >
+        <Play className='text-secondary' variant='Bold' size={48} />
+      </Button>
     </div>
   );
 };

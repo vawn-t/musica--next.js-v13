@@ -2,6 +2,7 @@
 import { memo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { HambergerMenu } from 'iconsax-react';
 
 // Components
 import Button from '@components/Button/index';
@@ -31,18 +32,9 @@ const Navigation = ({}: Props) => {
           />
         </Link>
 
-        <Button
-          className='sm:hidden'
-          icon={
-            <Image
-              src='/icons/menu.png'
-              alt='Menu button'
-              width={24}
-              height={24}
-            />
-          }
-          onClick={handleCollapse}
-        />
+        <Button className='sm:hidden' onClick={handleCollapse}>
+          <HambergerMenu size='32' variant='Broken' />
+        </Button>
       </div>
 
       <div
@@ -50,8 +42,8 @@ const Navigation = ({}: Props) => {
           expanded ? 'flex' : 'hidden'
         } sm:flex sm:items-center flex-col gap-12 sm:gap-8 sm:rounded-3xl sm:bg-darkAlt sm:w-16 sm:px-4 sm:py-8`}
       >
-        {NAVIGATION.map(({ name, iconUrl, route }: Navigation) => (
-          <Item key={name} name={name} iconUrl={iconUrl} route={route} />
+        {NAVIGATION.map(({ name, route, icon }: Navigation) => (
+          <Item key={name} name={name} icon={icon} route={route} />
         ))}
       </div>
     </nav>
