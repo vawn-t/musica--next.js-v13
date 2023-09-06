@@ -14,6 +14,7 @@ import Button from '@components/Button';
 import useAudio from '@/hooks/useAudio';
 import { MAX_RANGE } from '@constants/index';
 import { progressPositionCalculate } from '@utils/index';
+import classNames from 'classnames';
 
 type Props = {};
 
@@ -22,11 +23,10 @@ const SongControls = ({}: Props) => {
   const [isShuffled, setIsShuffled] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
 
-  const progressBar = useRef(null);
-
-  const [playing, progressValue, togglePlay, seek] = useAudio(
-    'https://res.cloudinary.com/drwsfgt0t/video/upload/v1693300693/spotifydown_com_Hoa_d2b0efa0db.mp3'
-  );
+  const [loop, playing, progressValue, toggleLoop, togglePlaying, seek] =
+    useAudio(
+      'https://res.cloudinary.com/drwsfgt0t/video/upload/v1693300693/spotifydown_com_Hoa_d2b0efa0db.mp3'
+    );
 
   const handleSeek = (event: MouseEvent<HTMLProgressElement>) => {
     seek(
@@ -47,7 +47,7 @@ const SongControls = ({}: Props) => {
         <Button onClick={prevSong}>
           <Previous size='16' variant='Bold' />
         </Button>
-        <Button className='text-secondary' onClick={togglePlay}>
+        <Button className='text-secondary' onClick={togglePlaying}>
           {playing ? (
             <PauseCircle size='26' variant='Bold' />
           ) : (
@@ -57,8 +57,11 @@ const SongControls = ({}: Props) => {
         <Button onClick={nextSong}>
           <Next size='16' variant='Bold' />
         </Button>
-        <Button onClick={collapseRepeat}>
-          <RepeateOne className='text-secondary' size='16' />
+        <Button onClick={toggleLoop}>
+          <RepeateOne
+            className={classNames({ ['text-secondary']: loop })}
+            size='16'
+          />
         </Button>
       </div>
 
@@ -72,7 +75,6 @@ const SongControls = ({}: Props) => {
           '
         value={progressValue}
         max={MAX_RANGE}
-        ref={progressBar}
         onClick={handleSeek}
       ></progress>
     </div>

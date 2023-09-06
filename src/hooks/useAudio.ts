@@ -1,7 +1,16 @@
 import { useEffect, useState } from 'react';
 import { songPositionCalculate } from '@utils/index';
 
-type AudioHookType = [boolean, number, () => void, (value: number) => void];
+import useToggle from './useToggle';
+
+type AudioHookType = [
+  boolean,
+  boolean,
+  number,
+  () => void,
+  () => void,
+  (value: number) => void
+];
 
 /**
  * Returns an array with the current state of the audio player.
@@ -15,13 +24,20 @@ type AudioHookType = [boolean, number, () => void, (value: number) => void];
  */
 const useAudio = (url: string): AudioHookType => {
   const [audio] = useState<HTMLAudioElement>(new Audio(url));
-  const [playing, setPlaying] = useState<boolean>(false);
+  //const [playing, setPlaying] = useState<boolean>(false);
+  const [playing, togglePlaying, setPlaying] = useToggle(false);
   const [progressValue, setProgressValue] = useState<number>(0);
+  const [loop, toggleLoop] = useToggle(false);
 
   useEffect(() => {
     playing ? audio.play() : audio.pause();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing]);
+
+  useEffect(() => {
+    audio.loop = loop;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loop]);
 
   useEffect(() => {
     audio.addEventListener('ended', () => setPlaying(false));
@@ -33,15 +49,14 @@ const useAudio = (url: string): AudioHookType => {
       audio.removeEventListener('ended', () => setPlaying(false));
       audio.removeEventListener('timeupdate', () => setProgressValue(0));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const togglePlay = () => setPlaying((value) => !value);
 
   const seek = (value: number) => {
     audio.currentTime = songPositionCalculate(value, audio.duration);
   };
 
-  return [playing, progressValue, togglePlay, seek];
+  return [loop, playing, progressValue, toggleLoop, togglePlaying, seek];
 };
 
 export default useAudio;
