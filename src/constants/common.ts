@@ -35,3 +35,5 @@ export const NAVIGATION: Navigation[] = [
     icon: MusicPlaylist
   }
 ];
+
+export const MAX_RANGE = 100;

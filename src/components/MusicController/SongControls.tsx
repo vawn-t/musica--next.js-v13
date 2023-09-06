@@ -12,6 +12,8 @@ import {
 
 import Button from '@components/Button';
 import useAudio from '@/hooks/useAudio';
+import { MAX_RANGE } from '@constants/index';
+import { progressPositionCalculate } from '@utils/index';
 
 type Props = {};
 
@@ -22,15 +24,13 @@ const SongControls = ({}: Props) => {
 
   const progressBar = useRef(null);
 
-  const [playing, toggle, progressValue] = useAudio(
-    'https://res.cloudinary.com/drwsfgt0t/video/upload/v1693300693/spotifydown_com_Hoa_d2b0efa0db.mp3',
-    progressBar
+  const [playing, progressValue, togglePlay, seek] = useAudio(
+    'https://res.cloudinary.com/drwsfgt0t/video/upload/v1693300693/spotifydown_com_Hoa_d2b0efa0db.mp3'
   );
 
-  const changeRange = (event: MouseEvent<HTMLProgressElement>) => {
-    console.log(event);
-    console.log(
-      (event.clientX * 100) / (event.target as HTMLProgressElement).offsetWidth
+  const handleSeek = (event: MouseEvent<HTMLProgressElement>) => {
+    seek(
+      progressPositionCalculate(event.clientX, event.currentTarget.offsetWidth)
     );
   };
   const collapseShuffled = () => {};
@@ -47,7 +47,7 @@ const SongControls = ({}: Props) => {
         <Button onClick={prevSong}>
           <Previous size='16' variant='Bold' />
         </Button>
-        <Button className='text-secondary' onClick={toggle}>
+        <Button className='text-secondary' onClick={togglePlay}>
           {playing ? (
             <PauseCircle size='26' variant='Bold' />
           ) : (
@@ -71,9 +71,9 @@ const SongControls = ({}: Props) => {
           [&::-webkit-progress-value]:rounded-lg [&::-webkit-progress-value]:bg-secondary
           '
         value={progressValue}
-        max={100}
+        max={MAX_RANGE}
         ref={progressBar}
-        onClick={changeRange}
+        onClick={handleSeek}
       ></progress>
     </div>
   );
