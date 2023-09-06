@@ -29,8 +29,8 @@ export default function RootLayout({
           <Navigation />
         </header>
         <main className='mx-7 sm:mx-28 sm:pt-24'>{children}</main>
-        <footer className='fixed w-full bottom-0 h-28 shadow-base border-t border-t-light/30'>
-          <MusicController></MusicController>
+        <footer className='fixed w-full bottom-0 h-28 shadow-base border-t border-t-light/30 bg-dark/25'>
+          <MusicController />
         </footer>
       </body>
     </html>
