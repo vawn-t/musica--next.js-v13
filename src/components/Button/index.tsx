@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, memo } from 'react';
 import classNames from 'classnames';
 
 type Props = {
@@ -17,4 +17,4 @@ const Button = ({ children, className = '', onClick }: Props) => (
   </button>
 );
 
-export default Button;
+export default memo(Button);
