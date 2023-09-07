@@ -39,16 +39,19 @@ const SongControls = ({
   // TODO: add shuffle logic
   const [isShuffled, setIsShuffled] = useState(false);
 
-  const handleSeek = useCallback((event: MouseEvent<HTMLProgressElement>) => {
-    seek(
-      progressPositionCalculate(
-        event.clientX,
-        event.currentTarget.offsetLeft,
-        event.currentTarget.offsetWidth
-      )
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const handleSeek = useCallback(
+    (event: MouseEvent<HTMLProgressElement>) => {
+      seek(
+        progressPositionCalculate(
+          event.clientX,
+          event.currentTarget.offsetLeft,
+          event.currentTarget.offsetWidth
+        )
+      );
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    [seek]
+  );
 
   // TODO: Need to handles
   const toggleShuffled = () => {};

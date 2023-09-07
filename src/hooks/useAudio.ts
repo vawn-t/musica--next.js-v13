@@ -56,7 +56,7 @@ const useAudio = (url: string): AudioHookType => {
   useEffect(() => {
     playing ? audio?.play() : audio?.pause();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playing]);
+  }, [audio, playing]);
 
   // Handles toggle loop song
   useEffect(() => {
@@ -95,7 +95,7 @@ const useAudio = (url: string): AudioHookType => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [audio?.duration]
+    [audio, audio?.duration]
   );
 
   return [
