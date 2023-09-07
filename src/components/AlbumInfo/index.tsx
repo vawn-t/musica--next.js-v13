@@ -1,10 +1,18 @@
-import Image from 'next/image';
+'use client';
 
+import Image from 'next/image';
+import { MusicSquareAdd, PlayCircle } from 'iconsax-react';
+
+// Components
 import Typography from '@components/Typography';
 import Button from '@components/Button';
+
+// Utils
 import imageLoader from '@/utils/imageLoader';
 import { generateDataURL } from '@/utils';
-import { TagType } from '@/constants';
+
+// Constants
+import { TagType } from '@constants/index';
 
 type Props = {
   description: string;
@@ -21,6 +29,10 @@ const AlbumInfo = ({
   thumbnail,
   title
 }: Props) => {
+  // TODO: Should handle
+  const handlePlayAll = () => {};
+  const handleAddToCollection = () => {};
+
   return (
     <div className='flex flex-col sm:flex-row gap-6'>
       <Image
@@ -43,9 +55,25 @@ const AlbumInfo = ({
           {totalSong} songs ~ {totalDuration} hrs+
         </Typography>
 
-        <div>
-          {/* <Button onClick={() => {}}>Play all</Button>
-          <Button onClick={() => {}}>Add to my collection</Button> */}
+        <div className='flex gap-2 pt-6 sm:pt-10'>
+          <Button
+            className='flex items-center gap-2 p-3 bg-black/30 rounded-2xl backdrop-blur-md'
+            onClick={handlePlayAll}
+          >
+            <PlayCircle className='text-secondary' size={16} variant='Bold' />
+            Play all
+          </Button>
+          <Button
+            className='flex items-center gap-2 p-3 bg-black/30 rounded-2xl backdrop-blur-md'
+            onClick={handleAddToCollection}
+          >
+            <MusicSquareAdd
+              className='text-secondary'
+              size={16}
+              variant='Bold'
+            />
+            Add to my collection
+          </Button>
         </div>
       </div>
     </div>
