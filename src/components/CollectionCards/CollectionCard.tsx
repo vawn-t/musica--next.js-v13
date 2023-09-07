@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import Image from 'next/image';
 
-import imageLoader, { generateDataURL } from '@utils/imageLoader';
+import { generateDataURL } from '@/utils';
+import imageLoader from '@utils/imageLoader';
 import { TagType } from '@constants/index';
 
 // Components

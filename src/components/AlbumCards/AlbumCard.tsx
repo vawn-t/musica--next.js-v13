@@ -1,10 +1,9 @@
-'use client';
-
 import Image from 'next/image';
 
 import Typography from '@components/Typography';
 import { TagType } from '@constants/index';
-import imageLoader, { generateDataURL } from '@utils/imageLoader';
+import imageLoader from '@utils/imageLoader';
+import { generateDataURL } from '@/utils';
 
 type Props = {
   name: string;
@@ -21,6 +20,7 @@ const AlbumCard = ({ thumbnail, name }: Props) => (
         width={160}
         height={160}
         loading='lazy'
+        placeholder='blur'
         blurDataURL={`data:image/svg+xml;base64,${generateDataURL(160, 160)}`}
         style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
       />
