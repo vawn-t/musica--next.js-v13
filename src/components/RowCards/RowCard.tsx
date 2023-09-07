@@ -13,14 +13,15 @@ import { TagType } from '@constants/index';
 // Utils
 import imageLoader from '@utils/imageLoader';
 import { formatDuration, generateDataURL } from '@utils/index';
+import { Play } from 'iconsax-react';
 
-type Props = {
+interface IProps {
   duration: number;
   name: string;
   thumbnail: string;
-};
+}
 
-const RowCard = ({ name, thumbnail, duration }: Props) => {
+const RowCard = ({ name, thumbnail, duration }: IProps) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (
@@ -39,19 +40,13 @@ const RowCard = ({ name, thumbnail, duration }: Props) => {
         <Typography Tag={TagType.h4}>{name}</Typography>
         <Typography Tag={TagType.span}>{formatDuration(duration)}</Typography>
       </div>
+
       <Button
         className='self-center absolute right-4 sm:right-8 w-9 h-9 flex justify-center items-center rounded-full border-2 border-light'
         onClick={handlePlay}
-        icon={
-          <Image
-            className=''
-            src='/icons/fill-4.png'
-            alt='Play button'
-            width={16}
-            height={16}
-          />
-        }
-      />
+      >
+        <Play className='text-secondary' variant='Bold' size={18} />
+      </Button>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Quicksand } from 'next/font/google';
 
 import { METADATA } from '@constants/index';
 import Navigation from '@components/Navigation';
+import MusicController from '@components/MusicController';
 
 const quicksand = Quicksand({
   weight: '400',
@@ -27,7 +28,10 @@ export default function RootLayout({
         <header className='m-7 sm:fixed'>
           <Navigation />
         </header>
-        <main className='mx-7 sm:mx-28 sm:pt-24'>{children}</main>
+        <main className='mx-7 pb-28 sm:mx-28 sm:pt-24'>{children}</main>
+        <footer className='fixed w-full bottom-0 h-28 shadow-base border-t border-t-light/30 bg-dark/75 backdrop-blur-md'>
+          <MusicController />
+        </footer>
       </body>
     </html>
   );

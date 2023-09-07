@@ -1,11 +1,11 @@
 import { Album } from '@/models';
 import CollectionCard from './CollectionCard';
 
-type Props = {
+interface IProps {
   cards: Album[];
-};
+}
 
-const CollectionCards = ({ cards }: Props) => (
+const CollectionCards = ({ cards }: IProps) => (
   <div className='flex flex-col sm:flex-row gap-6'>
     {cards.map((card) => (
       <CollectionCard

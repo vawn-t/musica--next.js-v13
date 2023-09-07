@@ -4,11 +4,11 @@ import { useCallback } from 'react';
 import { Song as SongModel } from '@/models';
 import Song from './song';
 
-type Props = {
+interface IProps {
   songs: SongModel[];
-};
+}
 
-const Songs = ({ songs }: Props) => {
+const Songs = ({ songs }: IProps) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (

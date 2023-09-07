@@ -1,27 +1,20 @@
+import { ReactNode, memo } from 'react';
 import classNames from 'classnames';
 
-type Props = {
+interface IProps {
+  children: ReactNode;
   className?: string;
-  label?: string;
-  icon?: JSX.Element;
   onClick: () => void;
-};
+}
 
-const Button = ({ className = '', label, icon, onClick }: Props) => (
+const Button = ({ children, className = '', onClick }: IProps) => (
   <button
-    className={classNames(
-      'cursor-pointer',
-      {
-        ['flex justify-center py-2.5 px-4 bg-white/30 rounded-2xl hover:bg-white/50']:
-          !!label
-      },
-      className
-    )}
+    type='button'
+    className={classNames('cursor-pointer', className)}
     onClick={onClick}
   >
-    {icon}
-    {!!label && <span className='pl-2'>{label}</span>}
+    {children}
   </button>
 );
 
-export default Button;
+export default memo(Button);
