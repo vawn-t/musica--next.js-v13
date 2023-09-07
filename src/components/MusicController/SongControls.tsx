@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 import classNames from 'classnames';
 import {
   Next,
@@ -9,19 +9,24 @@ import {
   Shuffle
 } from 'iconsax-react';
 
-import Button from '@components/Button';
-import { MAX_RANGE } from '@constants/index';
-import { progressPositionCalculate } from '@utils/index';
+// Components
 import ProgressBar from './ProgressBar';
+import Button from '@components/Button';
 
-type Props = {
+// Constants
+import { MAX_RANGE } from '@constants/index';
+
+// Untils
+import { progressPositionCalculate } from '@utils/index';
+
+interface IProps {
   loop: boolean;
   playing: boolean;
   progressValue: number;
   toggleLoop: () => void;
   togglePlaying: () => void;
   seek: (value: number) => void;
-};
+}
 
 const SongControls = ({
   loop,
@@ -30,11 +35,11 @@ const SongControls = ({
   toggleLoop,
   togglePlaying,
   seek
-}: Props) => {
+}: IProps) => {
   // TODO: add shuffle logic
   const [isShuffled, setIsShuffled] = useState(false);
 
-  const handleSeek = (event: MouseEvent<HTMLProgressElement>) => {
+  const handleSeek = useCallback((event: MouseEvent<HTMLProgressElement>) => {
     seek(
       progressPositionCalculate(
         event.clientX,
@@ -42,15 +47,18 @@ const SongControls = ({
         event.currentTarget.offsetWidth
       )
     );
-  };
-  const collapseShuffled = () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // TODO: Need to handles
+  const toggleShuffled = () => {};
   const prevSong = () => {};
   const nextSong = () => {};
 
   return (
     <div className='flex flex-col gap-4 sm:grow'>
       <div className='flex w-full justify-center gap-6 sm:gap-10'>
-        <Button className='hidden sm:block' onClick={collapseShuffled}>
+        <Button className='hidden sm:block' onClick={toggleShuffled}>
           <Shuffle size='22' />
         </Button>
         <Button className='hidden sm:block' onClick={prevSong}>

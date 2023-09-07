@@ -7,9 +7,9 @@ import SongControls from './SongControls';
 import VolumeControls from './VolumeControls';
 import SongDetail from './SongDetail';
 
-type Props = {};
+interface IProps {}
 
-const MusicController = ({}: Props) => {
+const MusicController = ({}: IProps) => {
   const [
     muted,
     volume,

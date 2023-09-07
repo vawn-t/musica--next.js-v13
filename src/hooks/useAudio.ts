@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { songPositionCalculate } from '@utils/index';
 import useToggle from './useToggle';
@@ -49,6 +49,7 @@ const useAudio = (url: string): AudioHookType => {
       newAudio.removeEventListener('ended', () => setPlaying(false));
       newAudio.removeEventListener('timeupdate', () => setProgressValue(0));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Handles toggle audio playing
@@ -87,11 +88,15 @@ const useAudio = (url: string): AudioHookType => {
    * @param {number} value - The position to seek to.
    * @return {void} This function does not return anything.
    */
-  const seek = (value: number) => {
-    if (audio) {
-      audio.currentTime = songPositionCalculate(value, audio.duration);
-    }
-  };
+  const seek = useCallback(
+    (value: number) => {
+      if (audio) {
+        audio.currentTime = songPositionCalculate(value, audio.duration);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [audio?.duration]
+  );
 
   return [
     muted,

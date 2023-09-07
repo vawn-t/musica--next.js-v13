@@ -8,13 +8,13 @@ import { formatDuration } from '@utils/index';
 import imageLoader from '@utils/imageLoader';
 import { VoiceSquare } from 'iconsax-react';
 
-type Props = {
+interface IProps {
   title: string;
   index: number;
   isPlaying?: boolean;
   duration: number;
   onClick: () => void;
-};
+}
 
 const Song = ({
   title,
@@ -22,7 +22,7 @@ const Song = ({
   isPlaying = false,
   duration,
   onClick
-}: Props) => (
+}: IProps) => (
   <div
     className={`grid grid-flow-col bg-black/30 rounded px-6 py-2 md:py-4 cursor-pointer ${
       isPlaying ? 'text-secondary' : 'text-white'

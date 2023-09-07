@@ -15,13 +15,13 @@ import imageLoader from '@utils/imageLoader';
 import { formatDuration, generateDataURL } from '@utils/index';
 import { Play } from 'iconsax-react';
 
-type Props = {
+interface IProps {
   duration: number;
   name: string;
   thumbnail: string;
-};
+}
 
-const RowCard = ({ name, thumbnail, duration }: Props) => {
+const RowCard = ({ name, thumbnail, duration }: IProps) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (

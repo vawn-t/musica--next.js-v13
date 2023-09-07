@@ -9,11 +9,11 @@ import Button from '@components/Button/index';
 import Typography from '@components/Typography';
 import { Play } from 'iconsax-react';
 
-type Props = {
+interface IProps {
   name: string;
   thumbnail: string;
-};
-const CollectionCard = ({ thumbnail, name }: Props) => {
+}
+const CollectionCard = ({ thumbnail, name }: IProps) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (

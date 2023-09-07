@@ -4,13 +4,13 @@ import imageLoader, { generateDataURL } from '@utils/imageLoader';
 import Typography from '@components/Typography';
 import { TagType } from '@/constants';
 
-type Props = {
+interface IProps {
   artists: string[];
   thumbnail: string;
   title: string;
-};
+}
 
-const SongDetail = ({ artists, thumbnail, title }: Props) => {
+const SongDetail = ({ artists = [], thumbnail, title }: IProps) => {
   return (
     <div className='flex gap-3'>
       <Image

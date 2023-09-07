@@ -6,11 +6,11 @@ import Typography from '@components/Typography';
 import { TagType } from '@constants/index';
 import { Banner as BannerType } from '@/models';
 
-type Props = {
+interface IProps {
   banner: BannerType;
-};
+}
 
-const Banner = ({ banner: { description, title, url, imgUrl } }: Props) => {
+const Banner = ({ banner: { description, title, url, imgUrl } }: IProps) => {
   return (
     <Link
       href={url}

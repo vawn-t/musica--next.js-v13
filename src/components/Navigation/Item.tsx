@@ -6,13 +6,13 @@ import { Icon } from 'iconsax-react';
 import Typography from '@components/Typography';
 import { TagType } from '@constants/index';
 
-type Props = {
+interface IProps {
   name: string;
   route: string;
   icon: Icon;
-};
+}
 
-const Item = ({ name, route, icon: Icon }: Props) => {
+const Item = ({ name, route, icon: Icon }: IProps) => {
   const pathname = usePathname();
 
   return (

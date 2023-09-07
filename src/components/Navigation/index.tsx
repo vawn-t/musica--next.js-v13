@@ -11,9 +11,9 @@ import Item from './Item';
 import { Navigation } from '@/models';
 import { NAVIGATION } from '@constants/index';
 
-type Props = {};
+interface IProps {}
 
-const Navigation = ({}: Props) => {
+const Navigation = ({}: IProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const handleCollapse = () => {
     setExpanded((val) => !val);
