@@ -1,11 +1,11 @@
 import { Album } from '@/models';
 import AlbumCard from './AlbumCard';
 
-type Props = {
+interface IProps {
   items: Album[];
-};
+}
 
-const AlbumCards = ({ items: cards }: Props) => (
+const AlbumCards = ({ items: cards }: IProps) => (
   <div className='flex gap-7 overflow-y-auto'>
     {cards.map((card) => (
       <AlbumCard key={card.id} thumbnail={card.thumbnail} name={card.name} />

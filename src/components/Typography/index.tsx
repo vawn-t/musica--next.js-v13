@@ -3,11 +3,11 @@ import classNames from 'classnames';
 
 import { TagType } from '@constants/index';
 
-type Props = {
+interface IProps {
   Tag?: TagType;
   children: ReactNode;
   className?: string;
-};
+}
 
 const styleMap: { [key in TagType]: string } = {
   h1: 'text-3xl font-bold',
@@ -19,7 +19,7 @@ const styleMap: { [key in TagType]: string } = {
   span: 'text-sm'
 };
 
-const Typography = ({ Tag = TagType.p, children, className = '' }: Props) => {
+const Typography = ({ Tag = TagType.p, children, className = '' }: IProps) => {
   return <Tag className={classNames(styleMap[Tag], className)}>{children}</Tag>;
 };
 

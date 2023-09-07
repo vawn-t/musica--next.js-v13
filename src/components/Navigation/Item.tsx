@@ -1,17 +1,18 @@
-import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import classNames from 'classnames';
+import { Icon } from 'iconsax-react';
+
 import Typography from '@components/Typography';
 import { TagType } from '@constants/index';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import classNames from 'classnames';
 
-type Props = {
-  iconUrl: string;
+interface IProps {
   name: string;
   route: string;
-};
+  icon: Icon;
+}
 
-const Item = ({ name, route, iconUrl }: Props) => {
+const Item = ({ name, route, icon: Icon }: IProps) => {
   const pathname = usePathname();
 
   return (
@@ -21,7 +22,7 @@ const Item = ({ name, route, iconUrl }: Props) => {
         ['opacity-25']: pathname !== route
       })}
     >
-      <Image src={iconUrl} alt={name} width={28} height={28} />
+      <Icon className='text-secondary' variant='Bold' size={28} />
       <Typography Tag={TagType.h4} className={'sm:hidden font-bold'}>
         {name}
       </Typography>

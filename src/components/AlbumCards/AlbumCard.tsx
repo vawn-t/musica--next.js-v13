@@ -5,12 +5,12 @@ import { TagType } from '@constants/index';
 import imageLoader from '@utils/imageLoader';
 import { generateDataURL } from '@/utils';
 
-type Props = {
+interface IProps {
   name: string;
   thumbnail: string;
-};
+}
 
-const AlbumCard = ({ thumbnail, name }: Props) => (
+const AlbumCard = ({ thumbnail, name }: IProps) => (
   <div className='w-40 cursor-pointer truncate'>
     <div className='rounded-xl overflow-hidden'>
       <Image

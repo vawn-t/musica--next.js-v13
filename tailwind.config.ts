@@ -32,6 +32,9 @@ const config: Config = {
         xl: '1.5rem',
         '2xl': '2rem',
         '3xl': '2.5rem'
+      },
+      boxShadow: {
+        base: '0px -25px 100px 0px rgba(16, 16, 16, 0.51)'
       }
     }
   },

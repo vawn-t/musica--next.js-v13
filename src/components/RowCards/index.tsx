@@ -1,11 +1,11 @@
 import { Album } from '@/models';
 import RowCard from './RowCard';
 
-type Props = {
+interface IProps {
   items: Album[];
-};
+}
 
-const RowCards = ({ items }: Props) => {
+const RowCards = ({ items }: IProps) => {
   return (
     <div className='flex sm:flex-col overflow-auto gap-2'>
       {items.map((item) => (
