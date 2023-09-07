@@ -1,10 +1,15 @@
 'use client';
 
 import useAudio from '@hooks/useAudio';
+
+// Components
 import SongControls from './SongControls';
 import VolumeControls from './VolumeControls';
+import SongDetail from './SongDetail';
 
-const MusicController = () => {
+type Props = {};
+
+const MusicController = ({}: Props) => {
   const [
     muted,
     volume,
@@ -21,7 +26,12 @@ const MusicController = () => {
   );
 
   return (
-    <div className='flex justify-around items-center h-full'>
+    <div className='flex justify-between items-center h-full px-9 sm:px-24 sm:gap-8'>
+      <SongDetail
+        artists={['Hoàng Tôn', '16Typh']}
+        thumbnail='https://res.cloudinary.com/drwsfgt0t/image/upload/v1692929785/ab67616d00001e0219b6ab951ea24234ed711054_46afb682e1.jpg'
+        title='Hỏa'
+      />
       <SongControls
         loop={loop}
         playing={playing}

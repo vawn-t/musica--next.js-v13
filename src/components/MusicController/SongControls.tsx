@@ -49,34 +49,34 @@ const SongControls = ({
   console.log(progressValue);
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div className='flex w-full justify-center gap-10'>
+    <div className='flex flex-col gap-4 sm:grow'>
+      <div className='flex w-full justify-center gap-6 sm:gap-10'>
         <Button className='hidden sm:block' onClick={collapseShuffled}>
-          <Shuffle size='16' />
+          <Shuffle size='22' />
         </Button>
-        <Button onClick={prevSong}>
-          <Previous size='16' variant='Bold' />
+        <Button className='hidden sm:block' onClick={prevSong}>
+          <Previous size='22' variant='Bold' />
         </Button>
         <Button className='text-secondary' onClick={togglePlaying}>
           {playing ? (
-            <PauseCircle size='26' variant='Bold' />
+            <PauseCircle size='36' variant='Bold' />
           ) : (
-            <PlayCircle size='26' variant='Bold' />
+            <PlayCircle size='36' variant='Bold' />
           )}
         </Button>
         <Button onClick={nextSong}>
-          <Next size='16' variant='Bold' />
+          <Next size='22' variant='Bold' />
         </Button>
-        <Button onClick={toggleLoop}>
+        <Button className='hidden sm:block' onClick={toggleLoop}>
           <RepeateOne
             className={classNames({ ['text-secondary']: loop })}
-            size='16'
+            size='22'
           />
         </Button>
       </div>
 
       <ProgressBar
-        className='w-full h-1'
+        className='w-full h-1 hidden sm:block'
         maxRange={MAX_RANGE}
         onClick={handleSeek}
         value={progressValue}

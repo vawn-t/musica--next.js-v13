@@ -30,7 +30,7 @@ const VolumeControls = ({
   };
 
   return (
-    <div className='flex items-center gap-2'>
+    <div className='hidden sm:flex items-center gap-2'>
       {muted || volume === 0 ? (
         <VolumeMute
           className='cursor-pointer'
