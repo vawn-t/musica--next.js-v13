@@ -1,7 +1,13 @@
 import Image from 'next/image';
 
-import imageLoader, { generateDataURL } from '@utils/imageLoader';
+// Components
 import Typography from '@components/Typography';
+
+// Utils
+import { generateDataURL } from '@utils/index';
+import imageLoader from '@utils/imageLoader';
+
+// Constants
 import { TagType } from '@/constants';
 
 interface IProps {
