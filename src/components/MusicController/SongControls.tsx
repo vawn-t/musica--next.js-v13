@@ -46,7 +46,6 @@ const SongControls = ({
   const collapseShuffled = () => {};
   const prevSong = () => {};
   const nextSong = () => {};
-  console.log(progressValue);
 
   return (
     <div className='flex flex-col gap-4 sm:grow'>
