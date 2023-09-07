@@ -34,7 +34,7 @@ const AlbumInfo = ({
   const handleAddToCollection = () => {};
 
   return (
-    <div className='flex flex-col sm:flex-row gap-6'>
+    <section className='flex flex-col sm:flex-row gap-6'>
       <Image
         alt={title}
         blurDataURL={`data:image/svg+xml;base64,${generateDataURL(284, 284)}`}
@@ -76,7 +76,7 @@ const AlbumInfo = ({
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -9,6 +9,7 @@ import imageLoader from '@utils/imageLoader';
 import { VoiceSquare } from 'iconsax-react';
 
 interface IProps {
+  artists: string[];
   title: string;
   index: number;
   isPlaying?: boolean;
@@ -17,6 +18,7 @@ interface IProps {
 }
 
 const Song = ({
+  artists = [],
   title,
   index,
   isPlaying = false,
@@ -33,7 +35,7 @@ const Song = ({
       {index}
     </Typography>
     <Typography className='row-span-2 col-span-4 flex items-center'>
-      {title}
+      {title} ~ {artists.join(', ')}
     </Typography>
     <VoiceSquare
       className={classNames(
