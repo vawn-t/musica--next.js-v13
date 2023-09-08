@@ -6,7 +6,7 @@ interface IProps {
 }
 
 const AlbumCards = ({ items: cards }: IProps) => (
-  <div className='flex gap-7 overflow-y-auto'>
+  <div className='flex flex-wrap gap-7 overflow-y-auto'>
     {cards.map((card) => (
       <AlbumCard
         key={card.id}

@@ -2,9 +2,12 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Quicksand } from 'next/font/google';
 
-import { METADATA } from '@constants/index';
+// Components
 import Navigation from '@components/Navigation';
 import MusicController from '@components/MusicController';
+
+// Constants
+import { METADATA } from '@constants/index';
 
 const quicksand = Quicksand({
   weight: '400',
