@@ -26,7 +26,7 @@ const Song = ({
   onClick
 }: IProps) => (
   <div
-    className={`grid grid-flow-col bg-black/30 rounded px-6 py-2 md:py-4 cursor-pointer ${
+    className={`grid grid-flow-col grid-cols-7 bg-black/30 rounded px-6 py-2 md:py-4 cursor-pointer ${
       isPlaying ? 'text-secondary' : 'text-white'
     }`}
     onClick={onClick}
