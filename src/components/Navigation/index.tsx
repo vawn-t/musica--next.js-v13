@@ -1,5 +1,6 @@
 'use client';
-import { memo, useState } from 'react';
+
+import { memo, useCallback, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { HambergerMenu } from 'iconsax-react';
@@ -8,16 +9,20 @@ import { HambergerMenu } from 'iconsax-react';
 import Button from '@components/Button/index';
 import Item from './Item';
 
-import { Navigation } from '@/models';
+// Models
+import { Navigation } from '@models/index';
+
+// Constants
 import { NAVIGATION } from '@constants/index';
 
 interface IProps {}
 
 const Navigation = ({}: IProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
-  const handleCollapse = () => {
+  
+  const handleCollapse = useCallback(() => {
     setExpanded((val) => !val);
-  };
+  }, []);
 
   return (
     <nav className='flex flex-col gap-8'>

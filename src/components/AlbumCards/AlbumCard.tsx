@@ -1,9 +1,14 @@
 import Image from 'next/image';
 
+// Components
 import Typography from '@components/Typography';
+
+// Constants
 import { TagType } from '@constants/index';
+
+// Utils
 import imageLoader from '@utils/imageLoader';
-import { generateDataURL } from '@/utils';
+import { generateDataURL } from '@utils/index';
 
 interface IProps {
   name: string;
@@ -20,8 +25,7 @@ const AlbumCard = ({ thumbnail, name }: IProps) => (
         width={160}
         height={160}
         loading='lazy'
-        placeholder='blur'
-        blurDataURL={`data:image/svg+xml;base64,${generateDataURL(160, 160)}`}
+        placeholder={`data:image/svg+xml;base64,${generateDataURL(160, 160)}`}
         style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
       />
     </div>

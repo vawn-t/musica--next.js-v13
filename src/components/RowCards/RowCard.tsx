@@ -1,11 +1,9 @@
-'use client';
-
 import { useCallback } from 'react';
 import Image from 'next/image';
 
 // Components
 import Typography from '@components/Typography';
-import Button from '@components/Button/index';
+import RowCardButton from './RowCardButton';
 
 // Constant
 import { TagType } from '@constants/index';
@@ -13,15 +11,15 @@ import { TagType } from '@constants/index';
 // Utils
 import imageLoader from '@utils/imageLoader';
 import { formatDuration, generateDataURL } from '@utils/index';
-import { Play } from 'iconsax-react';
 
 interface IProps {
+  id: number;
   duration: number;
   name: string;
   thumbnail: string;
 }
 
-const RowCard = ({ name, thumbnail, duration }: IProps) => {
+const RowCard = ({ id, name, thumbnail, duration }: IProps) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (
@@ -41,12 +39,7 @@ const RowCard = ({ name, thumbnail, duration }: IProps) => {
         <Typography Tag={TagType.span}>{formatDuration(duration)}</Typography>
       </div>
 
-      <Button
-        className='self-center absolute right-4 sm:right-8 w-9 h-9 flex justify-center items-center rounded-full border-2 border-light'
-        onClick={handlePlay}
-      >
-        <Play className='text-secondary' variant='Bold' size={18} />
-      </Button>
+      <RowCardButton id={id} />
     </div>
   );
 };
