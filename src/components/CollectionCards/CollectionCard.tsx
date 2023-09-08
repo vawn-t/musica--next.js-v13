@@ -1,24 +1,29 @@
 import { useCallback } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Play } from 'iconsax-react';
 
 import { generateDataURL } from '@/utils';
 import imageLoader from '@utils/imageLoader';
-import { TagType } from '@constants/index';
+import { TagType, goAlbum } from '@constants/index';
 
 // Components
 import Button from '@components/Button/index';
 import Typography from '@components/Typography';
-import { Play } from 'iconsax-react';
 
 interface IProps {
+  id: number;
   name: string;
   thumbnail: string;
 }
-const CollectionCard = ({ thumbnail, name }: IProps) => {
+const CollectionCard = ({ id, thumbnail, name }: IProps) => {
   const handlePlay = useCallback(() => {}, []);
 
   return (
-    <div className='group flex w-full h-60 sm:w-56 sm:h-56 cursor-pointer relative truncate rounded-lg [&:nth-child(4)]:break-after-auto'>
+    <Link
+      href={goAlbum(id)}
+      className='group flex w-full h-60 sm:w-56 sm:h-56 cursor-pointer relative truncate rounded-lg [&:nth-child(4)]:break-after-auto'
+    >
       <Image
         className='object-cover w-full h-auto group-hover:scale-110 duration-300'
         src={thumbnail}
@@ -41,7 +46,7 @@ const CollectionCard = ({ thumbnail, name }: IProps) => {
       >
         <Play className='text-secondary' variant='Bold' size={48} />
       </Button>
-    </div>
+    </Link>
   );
 };
 export default CollectionCard;

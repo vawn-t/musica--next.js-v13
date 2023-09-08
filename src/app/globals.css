@@ -2,8 +2,14 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@layer base {
+  :root {
+    --color-light: #fff;
+    --color-dark: #1d2123;
+  }
+}
+
 body {
-  /* TODO: Will update to variables */
-  color: #fff;
-  background-color: #1d2123;
+  color: var(--color-light);
+  background-color: var(--color-dark);
 }

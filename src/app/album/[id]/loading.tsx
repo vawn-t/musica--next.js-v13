@@ -1,5 +1,5 @@
-import { SkeletonPage } from '@components/Loading';
+import SkeletonAlbumPage from '@/components/Loading/SkeletonAlbumPage';
 
 export default function Loading() {
-  return <SkeletonPage />;
+  return <SkeletonAlbumPage />;
 }
