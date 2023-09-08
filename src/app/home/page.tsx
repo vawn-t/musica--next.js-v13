@@ -1,9 +1,16 @@
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
+// Services
 import { getAlbumsOrderBy, getFirstBanner } from '@services/index';
+
+// Models
 import { Album, Banner } from '@models/index';
+
+// Constants
 import { AlbumOrderOption, TagType } from '@constants/index';
+
+// Utils
 import { createAlbum } from '@utils/index';
 
 // Components
@@ -82,4 +89,5 @@ const Home = async () => {
     </>
   );
 };
+
 export default Home;

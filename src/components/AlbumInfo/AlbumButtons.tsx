@@ -1,7 +1,7 @@
 'use client';
 
-import Button from '@components/Button';
 import { MusicSquareAdd, PlayCircle } from 'iconsax-react';
+import Button from '@components/Button';
 
 // TODO: Should handle onClick event
 const albumButtonProps = [
