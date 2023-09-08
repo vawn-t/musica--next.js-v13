@@ -10,6 +10,7 @@ const CollectionCards = ({ cards }: IProps) => (
     {cards.map((card) => (
       <CollectionCard
         key={card.id}
+        id={card.id}
         name={card.name}
         thumbnail={card.thumbnail}
       />
