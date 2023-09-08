@@ -21,19 +21,4 @@ export enum AlbumOrderOption {
 
 /** CONSTANTS **/
 
-export const NAVIGATION: Navigation[] = [
-  {
-    id: 'app/home',
-    name: 'Home',
-    route: '/home',
-    icon: Home2
-  },
-  {
-    id: 'app/collection',
-    name: 'My Collection',
-    route: '/collection',
-    icon: MusicPlaylist
-  }
-];
-
 export const MAX_RANGE = 100;

@@ -30,14 +30,13 @@ const AlbumInfo = ({
     <section className='flex flex-col sm:flex-row gap-6'>
       <Image
         alt={title}
-        blurDataURL={`data:image/svg+xml;base64,${generateDataURL(284, 284)}`}
         className='rounded-3xl'
         src={thumbnail}
         loader={imageLoader}
         loading='lazy'
         height={284}
         width={284}
-        placeholder='blur'
+        placeholder={`data:image/svg+xml;base64,${generateDataURL(284, 284)}`}
       />
       <div className='grow'>
         <Typography className='text-alt font-bold' Tag={TagType.h1}>
