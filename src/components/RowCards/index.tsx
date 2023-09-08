@@ -1,5 +1,6 @@
 import { Album } from '@/models';
 import RowCard from './RowCard';
+import { memo } from 'react';
 
 interface IProps {
   items: Album[];
@@ -11,6 +12,7 @@ const RowCards = ({ items }: IProps) => {
       {items.map((item) => (
         <RowCard
           key={item.id}
+          id={item.id}
           duration={item.duration}
           name={item.name}
           thumbnail={item.thumbnail}
@@ -20,4 +22,4 @@ const RowCards = ({ items }: IProps) => {
   );
 };
 
-export default RowCards;
+export default memo(RowCards);
