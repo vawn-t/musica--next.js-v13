@@ -1,5 +1,5 @@
 import { Home2, MusicPlaylist } from 'iconsax-react';
-import { Navigation } from '@/models';
+import { Navigation } from '@models/index';
 
 /** ENUMS **/
 
