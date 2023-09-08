@@ -1,31 +1,30 @@
-'use client';
-
-import { useCallback } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 
 // Components
 import Typography from '@components/Typography';
-import Button from '@components/Button/index';
+import RowCardButton from './RowCardButton';
 
-// Constant
-import { TagType } from '@constants/index';
+// Constants
+import { TagType, goAlbum } from '@constants/index';
 
 // Utils
 import imageLoader from '@utils/imageLoader';
 import { formatDuration, generateDataURL } from '@utils/index';
-import { Play } from 'iconsax-react';
 
 interface IProps {
+  id: number;
   duration: number;
   name: string;
   thumbnail: string;
 }
 
-const RowCard = ({ name, thumbnail, duration }: IProps) => {
-  const handlePlay = useCallback(() => {}, []);
-
+const RowCard = ({ id, name, thumbnail, duration }: IProps) => {
   return (
-    <div className='relative flex flex-col sm:flex-row justify-between sm:justify-start gap-4 sm:gap-2 min-w-[20rem] sm:w-full sm:h-24 bg-darkAlt rounded-lg p-4'>
+    <Link
+      href={goAlbum(id)}
+      className='relative flex flex-col sm:flex-row justify-between sm:justify-start gap-4 sm:gap-2 min-w-[20rem] sm:w-full sm:h-24 bg-darkAlt rounded-lg p-4'
+    >
       <Image
         className='rounded w-24 h-24 sm:w-16 sm:h-16'
         src={thumbnail}
@@ -41,13 +40,8 @@ const RowCard = ({ name, thumbnail, duration }: IProps) => {
         <Typography Tag={TagType.span}>{formatDuration(duration)}</Typography>
       </div>
 
-      <Button
-        className='self-center absolute right-4 sm:right-8 w-9 h-9 flex justify-center items-center rounded-full border-2 border-light'
-        onClick={handlePlay}
-      >
-        <Play className='text-secondary' variant='Bold' size={18} />
-      </Button>
-    </div>
+      <RowCardButton id={id} />
+    </Link>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Album } from '@/models';
+import { Album } from '@models/index';
 import AlbumCard from './AlbumCard';
 
 interface IProps {
@@ -8,7 +8,12 @@ interface IProps {
 const AlbumCards = ({ items: cards }: IProps) => (
   <div className='flex gap-7 overflow-y-auto'>
     {cards.map((card) => (
-      <AlbumCard key={card.id} thumbnail={card.thumbnail} name={card.name} />
+      <AlbumCard
+        key={card.id}
+        id={card.id}
+        thumbnail={card.thumbnail}
+        name={card.name}
+      />
     ))}
   </div>
 );
