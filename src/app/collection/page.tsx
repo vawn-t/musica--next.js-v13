@@ -6,7 +6,7 @@ import { Album } from '@/models';
 
 const Collection = () => {
   return (
-    <section className='pb-28'>
+    <section className='pb-32'>
       <Button
         className='py-3 px-4 mb-7 text-dark bg-secondary text-base rounded-xl'
         onClick={() => {}}

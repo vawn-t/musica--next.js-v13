@@ -55,7 +55,7 @@ const Home = async () => {
 
   return (
     <>
-      <div className='sm:flex sm:justify-between sm:gap-8'>
+      <section className='sm:flex sm:justify-between sm:gap-8'>
         <Suspense fallback={<SkeletonImage />}>
           <section className='pb-12 sm:basis-4/5'>
             <BannerComponent banner={banner} />
@@ -69,7 +69,7 @@ const Home = async () => {
             <RowCards items={recentlyPlayedAlbums} />
           </Suspense>
         </section>
-      </div>
+      </section>
       <section className='pt-12'>
         <Typography Tag={TagType.h3} className='font-bold pb-4'>
           New releases.
