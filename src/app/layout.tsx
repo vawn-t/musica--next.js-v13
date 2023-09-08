@@ -1,6 +1,5 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Quicksand } from 'next/font/google';
 
 // Components
 import Navigation from '@components/Navigation';
@@ -9,11 +8,7 @@ import MusicController from '@components/MusicController';
 // Constants
 import { METADATA } from '@constants/index';
 
-const quicksand = Quicksand({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap'
-});
+import { quicksand } from './font';
 
 export const metadata: Metadata = {
   title: METADATA.HOME.title,
@@ -27,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={quicksand.className}>
-      <body className=''>
+      <body>
         <header className='m-7 sm:fixed'>
           <Navigation />
         </header>
