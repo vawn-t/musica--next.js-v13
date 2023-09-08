@@ -9,7 +9,8 @@ const Songs = dynamic(() => import('@components/Songs'));
 
 const Album = ({ params }: { params: { id: string } }) => {
   return (
-    <div className='flex flex-col gap-6 sm:gap-12 pb-28'>
+    <div className='flex flex-col gap-6 sm:gap-12 pb-32'>
+      {/* TODO: Just hard code for testing, will replace */}
       <AlbumInfo
         description='Lorem ipsum dolor sit  amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis'
         totalDuration={16}

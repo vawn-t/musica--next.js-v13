@@ -31,9 +31,7 @@ const Song = ({
       className={`grid grid-flow-col grid-cols-7 bg-black/30 rounded px-6 py-2 md:py-4 cursor-pointer ${
         isPlaying ? 'text-secondary' : 'text-white'
       }`}
-      onClick={async () => {
-        handlePlay();
-      }}
+      onClick={handlePlay}
     >
       <Typography className='row-span-2 col-span-1 flex items-center'>
         {index}

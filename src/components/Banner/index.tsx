@@ -22,7 +22,7 @@ const Banner = ({ banner: { description, title, url, imgUrl } }: IProps) => {
   return (
     <Link
       href={url}
-      className='relative w-full h-[31rem] px-8 pt-8 pb-28 sm:p-12 flex flex-col justify-end sm:justify-center gap-2 rounded-lg sm:rounded-3xl overflow-hidden'
+      className='relative w-full h-[31rem] px-8 pt-8 pb-32 sm:p-12 flex flex-col justify-end sm:justify-center gap-2 rounded-lg sm:rounded-3xl overflow-hidden'
       target='_blank'
     >
       <Image
