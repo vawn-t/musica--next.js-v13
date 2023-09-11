@@ -39,7 +39,7 @@ const MusicController = ({}: IProps) => {
     toggleLoop,
     togglePlaying,
     seek
-  ] = useAudio(song?.media.url || '');
+  ] = useAudio(song?.media?.url || '');
 
   return (
     <div className='flex justify-between items-center h-full px-9 sm:px-24 sm:gap-8'>

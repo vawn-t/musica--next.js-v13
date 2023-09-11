@@ -14,9 +14,9 @@ import { TagType } from '@constants/index';
 type Props = {
   description: string;
   totalSong: number;
-  totalDuration: number;
+  totalDuration: string;
   thumbnail: string;
-  title: string;
+  name: string;
 };
 
 const AlbumInfo = ({
@@ -24,12 +24,12 @@ const AlbumInfo = ({
   totalDuration,
   totalSong,
   thumbnail,
-  title
+  name
 }: Props) => {
   return (
     <section className='flex flex-col sm:flex-row gap-6'>
       <Image
-        alt={title}
+        alt={name}
         className='rounded-3xl'
         src={thumbnail}
         loader={imageLoader}
@@ -40,7 +40,7 @@ const AlbumInfo = ({
       />
       <div className='grow'>
         <Typography className='text-alt font-bold' Tag={TagType.h1}>
-          {title}
+          {name}
         </Typography>
         <Typography className='text-light pt-3'>{description}</Typography>
         <Typography className='text-light pt-3'>

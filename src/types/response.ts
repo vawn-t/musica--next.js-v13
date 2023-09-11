@@ -1,4 +1,4 @@
-import { Album, Banner, Song } from '@/models';
+import { AlbumAttributes, Artist, Banner, SongAttributes } from '@models/index';
 
 type ResponseAttributes<T, U> = {
   id: number;
@@ -13,6 +13,7 @@ type SubResponseAttributes<T> = {
 
 type SubResponseAttributesArray<T> = {
   data: {
+    id: number;
     attributes: T;
   }[];
 };
@@ -25,24 +26,32 @@ type BannerResponse = {
   data: ResponseAttributes<Banner, BannerAdditionalAttribute>;
 };
 
-type AlbumAdditionalAttributes = {
+type AlbumsAdditionalAttributes = {
   thumbnail: SubResponseAttributes<{ url: string }>;
-  songs?: SubResponseAttributesArray<{ duration: number }>;
+  songs: SubResponseAttributesArray<
+    SongAttributes & { SubResponseAttributes: Artist }
+  >;
+};
+
+type AlbumResponse = {
+  data: ResponseAttributes<AlbumAttributes, AlbumsAdditionalAttributes>;
 };
 
 type AlbumsResponse = {
-  data: ResponseAttributes<Album, AlbumAdditionalAttributes>[];
+  data: ResponseAttributes<AlbumAttributes, AlbumsAdditionalAttributes>[];
 };
 
 type MeResponse = {
-  song: Song;
-  album: Album;
+  song: SongAttributes;
+  album: AlbumAttributes;
 };
 
 export type {
+  AlbumResponse,
   AlbumsResponse,
-  AlbumAdditionalAttributes,
+  AlbumsAdditionalAttributes,
   BannerResponse,
+  MeResponse,
   ResponseAttributes,
-  MeResponse
+  SubResponseAttributes
 };

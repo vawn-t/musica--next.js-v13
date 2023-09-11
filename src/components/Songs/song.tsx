@@ -1,7 +1,6 @@
 'use client';
 
-import { useCallback } from 'react';
-import useSWR, { mutate } from 'swr';
+import { mutate } from 'swr';
 import classNames from 'classnames';
 import { VoiceSquare } from 'iconsax-react';
 
@@ -12,15 +11,17 @@ import Typography from '@components/Typography';
 import { formatDuration } from '@utils/index';
 
 // Services
-import { POST, PUT, swrFetcher } from '@services/clientRequest';
 import { updateCurrentPlayer } from '@/services/player.service';
 
 // Constants
 import { APIKey } from '@constants/index';
 
+// Artist
+import { Artist } from '@models/index';
+
 interface IProps {
   id: number;
-  artists: string[];
+  artists: Artist[];
   name: string;
   index: number;
   isPlaying?: boolean;
@@ -36,11 +37,12 @@ const Song = ({
   duration
 }: IProps) => {
   // TODO: must handle
-  const handlePlay = useCallback(async () => {
+  const handlePlay = async () => {
     await updateCurrentPlayer(id, 1);
 
     mutate(APIKey.me);
-  }, [id]);
+  };
+  console.log('artists', artists);
 
   return (
     <div
@@ -53,7 +55,10 @@ const Song = ({
         {index}
       </Typography>
       <Typography className='row-span-2 col-span-4 flex items-center'>
-        {name} ~ {artists.join(', ')}
+        {name} ~ 
+        {artists.data {/* TODO: should fix */}
+          .map((artist: Artist) => artist.attributes.name)
+          .join(', ')}
       </Typography>
       <VoiceSquare
         className={classNames(

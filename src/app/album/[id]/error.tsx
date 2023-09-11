@@ -7,7 +7,7 @@ import { TagType } from '@constants/index';
 
 export default function Error({ error }: { error: Error }) {
   return (
-    <div className='h-screen w-full mx-auto'>
+    <div className='h-screen w-full mx-auto text-center'>
       <Typography className='font-extrabold' Tag={TagType.h2}>
         Something went wrong!
       </Typography>

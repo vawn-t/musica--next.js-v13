@@ -1,15 +1,21 @@
+import { Song } from '.';
+
 export class Album {
+  id: number;
+  attributes: AlbumAttributes;
+
+  constructor({ id, attributes }: Album) {
+    this.id = id;
+    this.attributes = attributes;
+  }
+}
+
+export interface AlbumAttributes {
+  description: string;
   duration: number;
   name: string;
-  id: number;
+  songs: Song[];
   thumbnail: Thumbnail | string;
-
-  constructor({ duration, name, id, thumbnail }: Album) {
-    this.duration = duration;
-    this.name = name;
-    this.id = id;
-    this.thumbnail = thumbnail;
-  }
 }
 
 export interface Thumbnail {

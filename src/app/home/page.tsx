@@ -11,7 +11,7 @@ import { Album, Banner } from '@models/index';
 import { AlbumOrderOption, TagType } from '@constants/index';
 
 // Utils
-import { createAlbum } from '@utils/index';
+import { createAlbums } from '@utils/index';
 
 // Components
 const SkeletonCard = dynamic(() => import('@components/Loading/SkeletonCard'));
@@ -47,11 +47,11 @@ const Home = async () => {
     imgUrl: background.data.attributes.url
   });
 
-  const recentlyPlayedAlbums: Album[] = createAlbum(
+  const recentlyPlayedAlbums: Album[] = createAlbums(
     albumsOrderByRecentlyPlayed
   );
-  const recentlyReleasedAlbums: Album[] = createAlbum(albumsOrderByReleased);
-  const popularityAlbums: Album[] = createAlbum(albumsOrderByPopularity);
+  const recentlyReleasedAlbums: Album[] = createAlbums(albumsOrderByReleased);
+  const popularityAlbums: Album[] = createAlbums(albumsOrderByPopularity);
 
   return (
     <>

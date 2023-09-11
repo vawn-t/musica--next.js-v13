@@ -1,41 +1,29 @@
 import dynamic from 'next/dynamic';
 
-// Models
-import { Song } from '@/models';
+// Services
+import { getAlbumById } from '@services/index';
+
+// Utils
+import { createAlbum, formatDuration } from '@utils/index';
 
 // Components
 const AlbumInfo = dynamic(() => import('@components/AlbumInfo'));
 const Songs = dynamic(() => import('@components/Songs'));
 
-const Album = ({ params }: { params: { id: string } }) => {
+const Album = async ({ params }: { params: { id: number } }) => {
+  const { data } = await getAlbumById(params.id);
+  const { attributes } = createAlbum(data);
+
   return (
-    <section className='flex flex-col gap-6 sm:gap-12 pb-32'>
-      {/* TODO: Just hard code for testing, will replace */}
+    <section className='flex flex-col gap-6 sm:gap-12'>
       <AlbumInfo
-        description='Lorem ipsum dolor sit  amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis'
-        totalDuration={16}
-        totalSong={64}
-        title={`Tomorrow's tunes`}
-        thumbnail='https://res.cloudinary.com/drwsfgt0t/image/upload/v1692929785/ab67616d00001e0219b6ab951ea24234ed711054_46afb682e1.jpg'
+        description={attributes.description}
+        totalDuration={formatDuration(attributes.duration)}
+        totalSong={attributes.songs.length}
+        name={attributes.name}
+        thumbnail={attributes.thumbnail as string}
       />
-      <Songs
-        songs={
-          [
-            {
-              id: 1,
-              name: 'Song 1',
-              duration: 100,
-              artists: ['Hoàng Tôn', '16Typh']
-            },
-            {
-              id: 2,
-              name: 'Song 2',
-              duration: 120,
-              artists: ['Hoàng Tôn']
-            }
-          ] as Song[]
-        }
-      />
+      <Songs songs={attributes.songs} />
     </section>
   );
 };
