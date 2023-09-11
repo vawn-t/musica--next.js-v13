@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import useSWR from 'swr';
 
 // Hooks
@@ -10,31 +9,24 @@ import useAudio from '@hooks/useAudio';
 import SongControls from './SongControls';
 import VolumeControls from './VolumeControls';
 import SongDetail from './SongDetail';
+import Spinner from '@components/Loading/Spinner';
 
 // Services
-import { swrFetcher } from '@/services/clientRequest';
+import { getCurrentPLayer } from '@/services/player.service';
 
 // Constants
-import { SONG } from '@/constants';
+import { APIKey } from '@constants/index';
+
+// Models
+import { Thumbnail } from '@models/album';
 
 interface IProps {}
 
 const MusicController = ({}: IProps) => {
-  const {
-    data: {
-      player: { song = '' }
-    },
-    isLoading: idGetting
-  } = useSWR(process.env.NEXT_PUBLIC_API_HOST + SONG.currentSong, swrFetcher);
-
-  const { data, isLoading, mutate } = useSWR(
-    process.env.NEXT_PUBLIC_API_HOST + SONG.getSongById(song),
-    swrFetcher
+  const { data: { song, album } = {}, isLoading } = useSWR(
+    APIKey.me,
+    getCurrentPLayer
   );
-
-  useEffect(() => {
-    mutate();
-  }, [idGetting, mutate]);
 
   const [
     muted,
@@ -47,31 +39,35 @@ const MusicController = ({}: IProps) => {
     toggleLoop,
     togglePlaying,
     seek
-  ] = useAudio(
-    isLoading ? '' : data.data?.attributes?.media?.data?.attributes?.url
-  );
+  ] = useAudio(song?.media.url || '');
 
   return (
     <div className='flex justify-between items-center h-full px-9 sm:px-24 sm:gap-8'>
-      <SongDetail
-        artists={['Hoàng Tôn', '16Typh']}
-        thumbnail='https://res.cloudinary.com/drwsfgt0t/image/upload/v1692929785/ab67616d00001e0219b6ab951ea24234ed711054_46afb682e1.jpg'
-        title='Hỏa'
-      />
-      <SongControls
-        loop={loop}
-        playing={playing}
-        progressValue={progressValue}
-        toggleLoop={toggleLoop}
-        togglePlaying={togglePlaying}
-        seek={seek}
-      />
-      <VolumeControls
-        muted={muted}
-        volume={volume}
-        onSetVolume={setVolume}
-        onToggleMute={toggleMute}
-      />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <SongDetail
+            artists={(song?.artists || []).map((artist: any) => artist.name)}
+            thumbnail={(album?.thumbnail as Thumbnail).url || ''}
+            title={song?.name || ''}
+          />
+          <SongControls
+            loop={loop}
+            playing={playing}
+            progressValue={progressValue}
+            toggleLoop={toggleLoop}
+            togglePlaying={togglePlaying}
+            seek={seek}
+          />
+          <VolumeControls
+            muted={muted}
+            volume={volume}
+            onSetVolume={setVolume}
+            onToggleMute={toggleMute}
+          />
+        </>
+      )}
     </div>
   );
 };

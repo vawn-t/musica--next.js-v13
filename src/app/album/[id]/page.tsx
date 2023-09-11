@@ -23,15 +23,15 @@ const Album = ({ params }: { params: { id: string } }) => {
           [
             {
               id: 1,
-              title: 'Song 1',
+              name: 'Song 1',
               duration: 100,
-              artist: ['Hoàng Tôn', '16Typh']
+              artists: ['Hoàng Tôn', '16Typh']
             },
             {
               id: 2,
-              title: 'Song 2',
+              name: 'Song 2',
               duration: 120,
-              artist: ['Hoàng Tôn']
+              artists: ['Hoàng Tôn']
             }
           ] as Song[]
         }

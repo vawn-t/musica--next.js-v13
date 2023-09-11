@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import classNames from 'classnames';
 import { VoiceSquare } from 'iconsax-react';
 
@@ -13,11 +13,15 @@ import { formatDuration } from '@utils/index';
 
 // Services
 import { POST, PUT, swrFetcher } from '@services/clientRequest';
+import { updateCurrentPlayer } from '@/services/player.service';
+
+// Constants
+import { APIKey } from '@constants/index';
 
 interface IProps {
   id: number;
   artists: string[];
-  title: string;
+  name: string;
   index: number;
   isPlaying?: boolean;
   duration: number;
@@ -26,28 +30,17 @@ interface IProps {
 const Song = ({
   id,
   artists = [],
-  title,
+  name,
   index,
   isPlaying = false,
   duration
 }: IProps) => {
-  const { data } = useSWR(
-    process.env.NEXT_PUBLIC_API_HOST + `/songs/${id}?populate=*`,
-    swrFetcher
-  );
-
   // TODO: must handle
   const handlePlay = useCallback(async () => {
-    await PUT('/users/1', {
-      player: {
-        song: id,
-        album: 1
-      }
-    });
-    await POST('/api/revalidate?tag=music');
-  }, [id]);
+    await updateCurrentPlayer(id, 1);
 
-  console.log('song by id', data);
+    mutate(APIKey.me);
+  }, [id]);
 
   return (
     <div
@@ -60,7 +53,7 @@ const Song = ({
         {index}
       </Typography>
       <Typography className='row-span-2 col-span-4 flex items-center'>
-        {title} ~ {artists.join(', ')}
+        {name} ~ {artists.join(', ')}
       </Typography>
       <VoiceSquare
         className={classNames(

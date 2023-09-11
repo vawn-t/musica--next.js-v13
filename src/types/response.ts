@@ -1,4 +1,4 @@
-import { Album, Banner } from '@/models';
+import { Album, Banner, Song } from '@/models';
 
 type ResponseAttributes<T, U> = {
   id: number;
@@ -34,9 +34,15 @@ type AlbumsResponse = {
   data: ResponseAttributes<Album, AlbumAdditionalAttributes>[];
 };
 
+type MeResponse = {
+  song: Song;
+  album: Album;
+};
+
 export type {
   AlbumsResponse,
   AlbumAdditionalAttributes,
   BannerResponse,
-  ResponseAttributes
+  ResponseAttributes,
+  MeResponse
 };

@@ -9,7 +9,8 @@ export const ALBUM = {
     `/albums?sort=${option}:desc&populate=*`
 };
 
-export const SONG = {
-  currentSong: '/users/1?[fields][0]=player',
-  getSongById: (id: number) => `/songs/${id}?populate=*`
+export const PLAYER = {
+  currentSong:
+    '/users/1?populate[song][populate][0]=media&populate[song][populate][1]=artists&populate[album][populate][0]=thumbnail',
+  updateCurrentPlayer: '/users/1'
 };

@@ -61,5 +61,7 @@ export const PUT = async (endPoint: string, payload: any = {}) =>
   });
 
 export const swrFetcher = async (...args: any) => {
+  console.log('swrFetcher', args);
+
   return fetch(args).then((res) => res.json());
 };

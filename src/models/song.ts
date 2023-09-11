@@ -1,6 +1,12 @@
 export interface Song {
-  artist: string[];
+  artists: string[];
   duration: number;
   id: number;
-  title: string;
+  name: string;
+  media: Media;
+}
+
+interface Media {
+  id: number;
+  url: string;
 }

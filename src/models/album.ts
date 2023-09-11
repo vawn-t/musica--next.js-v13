@@ -2,7 +2,7 @@ export class Album {
   duration: number;
   name: string;
   id: number;
-  thumbnail: string;
+  thumbnail: Thumbnail | string;
 
   constructor({ duration, name, id, thumbnail }: Album) {
     this.duration = duration;
@@ -10,4 +10,8 @@ export class Album {
     this.id = id;
     this.thumbnail = thumbnail;
   }
+}
+
+export interface Thumbnail {
+  url: string;
 }

@@ -15,10 +15,10 @@ const Songs = ({ songs }: IProps) => {
         <Song
           key={song.id}
           id={song.id}
-          artists={song.artist}
+          artists={song.artists}
           duration={song.duration}
           index={index}
-          title={song.title}
+          name={song.name}
           // TODO: handle isPlaying
           // isPlaying
         />

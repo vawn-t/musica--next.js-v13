@@ -48,6 +48,7 @@ const useAudio = (url: string): AudioHookType => {
       return () => {
         newAudio.removeEventListener('ended', () => setPlaying(false));
         newAudio.removeEventListener('timeupdate', () => setProgressValue(0));
+        newAudio.pause();
       };
     }
 
