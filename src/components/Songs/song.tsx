@@ -55,8 +55,8 @@ const Song = ({
         {index}
       </Typography>
       <Typography className='row-span-2 col-span-4 flex items-center'>
-        {name} ~ 
-        {artists.data {/* TODO: should fix */}
+        {name} ~{' '}
+        {artists.data // TODO: should fix
           .map((artist: Artist) => artist.attributes.name)
           .join(', ')}
       </Typography>
