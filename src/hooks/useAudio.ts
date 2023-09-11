@@ -33,24 +33,26 @@ const useAudio = (url: string): AudioHookType => {
   const [muted, toggleMute] = useToggle(false);
 
   useEffect(() => {
-    const newAudio = new Audio(url);
+    if (url !== '') {
+      const newAudio = new Audio(url);
 
-    // Pauses if the playback of the audio has ended
-    newAudio.addEventListener('ended', () => setPlaying(false));
+      // Pauses if the playback of the audio has ended
+      newAudio.addEventListener('ended', () => setPlaying(false));
 
-    // Handles audio progress
-    newAudio.addEventListener('timeupdate', () =>
-      setProgressValue((newAudio.currentTime / newAudio.duration) * 100)
-    );
+      // Handles audio progress
+      newAudio.addEventListener('timeupdate', () =>
+        setProgressValue((newAudio.currentTime / newAudio.duration) * 100)
+      );
 
-    setAudio(newAudio);
+      setAudio(newAudio);
+      return () => {
+        newAudio.removeEventListener('ended', () => setPlaying(false));
+        newAudio.removeEventListener('timeupdate', () => setProgressValue(0));
+      };
+    }
 
-    return () => {
-      newAudio.removeEventListener('ended', () => setPlaying(false));
-      newAudio.removeEventListener('timeupdate', () => setProgressValue(0));
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [url]);
 
   // Handles toggle audio playing
   useEffect(() => {

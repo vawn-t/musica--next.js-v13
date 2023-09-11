@@ -1,5 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
+import useSWR from 'swr';
+
+// Hooks
 import useAudio from '@hooks/useAudio';
 
 // Components
@@ -7,9 +11,31 @@ import SongControls from './SongControls';
 import VolumeControls from './VolumeControls';
 import SongDetail from './SongDetail';
 
+// Services
+import { swrFetcher } from '@/services/clientRequest';
+
+// Constants
+import { SONG } from '@/constants';
+
 interface IProps {}
 
 const MusicController = ({}: IProps) => {
+  const {
+    data: {
+      player: { song = '' }
+    },
+    isLoading: idGetting
+  } = useSWR(process.env.NEXT_PUBLIC_API_HOST + SONG.currentSong, swrFetcher);
+
+  const { data, isLoading, mutate } = useSWR(
+    process.env.NEXT_PUBLIC_API_HOST + SONG.getSongById(song),
+    swrFetcher
+  );
+
+  useEffect(() => {
+    mutate();
+  }, [idGetting, mutate]);
+
   const [
     muted,
     volume,
@@ -22,7 +48,7 @@ const MusicController = ({}: IProps) => {
     togglePlaying,
     seek
   ] = useAudio(
-    'https://res.cloudinary.com/drwsfgt0t/video/upload/v1693300693/spotifydown_com_Hoa_d2b0efa0db.mp3'
+    isLoading ? '' : data.data?.attributes?.media?.data?.attributes?.url
   );
 
   return (

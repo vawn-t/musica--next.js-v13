@@ -1,11 +1,18 @@
 'use client';
 
 import { useCallback } from 'react';
+import useSWR from 'swr';
 import classNames from 'classnames';
 import { VoiceSquare } from 'iconsax-react';
 
+// Components
 import Typography from '@components/Typography';
+
+// Utils
 import { formatDuration } from '@utils/index';
+
+// Services
+import { POST, PUT, swrFetcher } from '@services/clientRequest';
 
 interface IProps {
   id: number;
@@ -17,14 +24,30 @@ interface IProps {
 }
 
 const Song = ({
+  id,
   artists = [],
   title,
   index,
   isPlaying = false,
   duration
 }: IProps) => {
+  const { data } = useSWR(
+    process.env.NEXT_PUBLIC_API_HOST + `/songs/${id}?populate=*`,
+    swrFetcher
+  );
+
   // TODO: must handle
-  const handlePlay = useCallback(() => {}, []);
+  const handlePlay = useCallback(async () => {
+    await PUT('/users/1', {
+      player: {
+        song: id,
+        album: 1
+      }
+    });
+    await POST('/api/revalidate?tag=music');
+  }, [id]);
+
+  console.log('song by id', data);
 
   return (
     <div
