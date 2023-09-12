@@ -14,12 +14,13 @@ const AlbumInfo = dynamic(() => import('@components/AlbumInfo'));
 const Songs = dynamic(() => import('@components/Songs'));
 
 const Album = async ({ params }: { params: { id: number } }) => {
-  const albumAttributes = await getAlbumById(params.id);
+  const { id, attributes: albumAttributes } = await getAlbumById(params.id);
 
   return (
     <section className='flex flex-col gap-6 sm:gap-12'>
       <Suspense fallback={<SkeletonCollectionPage />}>
         <AlbumInfo
+          albumId={id}
           description={albumAttributes.description}
           totalDuration={formatDuration(albumAttributes.duration)}
           totalSong={albumAttributes.songs.length}

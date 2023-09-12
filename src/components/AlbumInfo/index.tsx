@@ -12,19 +12,21 @@ import { generateDataURL } from '@/utils';
 import { TagType } from '@constants/index';
 
 type Props = {
+  albumId: number;
   description: string;
+  name: string;
   totalSong: number;
   totalDuration: string;
   thumbnail: string;
-  name: string;
 };
 
 const AlbumInfo = ({
+  albumId,
   description,
+  name,
   totalDuration,
   totalSong,
-  thumbnail,
-  name
+  thumbnail
 }: Props) => {
   return (
     <section className='flex flex-col sm:flex-row gap-6'>
@@ -46,7 +48,7 @@ const AlbumInfo = ({
         <Typography className='text-light pt-3'>
           {totalSong} songs ~ {totalDuration} hrs+
         </Typography>
-        <AlbumButtons />
+        <AlbumButtons albumId={albumId} />
       </div>
     </section>
   );

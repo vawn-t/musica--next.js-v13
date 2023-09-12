@@ -34,9 +34,9 @@ export const getAlbumById = async (id: number) => {
     FetchType.ssr
   );
 
-  const { attributes: albumAttributes } = createAlbum(data);
+  const album = createAlbum(data);
 
-  return albumAttributes;
+  return album;
 };
 
 export const increaseAlbumPlayCount = async (

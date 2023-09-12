@@ -7,7 +7,12 @@ import { COLLECTION, FetchType, APIKey, ME } from '@constants/index';
 import { fetcher, PUT, swrFetcher } from './clientRequest';
 
 // Types
-import { GetMyCollection, MeResponse } from '@/types';
+import type {
+  GetMyCollection,
+  MeResponse,
+  AddToCollectionRequest,
+  UpdateCurrentPlayerRequest
+} from '@/types';
 
 // Models
 import { Album, AlbumAttributes } from '@models/index';
@@ -30,4 +35,24 @@ export const getMyCollection = async () => {
   );
 
   return albums;
+};
+
+export const addAlbumToCollection = async (albumId: number) => {
+  const albums = await getMyCollection();
+  const currentAlbums = albums.map((album) => ({ id: album.id }));
+
+  // Check duplicate album id
+  const updatedAlbums = currentAlbums.reduce(
+    (acc, album) => {
+      if (album.id !== albumId) {
+        acc.push(album);
+      }
+      return acc;
+    },
+    [{ id: albumId }]
+  );
+
+  await PUT<AddToCollectionRequest>(ME.info, {
+    albums: updatedAlbums
+  });
 };
