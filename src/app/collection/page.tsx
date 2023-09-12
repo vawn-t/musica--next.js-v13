@@ -9,7 +9,7 @@ const SkeletonImage = dynamic(
 );
 
 // Services
-import { getMyCollection } from '@/services/collection.service';
+import { getMyCollection } from '@/services/me.service';
 
 const Collection = async () => {
   const albums = await getMyCollection();

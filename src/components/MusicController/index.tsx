@@ -12,7 +12,7 @@ import SongDetail from './SongDetail';
 import Spinner from '@components/Loading/Spinner';
 
 // Services
-import { getCurrentPLayer } from '@/services/player.service';
+import { getCurrentPLayer } from '@/services/me.service';
 
 // Constants
 import { APIKey } from '@constants/index';
