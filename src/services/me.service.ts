@@ -1,7 +1,13 @@
 import { Fetcher } from 'swr';
 
 // Constants
-import { COLLECTION, FetchType, APIKey, ME } from '@constants/index';
+import {
+  COLLECTION,
+  FetchType,
+  APIKey,
+  ME,
+  MessageType
+} from '@constants/index';
 
 // Services
 import { fetcher, PUT, swrFetcher } from './clientRequest';
@@ -38,21 +44,29 @@ export const getMyCollection = async () => {
 };
 
 export const addAlbumToCollection = async (albumId: number) => {
-  const albums = await getMyCollection();
-  const currentAlbums = albums.map((album) => ({ id: album.id }));
+  try {
+    const albums = await getMyCollection();
+    const currentAlbums = albums.map((album) => ({ id: album.id }));
 
-  // Check duplicate album id
-  const updatedAlbums = currentAlbums.reduce(
-    (acc, album) => {
-      if (album.id !== albumId) {
-        acc.push(album);
-      }
-      return acc;
-    },
-    [{ id: albumId }]
-  );
+    // Check duplicate album id
+    const updatedAlbums = currentAlbums.reduce(
+      (acc, album) => {
+        if (album.id !== albumId) {
+          acc.push(album);
+        }
+        return acc;
+      },
+      [{ id: albumId }]
+    );
 
-  await PUT<AddToCollectionRequest>(ME.info, {
-    albums: updatedAlbums
-  });
+    await PUT<AddToCollectionRequest>(ME.info, {
+      albums: updatedAlbums
+    });
+
+    return MessageType.success;
+  } catch (error) {
+    console.error(error);
+
+    return MessageType.error;
+  }
 };

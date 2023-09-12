@@ -25,6 +25,11 @@ export enum FetchType {
   isrTag
 }
 
+export enum MessageType {
+  error = 'error',
+  success = 'success'
+}
+
 /** CONSTANTS **/
 
 export const MAX_RANGE = 100;

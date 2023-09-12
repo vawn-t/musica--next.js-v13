@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter, usePathname } from 'next/navigation';
 import { MusicSquareAdd, PlayCircle } from 'iconsax-react';
 
 // Components
@@ -27,12 +28,17 @@ interface IProp {
 }
 
 const AlbumButtons = ({ albumId }: IProp) => {
+  const currentPath = usePathname();
+  const { push } = useRouter();
+
   return (
     <div className='flex gap-2 pt-6 sm:pt-10'>
-      {albumButtonProps.map(({ name, icon: Icon, handleClick }) => {
+      {albumButtonProps.map(({ name, icon: Icon, handleClick = () => {} }) => {
         if (name === 'Add to my collection') {
-          handleClick = () => {
-            addAlbumToCollection(albumId);
+          handleClick = async () => {
+            const result = await addAlbumToCollection(albumId);
+
+            push(`${currentPath}/?model=${result}`);
           };
         }
 

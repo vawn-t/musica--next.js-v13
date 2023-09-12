@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
@@ -5,19 +6,28 @@ import { getAlbumById } from '@/services/album.service';
 
 // Utils
 import { formatDuration } from '@utils/index';
-import { Suspense } from 'react';
 import SkeletonCollectionPage from '@/components/Loading/SkeletonCollectionPage';
 import SkeletonRaw from '@/components/Loading/SkeletonRow';
+import MessagePopup from '@/components/MessagePopup';
+import { MessageType } from '@/constants';
 
 // Components
 const AlbumInfo = dynamic(() => import('@components/AlbumInfo'));
 const Songs = dynamic(() => import('@components/Songs'));
 
-const Album = async ({ params }: { params: { id: number } }) => {
+interface IProp {
+  searchParams: { modal: MessageType } | null | undefined;
+  params: { id: number };
+}
+
+const Album = async ({ params, searchParams }: IProp) => {
   const { id, attributes: albumAttributes } = await getAlbumById(params.id);
+
+  console.log('searchParams', searchParams);
 
   return (
     <section className='flex flex-col gap-6 sm:gap-12'>
+      {searchParams?.modal && <MessagePopup status={searchParams.modal} />}
       <Suspense fallback={<SkeletonCollectionPage />}>
         <AlbumInfo
           albumId={id}
@@ -28,7 +38,6 @@ const Album = async ({ params }: { params: { id: number } }) => {
           thumbnail={albumAttributes.thumbnail as string}
         />
       </Suspense>
-
       <Suspense fallback={<SkeletonRaw />}>
         <Songs albumId={params.id} songs={albumAttributes.songs} />
       </Suspense>
