@@ -61,6 +61,10 @@ type MeResponse = {
   album: AlbumAttributes;
 };
 
+type GetMyCollection = {
+  albums: { id: number & AlbumAttributes }[];
+};
+
 export type {
   AlbumResponse,
   BannerResponse,
@@ -68,5 +72,6 @@ export type {
   ResponseAttributes,
   SubResponseAttributes,
   GetAlbumResponse,
-  GetAlbumsResponse
+  GetAlbumsResponse,
+  GetMyCollection
 };

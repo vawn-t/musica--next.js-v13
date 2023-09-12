@@ -15,3 +15,7 @@ export const PLAYER = {
     '/users/1?populate[song][populate][0]=media&populate[song][populate][1]=artists&populate[album][populate][0]=thumbnail',
   updateCurrentPlayer: '/users/1'
 };
+
+export const COLLECTION = {
+  getMyCollection: '/users/1?populate[albums][populate][0]=thumbnail'
+};

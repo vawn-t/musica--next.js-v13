@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Typography from '@components/Typography';
 
 // Constants
-import { TagType, goAlbum } from '@constants/index';
+import { TagType, DIRECTION } from '@constants/index';
 
 // Utils
 import imageLoader from '@utils/imageLoader';
@@ -19,7 +19,7 @@ interface IProps {
 
 const AlbumCard = ({ id, name, thumbnail }: IProps) => {
   return (
-    <Link href={goAlbum(id)} className='w-40 cursor-pointer truncate'>
+    <Link href={DIRECTION.goAlbum(id)} className='w-40 cursor-pointer truncate'>
       <div className='rounded-xl overflow-hidden'>
         <Image
           src={thumbnail}

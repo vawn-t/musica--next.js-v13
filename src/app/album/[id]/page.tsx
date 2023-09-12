@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumById } from '@services/index';
+import { getAlbumById } from '@/services/album.service';
 
 // Utils
 import { createAlbum, formatDuration } from '@utils/index';

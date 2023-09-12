@@ -2,7 +2,8 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumsOrderBy, getFirstBanner } from '@services/index';
+import { getAlbumsOrderBy } from '@services/album.service';
+import { getFirstBanner } from '@/services/banner.service';
 
 // Models
 import { Album, Banner } from '@models/index';
@@ -56,11 +57,11 @@ const Home = async () => {
   return (
     <>
       <section className='sm:flex sm:justify-between sm:gap-8'>
-        <Suspense fallback={<SkeletonImage />}>
-          <section className='pb-12 sm:pb-0 sm:basis-4/5'>
+        <section className='pb-12 sm:pb-0 sm:basis-4/5'>
+          <Suspense fallback={<SkeletonImage />}>
             <BannerComponent banner={banner} />
-          </section>
-        </Suspense>
+          </Suspense>
+        </section>
         <section className='sm:basis-2/6 w-full'>
           <Typography Tag={TagType.h3} className='font-bold'>
             Recently played
