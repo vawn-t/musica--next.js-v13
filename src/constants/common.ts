@@ -19,6 +19,12 @@ export enum AlbumOrderOption {
   release = 'publishedAt'
 }
 
+export enum FetchType {
+  ssr,
+  isr,
+  isrTag
+}
+
 /** CONSTANTS **/
 
 export const MAX_RANGE = 100;

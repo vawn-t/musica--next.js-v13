@@ -1,27 +1,51 @@
-import { Album } from '@models/index';
-import { AlbumAdditionalAttributes, ResponseAttributes } from '@/types';
+// Utils
+import { createSong } from './song';
+
+// Models
+import { Album, Song } from '@models/index';
+
+// Types
+import { AlbumResponse } from '@/types';
 
 /**
- * Creates an array of albums based on the provided response attributes.
+ * Creates an album object based on the provided album response.
  *
- * @param {ResponseAttributes<Album, AlbumAdditionalAttributes>[]} albums - An array of response attributes representing albums.
- * @return {Album[]} An array of Album objects.
+ * @param {AlbumResponse} albumResponse - The album response object containing the album data.
+ * @return {Album} The created album object.
  */
-export const createAlbum = (
-  albums: ResponseAttributes<Album, AlbumAdditionalAttributes>[]
-): Album[] => {
-  let duration = 0;
+export const createAlbum = ({
+  id,
+  attributes: { songs, ...restAttributes }
+}: AlbumResponse): Album => {
+  const albumDuration = songs.data.reduce(
+    (acc, { attributes: { duration } }) => acc + duration,
+    0
+  );
 
-  return albums.map(({ id, attributes }) => {
-    attributes.songs &&
-      attributes.songs.data.forEach(
-        ({ attributes }) => (duration += attributes.duration)
-      );
-    return new Album({
-      id: +id,
-      duration,
-      name: attributes.name,
-      thumbnail: attributes.thumbnail.data.attributes.url
-    });
+  const createdSongs = songs.data.map(({ id, attributes }) =>
+    createSong(id, {
+      ...attributes,
+      artists: attributes.artists ? attributes.artists.data : []
+    })
+  );
+
+  return new Album({
+    id,
+    attributes: {
+      ...restAttributes,
+      thumbnail: restAttributes.thumbnail.data.attributes.url,
+      songs: createdSongs,
+      duration: albumDuration
+    }
   });
+};
+
+/**
+ * Creates an array of albums based on the given album responses.
+ *
+ * @param {AlbumResponse[]} albums - The array of album responses.
+ * @return {Album[]} The array of created albums.
+ */
+export const createAlbums = (albums: AlbumResponse[]): Album[] => {
+  return albums.map((album) => createAlbum(album));
 };

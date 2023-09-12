@@ -10,15 +10,15 @@ interface IProps {
 
 const Songs = ({ songs }: IProps) => {
   return (
-    <section className='flex flex-col gap-4'>
-      {songs.map((song, index) => (
+    <section className='flex flex-col gap-4 pb-32'>
+      {songs.map(({ id, attributes }, index) => (
         <Song
-          key={song.id}
-          id={song.id}
-          artists={song.artist}
-          duration={song.duration}
+          key={id}
+          id={id}
+          artists={attributes.artists}
+          duration={attributes.duration}
           index={index}
-          title={song.title}
+          name={attributes.name}
           // TODO: handle isPlaying
           // isPlaying
         />

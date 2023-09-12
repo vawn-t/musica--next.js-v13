@@ -1,6 +1,16 @@
-import { ALBUM, AlbumOrderOption } from '@constants/index';
-import { AlbumsResponse } from '@/types';
+// Constants
+import { ALBUM, AlbumOrderOption, FetchType } from '@constants/index';
+
+// Types
+import type { GetAlbumResponse, GetAlbumsResponse } from '@/types';
+
 import { fetcher } from './clientRequest';
 
 export const getAlbumsOrderBy = async (option: AlbumOrderOption) =>
-  await fetcher<AlbumsResponse>(ALBUM.getAlbumsOrderBy(option), 'isr');
+  await fetcher<GetAlbumsResponse>(
+    ALBUM.getAlbumsOrderBy(option),
+    FetchType.isr
+  );
+
+export const getAlbumById = async (id: number) =>
+  await fetcher<GetAlbumResponse>(ALBUM.getAlbumById(id));
