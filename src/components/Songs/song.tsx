@@ -42,7 +42,6 @@ const Song = ({
 
     mutate(APIKey.me);
   };
-  console.log('artists', artists);
 
   return (
     <div
@@ -56,7 +55,7 @@ const Song = ({
       </Typography>
       <Typography className='row-span-2 col-span-4 flex items-center'>
         {name} ~{' '}
-        {((artists as any).data as Artist[]) // TODO: should fix
+        {artists // TODO: should fix
           .map((artist: Artist) => artist.attributes.name)
           .join(', ')}
       </Typography>

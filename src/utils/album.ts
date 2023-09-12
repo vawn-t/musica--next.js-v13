@@ -1,29 +1,25 @@
 import { Album, AlbumAttributes, Song } from '@models/index';
-import { AlbumsAdditionalAttributes, ResponseAttributes } from '@/types';
+import { AlbumResponse } from '@/types';
 import { createSong } from './song';
 
-export const createAlbum = ({
-  id,
-  attributes
-}: ResponseAttributes<AlbumAttributes, AlbumsAdditionalAttributes>): Album => {
+export const createAlbum = ({ id, attributes }: AlbumResponse): Album => {
   let duration = 0;
   let songs: Song[] = [];
 
   attributes.songs.data.forEach(({ id, attributes }) => {
     duration += attributes.duration;
-    songs.push(createSong(id, attributes));
+    songs.push(
+      createSong(id, { ...attributes, artists: attributes.artists.data })
+    );
   });
-
-  attributes.duration = duration;
 
   return new Album({
     id,
     attributes: {
-      description: attributes.description,
-      duration,
-      name: attributes.name,
+      ...attributes,
+      thumbnail: attributes.thumbnail.data.attributes.url,
       songs,
-      thumbnail: attributes.thumbnail.data.attributes.url
+      duration
     }
   });
 };
@@ -34,8 +30,6 @@ export const createAlbum = ({
  * @param {ResponseAttributes<AlbumAttributes, AlbumsAdditionalAttributes>[]} albums - An array of response attributes representing albums.
  * @return {Album[]} An array of Album objects.
  */
-export const createAlbums = (
-  albums: ResponseAttributes<AlbumAttributes, AlbumsAdditionalAttributes>[]
-): Album[] => {
+export const createAlbums = (albums: AlbumResponse[]): Album[] => {
   return albums.map((album) => createAlbum(album));
 };
