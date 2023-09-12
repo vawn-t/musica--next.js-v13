@@ -57,7 +57,7 @@ const Home = async () => {
     <>
       <section className='sm:flex sm:justify-between sm:gap-8'>
         <Suspense fallback={<SkeletonImage />}>
-          <section className='pb-12 sm:basis-4/5'>
+          <section className='pb-12 sm:pb-0 sm:basis-4/5'>
             <BannerComponent banner={banner} />
           </section>
         </Suspense>
