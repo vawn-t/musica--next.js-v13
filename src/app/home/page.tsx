@@ -5,14 +5,8 @@ import dynamic from 'next/dynamic';
 import { getAlbumsOrderBy } from '@services/album.service';
 import { getFirstBanner } from '@/services/banner.service';
 
-// Models
-import { Album, Banner } from '@models/index';
-
 // Constants
 import { AlbumOrderOption, TagType } from '@constants/index';
-
-// Utils
-import { createAlbums } from '@utils/index';
 
 // Components
 const SkeletonCard = dynamic(() => import('@components/Loading/SkeletonCard'));
@@ -25,34 +19,17 @@ const AlbumCards = dynamic(() => import('@components/AlbumCards'));
 const BannerComponent = dynamic(() => import('@components/Banner'));
 
 const Home = async () => {
-  const {
-    data: {
-      attributes: { description, title, url, background }
-    }
-  } = await getFirstBanner();
-  const { data: albumsOrderByRecentlyPlayed } = await getAlbumsOrderBy(
+  const banner = await getFirstBanner();
+
+  const albumsOrderByRecentlyPlayed = await getAlbumsOrderBy(
     AlbumOrderOption.recentlyPlayed
   );
-  const { data: albumsOrderByReleased } = await getAlbumsOrderBy(
+  const albumsOrderByReleased = await getAlbumsOrderBy(
     AlbumOrderOption.release
   );
-  const { data: albumsOrderByPopularity } = await getAlbumsOrderBy(
+  const albumsOrderByPopularity = await getAlbumsOrderBy(
     AlbumOrderOption.popularity
   );
-
-  const banner = new Banner({
-    description,
-    title,
-    url,
-    background,
-    imgUrl: background.data.attributes.url
-  });
-
-  const recentlyPlayedAlbums: Album[] = createAlbums(
-    albumsOrderByRecentlyPlayed
-  );
-  const recentlyReleasedAlbums: Album[] = createAlbums(albumsOrderByReleased);
-  const popularityAlbums: Album[] = createAlbums(albumsOrderByPopularity);
 
   return (
     <>
@@ -67,7 +44,7 @@ const Home = async () => {
             Recently played
           </Typography>
           <Suspense fallback={<SkeletonCard />}>
-            <RowCards items={recentlyPlayedAlbums} />
+            <RowCards items={albumsOrderByRecentlyPlayed} />
           </Suspense>
         </section>
       </section>
@@ -76,7 +53,7 @@ const Home = async () => {
           New releases.
         </Typography>
         <Suspense fallback={<SkeletonCard />}>
-          <AlbumCards items={recentlyReleasedAlbums} />
+          <AlbumCards items={albumsOrderByReleased} />
         </Suspense>
       </section>
       <section className='pt-12'>
@@ -84,7 +61,7 @@ const Home = async () => {
           Popularity.
         </Typography>
         <Suspense fallback={<SkeletonCard />}>
-          <AlbumCards items={popularityAlbums} />
+          <AlbumCards items={albumsOrderByPopularity} />
         </Suspense>
       </section>
     </>
