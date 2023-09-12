@@ -24,7 +24,7 @@ type AudioHookType = [
  * @param {string} url - The URL of the audio file.
  * @return {AudioHookType} An array containing the state and functions for controlling the audio playback.
  */
-const useAudio = (url: string): AudioHookType => {
+const useAudio = (url: string, handleAudioEnded: () => void): AudioHookType => {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [progressValue, setProgressValue] = useState<number>(0);
   const [volume, setVolume] = useState<number>(0.8);
@@ -37,7 +37,7 @@ const useAudio = (url: string): AudioHookType => {
       const newAudio = new Audio(url);
 
       // Pauses if the playback of the audio has ended
-      newAudio.addEventListener('ended', () => setPlaying(false));
+      newAudio.addEventListener('ended', handleEnded);
 
       // Handles audio progress
       newAudio.addEventListener('timeupdate', () =>
@@ -46,7 +46,7 @@ const useAudio = (url: string): AudioHookType => {
 
       setAudio(newAudio);
       return () => {
-        newAudio.removeEventListener('ended', () => setPlaying(false));
+        newAudio.removeEventListener('ended', handleEnded);
         newAudio.removeEventListener('timeupdate', () => setProgressValue(0));
         newAudio.pause();
       };
@@ -100,6 +100,11 @@ const useAudio = (url: string): AudioHookType => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [audio, audio?.duration]
   );
+
+  const handleEnded = () => {
+    setPlaying(false);
+    handleAudioEnded();
+  };
 
   return [
     muted,

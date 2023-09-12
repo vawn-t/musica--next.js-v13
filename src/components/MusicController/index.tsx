@@ -19,6 +19,8 @@ import { APIKey } from '@constants/index';
 
 // Models
 import { Thumbnail } from '@models/album';
+import { useCallback } from 'react';
+import { increaseAlbumPlayCount } from '@/services/album.service';
 
 interface IProps {}
 
@@ -27,6 +29,12 @@ const MusicController = ({}: IProps) => {
     APIKey.me,
     getCurrentPLayer
   );
+
+  const handleEnded = useCallback(() => {
+    if (!!album) {
+      increaseAlbumPlayCount(album.id, ++album.plays);
+    }
+  }, [album]);
 
   const [
     muted,
@@ -39,7 +47,7 @@ const MusicController = ({}: IProps) => {
     toggleLoop,
     togglePlaying,
     seek
-  ] = useAudio(song?.media?.url || '');
+  ] = useAudio(song?.media?.url || '', handleEnded);
 
   return (
     <div className='flex justify-between items-center h-full px-9 sm:px-24 sm:gap-8'>

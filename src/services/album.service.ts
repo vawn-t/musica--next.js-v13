@@ -2,10 +2,14 @@
 import { ALBUM, AlbumOrderOption, FetchType } from '@constants/index';
 
 // Types
-import type { GetAlbumResponse, GetAlbumsResponse } from '@/types';
+import type {
+  GetAlbumResponse,
+  GetAlbumsResponse,
+  IncreasePLaysCountRequest
+} from '@/types';
 
 // Services
-import { fetcher } from './clientRequest';
+import { PUT, fetcher } from './clientRequest';
 
 // Utils
 import { createAlbum, createAlbums } from '@utils/index';
@@ -34,3 +38,11 @@ export const getAlbumById = async (id: number) => {
 
   return albumAttributes;
 };
+
+export const increaseAlbumPlayCount = async (
+  albumId: number,
+  playsCount: number
+) =>
+  await PUT<IncreasePLaysCountRequest>(ALBUM.increaseAlbumPlayCount(albumId), {
+    data: { plays: playsCount }
+  });
