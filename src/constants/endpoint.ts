@@ -7,7 +7,8 @@ export const BANNER = {
 export const ALBUM = {
   getAlbumsOrderBy: (option: AlbumOrderOption) =>
     `/albums?sort=${option}:desc&populate=*`,
-  getAlbumById: (id: number) => `/albums/${id}?populate=deep,3`
+  getAlbumById: (id: number) => `/albums/${id}?populate=deep,3`,
+  increaseAlbumPlayCount: (id: number) => `/albums/${id}`
 };
 
 export const ME = {
