@@ -27,8 +27,9 @@ const Album = async ({ params }: { params: { id: number } }) => {
           thumbnail={albumAttributes.thumbnail as string}
         />
       </Suspense>
+
       <Suspense fallback={<SkeletonRaw />}>
-        <Songs songs={albumAttributes.songs} />
+        <Songs albumId={params.id} songs={albumAttributes.songs} />
       </Suspense>
     </section>
   );

@@ -16,7 +16,7 @@ import Button from '@components/Button';
 // Constants
 import { MAX_RANGE } from '@constants/index';
 
-// Untils
+// Utils
 import { progressPositionCalculate } from '@utils/index';
 
 interface IProps {

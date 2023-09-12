@@ -21,6 +21,7 @@ import { Artist } from '@models/index';
 
 interface IProps {
   id: number;
+  albumId: number;
   artists: Artist[];
   name: string;
   index: number;
@@ -30,6 +31,7 @@ interface IProps {
 
 const Song = ({
   id,
+  albumId,
   artists = [],
   name,
   index,
@@ -38,7 +40,8 @@ const Song = ({
 }: IProps) => {
   // TODO: must handle
   const handlePlay = async () => {
-    await updateCurrentPlayer(id, 1);
+    // TODO: Should update album id
+    await updateCurrentPlayer({ song: id, album: albumId });
 
     mutate(APIKey.me);
   };

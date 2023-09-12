@@ -15,11 +15,9 @@ import { Album, AlbumAttributes } from '@models/index';
 export const getCurrentPLayer: Fetcher<MeResponse, APIKey> = () =>
   swrFetcher(process.env.NEXT_PUBLIC_API_HOST + ME.getCurrentSong);
 
-export const updateCurrentPlayer = (songId: number, albumId: number) =>
-  PUT(ME.info, {
-    song: songId,
-    album: albumId
-  });
+export const updateCurrentPlayer = async (
+  payload: UpdateCurrentPlayerRequest
+) => await PUT<UpdateCurrentPlayerRequest>(ME.info, payload);
 
 export const getMyCollection = async () => {
   const data = await fetcher<GetMyCollection>(
