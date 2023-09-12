@@ -12,6 +12,7 @@ const Songs = dynamic(() => import('@components/Songs'));
 
 const Album = async ({ params }: { params: { id: number } }) => {
   const { data } = await getAlbumById(params.id);
+
   const { attributes } = createAlbum(data);
 
   return (

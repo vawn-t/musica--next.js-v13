@@ -1,6 +1,5 @@
 import {
   AlbumAttributes,
-  Artist,
   ArtistAttributes,
   Banner,
   SongAttributes
@@ -17,24 +16,12 @@ type SubResponseAttributes<T> = {
   };
 };
 
-type SubResponseAttributesArray<T> = {
-  data: {
-    id: number;
-    attributes: T;
-  }[];
-};
-
 type BannerAdditionalAttribute = {
   background: SubResponseAttributes<{ url: string }>;
 };
 
 type BannerResponse = {
   data: ResponseAttributes<Banner, BannerAdditionalAttribute>;
-};
-
-type AlbumsAdditionalAttributes = {
-  thumbnail: SubResponseAttributes<{ url: string }>;
-  songs: SubResponseAttributesArray<SongAttributes & { artists: Artist }>;
 };
 
 type AlbumResponse = {
@@ -44,7 +31,7 @@ type AlbumResponse = {
       data: {
         id: number;
         attributes: SongAttributes & {
-          artists: {
+          artists?: {
             data: {
               id: number;
               attributes: ArtistAttributes;
@@ -69,10 +56,6 @@ type GetAlbumsResponse = {
   data: AlbumResponse[];
 };
 
-type AlbumsResponse = {
-  data: ResponseAttributes<AlbumAttributes, AlbumsAdditionalAttributes>[];
-};
-
 type MeResponse = {
   song: SongAttributes;
   album: AlbumAttributes;
@@ -80,8 +63,6 @@ type MeResponse = {
 
 export type {
   AlbumResponse,
-  AlbumsResponse,
-  AlbumsAdditionalAttributes,
   BannerResponse,
   MeResponse,
   ResponseAttributes,
