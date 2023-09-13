@@ -38,7 +38,7 @@ const AlbumButtons = ({ albumId }: IProp) => {
           handleClick = async () => {
             const result = await addAlbumToCollection(albumId);
 
-            push(`${currentPath}/?model=${result}`);
+            push(`${currentPath}/?modal=${result}`);
           };
         }
 
