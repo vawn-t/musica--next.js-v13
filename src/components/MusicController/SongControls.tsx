@@ -64,9 +64,6 @@ const SongControls = ({
     } else {
       await updateCurrentPlayer({ song: previousSongId, album: albumId });
 
-      // seek progress bar to 0
-      seek(0);
-
       mutate(APIKey.me);
     }
   }, [albumId, isFirstSong, previousSongId, seek]);
@@ -75,12 +72,9 @@ const SongControls = ({
     if (albumId && nextSongId >= 0) {
       await updateCurrentPlayer({ song: nextSongId, album: albumId });
 
-      // seek progress bar to 0
-      seek(0);
-
       mutate(APIKey.me);
     }
-  }, [albumId, nextSongId, seek]);
+  }, [albumId, nextSongId]);
   return (
     <div className='flex flex-col gap-4 sm:grow'>
       <Controller

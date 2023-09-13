@@ -45,6 +45,10 @@ const useAudio = (url: string, handleAudioEnded: () => void): AudioHookType => {
       );
 
       setAudio(newAudio);
+
+      if (audio) {
+        audio.currentTime = 0;
+      }
       return () => {
         newAudio.removeEventListener('ended', handleEnded);
         newAudio.removeEventListener('timeupdate', () => setProgressValue(0));
