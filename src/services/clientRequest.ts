@@ -53,7 +53,7 @@ export const POST = async (endPoint: string, payload: any = {}) =>
     body: JSON.stringify(payload)
   });
 
-export const PUT = async (endPoint: string, payload: any = {}) =>
+export const PUT = async <T>(endPoint: string, payload: T) =>
   await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

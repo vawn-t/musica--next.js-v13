@@ -1,4 +1,4 @@
-import { Album } from '@/models';
+import { Album, Thumbnail } from '@models/index';
 import CollectionCard from './CollectionCard';
 
 interface IProps {
@@ -12,7 +12,7 @@ const CollectionCards = ({ cards }: IProps) => (
         key={id}
         id={id}
         name={attributes.name}
-        thumbnail={attributes.thumbnail as string}
+        thumbnail={(attributes.thumbnail as Thumbnail).url}
       />
     ))}
   </div>

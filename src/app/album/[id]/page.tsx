@@ -1,30 +1,44 @@
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumById } from '@services/index';
+import { getAlbumById } from '@/services/album.service';
 
 // Utils
-import { createAlbum, formatDuration } from '@utils/index';
+import { formatDuration } from '@utils/index';
+import SkeletonCollectionPage from '@/components/Loading/SkeletonCollectionPage';
+import SkeletonRaw from '@/components/Loading/SkeletonRow';
+import MessagePopup from '@/components/MessagePopup';
+import { MessageType } from '@/constants';
 
 // Components
 const AlbumInfo = dynamic(() => import('@components/AlbumInfo'));
 const Songs = dynamic(() => import('@components/Songs'));
 
-const Album = async ({ params }: { params: { id: number } }) => {
-  const { data } = await getAlbumById(params.id);
+interface IProp {
+  searchParams: { modal: MessageType } | null | undefined;
+  params: { id: number };
+}
 
-  const { attributes } = createAlbum(data);
+const Album = async ({ params, searchParams }: IProp) => {
+  const { id, attributes: albumAttributes } = await getAlbumById(params.id);
 
   return (
     <section className='flex flex-col gap-6 sm:gap-12'>
-      <AlbumInfo
-        description={attributes.description}
-        totalDuration={formatDuration(attributes.duration)}
-        totalSong={attributes.songs.length}
-        name={attributes.name}
-        thumbnail={attributes.thumbnail as string}
-      />
-      <Songs songs={attributes.songs} />
+      {searchParams?.modal && <MessagePopup status={searchParams.modal} />}
+      <Suspense fallback={<SkeletonCollectionPage />}>
+        <AlbumInfo
+          albumId={id}
+          description={albumAttributes.description}
+          totalDuration={formatDuration(albumAttributes.duration)}
+          totalSong={albumAttributes.songs.length}
+          name={albumAttributes.name}
+          thumbnail={albumAttributes.thumbnail as string}
+        />
+      </Suspense>
+      <Suspense fallback={<SkeletonRaw />}>
+        <Songs albumId={params.id} songs={albumAttributes.songs} />
+      </Suspense>
     </section>
   );
 };

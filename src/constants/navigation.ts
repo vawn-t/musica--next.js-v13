@@ -16,4 +16,7 @@ export const NAVIGATION: Navigation[] = [
   }
 ];
 
-export const goAlbum = (id: number) => `/album/${id}`;
+export const DIRECTION = {
+  goAlbum: (id: number) => `/album/${id}`,
+  goMyCollection: '/collection'
+};

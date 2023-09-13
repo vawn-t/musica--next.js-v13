@@ -2,16 +2,11 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumsOrderBy, getFirstBanner } from '@services/index';
-
-// Models
-import { Album, Banner } from '@models/index';
+import { getAlbumsOrderBy } from '@services/album.service';
+import { getFirstBanner } from '@/services/banner.service';
 
 // Constants
 import { AlbumOrderOption, TagType } from '@constants/index';
-
-// Utils
-import { createAlbums } from '@utils/index';
 
 // Components
 const SkeletonCard = dynamic(() => import('@components/Loading/SkeletonCard'));
@@ -24,49 +19,32 @@ const AlbumCards = dynamic(() => import('@components/AlbumCards'));
 const BannerComponent = dynamic(() => import('@components/Banner'));
 
 const Home = async () => {
-  const {
-    data: {
-      attributes: { description, title, url, background }
-    }
-  } = await getFirstBanner();
-  const { data: albumsOrderByRecentlyPlayed } = await getAlbumsOrderBy(
+  const banner = await getFirstBanner();
+
+  const albumsOrderByRecentlyPlayed = await getAlbumsOrderBy(
     AlbumOrderOption.recentlyPlayed
   );
-  const { data: albumsOrderByReleased } = await getAlbumsOrderBy(
+  const albumsOrderByReleased = await getAlbumsOrderBy(
     AlbumOrderOption.release
   );
-  const { data: albumsOrderByPopularity } = await getAlbumsOrderBy(
+  const albumsOrderByPopularity = await getAlbumsOrderBy(
     AlbumOrderOption.popularity
   );
-
-  const banner = new Banner({
-    description,
-    title,
-    url,
-    background,
-    imgUrl: background.data.attributes.url
-  });
-
-  const recentlyPlayedAlbums: Album[] = createAlbums(
-    albumsOrderByRecentlyPlayed
-  );
-  const recentlyReleasedAlbums: Album[] = createAlbums(albumsOrderByReleased);
-  const popularityAlbums: Album[] = createAlbums(albumsOrderByPopularity);
 
   return (
     <>
       <section className='sm:flex sm:justify-between sm:gap-8'>
-        <Suspense fallback={<SkeletonImage />}>
-          <section className='pb-12 sm:basis-4/5'>
+        <section className='pb-12 sm:pb-0 sm:basis-4/5'>
+          <Suspense fallback={<SkeletonImage />}>
             <BannerComponent banner={banner} />
-          </section>
-        </Suspense>
+          </Suspense>
+        </section>
         <section className='sm:basis-2/6 w-full'>
           <Typography Tag={TagType.h3} className='font-bold'>
             Recently played
           </Typography>
           <Suspense fallback={<SkeletonCard />}>
-            <RowCards items={recentlyPlayedAlbums} />
+            <RowCards items={albumsOrderByRecentlyPlayed} />
           </Suspense>
         </section>
       </section>
@@ -75,7 +53,7 @@ const Home = async () => {
           New releases.
         </Typography>
         <Suspense fallback={<SkeletonCard />}>
-          <AlbumCards items={recentlyReleasedAlbums} />
+          <AlbumCards items={albumsOrderByReleased} />
         </Suspense>
       </section>
       <section className='pt-12'>
@@ -83,7 +61,7 @@ const Home = async () => {
           Popularity.
         </Typography>
         <Suspense fallback={<SkeletonCard />}>
-          <AlbumCards items={popularityAlbums} />
+          <AlbumCards items={albumsOrderByPopularity} />
         </Suspense>
       </section>
     </>

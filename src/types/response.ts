@@ -2,7 +2,9 @@ import {
   AlbumAttributes,
   ArtistAttributes,
   Banner,
-  SongAttributes
+  Song,
+  SongAttributes,
+  Thumbnail
 } from '@models/index';
 
 type ResponseAttributes<T, U> = {
@@ -58,7 +60,19 @@ type GetAlbumsResponse = {
 
 type MeResponse = {
   song: SongAttributes;
-  album: AlbumAttributes;
+  album: {
+    id: number;
+    description: string;
+    duration: number;
+    name: string;
+    songs: Song[];
+    thumbnail: Thumbnail | string;
+    plays: number;
+  };
+};
+
+type GetMyCollection = {
+  albums: { id: number & AlbumAttributes }[];
 };
 
 export type {
@@ -68,5 +82,6 @@ export type {
   ResponseAttributes,
   SubResponseAttributes,
   GetAlbumResponse,
-  GetAlbumsResponse
+  GetAlbumsResponse,
+  GetMyCollection
 };
