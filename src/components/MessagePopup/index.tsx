@@ -3,17 +3,24 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { MessageType } from '@/constants';
+import { usePathname } from 'next/navigation';
 
 interface IProps {
   status: MessageType;
 }
 
 const MessagePopup = ({ status }: IProps) => {
+  const pathName = usePathname();
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     const displayInterval: any = setInterval(() => {
       setHidden(true);
+
+      if (typeof window !== 'undefined') {
+        // Remove search param
+        window.history.replaceState(null, '', pathName);
+      }
     }, 3000);
 
     return () => {
