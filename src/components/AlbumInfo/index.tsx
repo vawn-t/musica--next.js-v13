@@ -46,7 +46,7 @@ const AlbumInfo = ({
         </Typography>
         <Typography className='text-light pt-3'>{description}</Typography>
         <Typography className='text-light pt-3'>
-          {totalSong} songs ~ {totalDuration} hrs+
+          {totalSong} songs ~ {totalDuration}
         </Typography>
         <AlbumButtons albumId={albumId} />
       </div>

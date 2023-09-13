@@ -1,25 +1,18 @@
-import { MouseEvent, useCallback, useState } from 'react';
-import classNames from 'classnames';
-import {
-  Next,
-  PauseCircle,
-  PlayCircle,
-  Previous,
-  RepeateOne,
-  Shuffle
-} from 'iconsax-react';
+import { MouseEvent, memo, useCallback, useState } from 'react';
+import { mutate } from 'swr';
 
 // Components
 import ProgressBar from './ProgressBar';
-import Button from '@components/Button';
+import Controller from './Controller';
 
 // Constants
 import { APIKey, MAX_RANGE } from '@constants/index';
 
 // Utils
 import { progressPositionCalculate } from '@utils/index';
+
+// Services
 import { updateCurrentPlayer } from '@/services/me.service';
-import { mutate } from 'swr';
 
 interface IProps {
   albumId: number;
@@ -27,7 +20,8 @@ interface IProps {
   playing: boolean;
   progressValue: number;
   nextSongId: number;
-  previousSongId?: number;
+  isFirstSong: boolean;
+  previousSongId: number;
   toggleLoop: () => void;
   togglePlaying: () => void;
   seek: (value: number) => void;
@@ -39,6 +33,7 @@ const SongControls = ({
   playing,
   progressValue,
   nextSongId,
+  isFirstSong,
   previousSongId,
   toggleLoop,
   togglePlaying,
@@ -56,16 +51,27 @@ const SongControls = ({
           event.currentTarget.offsetWidth
         )
       );
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
     [seek]
   );
 
   // TODO: Need to handles
-  const toggleShuffled = () => {};
-  const prevSong = () => {};
+  const toggleShuffled = useCallback(() => {}, []);
 
-  const nextSong = async () => {
+  const prevSong = useCallback(async () => {
+    if (isFirstSong) {
+      seek(0);
+    } else {
+      await updateCurrentPlayer({ song: previousSongId, album: albumId });
+
+      // seek progress bar to 0
+      seek(0);
+
+      mutate(APIKey.me);
+    }
+  }, [albumId, isFirstSong, previousSongId, seek]);
+
+  const nextSong = useCallback(async () => {
     if (albumId && nextSongId >= 0) {
       await updateCurrentPlayer({ song: nextSongId, album: albumId });
 
@@ -74,35 +80,18 @@ const SongControls = ({
 
       mutate(APIKey.me);
     }
-  };
-
+  }, [albumId, nextSongId, seek]);
   return (
     <div className='flex flex-col gap-4 sm:grow'>
-      <div className='flex w-full justify-center gap-6 sm:gap-10'>
-        <Button className='hidden sm:block' onClick={toggleShuffled}>
-          <Shuffle size='22' />
-        </Button>
-        <Button className='hidden sm:block' onClick={prevSong}>
-          <Previous size='22' variant='Bold' />
-        </Button>
-        <Button className='text-secondary' onClick={togglePlaying}>
-          {playing ? (
-            <PauseCircle size='36' variant='Bold' />
-          ) : (
-            <PlayCircle size='36' variant='Bold' />
-          )}
-        </Button>
-        <Button onClick={nextSong}>
-          <Next size='22' variant='Bold' />
-        </Button>
-        <Button className='hidden sm:block' onClick={toggleLoop}>
-          <RepeateOne
-            className={classNames({ ['text-secondary']: loop })}
-            size='22'
-          />
-        </Button>
-      </div>
-
+      <Controller
+        loop={loop}
+        playing={playing}
+        toggleShuffled={toggleShuffled}
+        nextSong={nextSong}
+        prevSong={prevSong}
+        togglePlaying={togglePlaying}
+        toggleLoop={toggleLoop}
+      />
       <ProgressBar
         className='w-full h-1 hidden sm:block'
         maxRange={MAX_RANGE}
@@ -113,4 +102,4 @@ const SongControls = ({
   );
 };
 
-export default SongControls;
+export default memo(SongControls);

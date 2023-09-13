@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Image from 'next/image';
 
 // Components
@@ -47,4 +48,4 @@ const SongDetail = ({ artists = [], thumbnail, title }: IProps) => {
   );
 };
 
-export default SongDetail;
+export default memo(SongDetail);

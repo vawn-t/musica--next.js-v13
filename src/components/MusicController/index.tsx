@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
 // Hooks
@@ -36,10 +36,13 @@ const MusicController = ({}: IProps) => {
   const [nextSongId, setNextSongId] = useState<number>(-1);
   const [previousSongId, setPreviousSonsId] = useState<number>(-1);
 
+  const artists = useMemo(
+    () => (song?.artists || []).map((artist: any) => artist.name),
+    [song?.artists]
+  );
+
   useEffect(() => {
     if (album && album?.songs.length && album.id !== currentAlbumId) {
-      console.log('album?.songs', album?.songs);
-
       setCurrentAlbumId(album.id);
       setSongsQueue(album?.songs);
     }
@@ -48,6 +51,7 @@ const MusicController = ({}: IProps) => {
   useEffect(() => {
     if (song) {
       setNextSongId(getNextSongId(song.id, songsQueue));
+      setPreviousSonsId(getPreviousSongId(song.id, songsQueue));
     }
   }, [song, songsQueue]);
 
@@ -55,6 +59,7 @@ const MusicController = ({}: IProps) => {
     if (!!album) {
       increaseAlbumPlayCount(album.id, ++album.plays);
     }
+
     await updateCurrentPlayer({ song: nextSongId, album: currentAlbumId });
     mutate();
   }, [album, currentAlbumId, mutate, nextSongId]);
@@ -64,12 +69,27 @@ const MusicController = ({}: IProps) => {
       return currentSongId;
     }
 
-    const nextSongIndex = songsQueue.findIndex(
+    const currentSongIndex = songsQueue.findIndex(
       (song) => song.id === currentSongId
     );
 
     // return to first song if last song
-    return songsQueue[nextSongIndex + 1]?.id ?? songsQueue[0].id;
+    return songsQueue[currentSongIndex + 1]?.id ?? songsQueue[0].id;
+  };
+
+  const getPreviousSongId = (
+    currentSongId: number,
+    songsQueue: Song[]
+  ): number => {
+    if (!songsQueue.length) {
+      return currentSongId;
+    }
+    const currentSongIndex = songsQueue.findIndex(
+      (song) => song.id === currentSongId
+    );
+
+    // return to first song if fist song
+    return songsQueue[currentSongIndex - 1]?.id ?? songsQueue[0].id;
   };
 
   const [
@@ -92,7 +112,7 @@ const MusicController = ({}: IProps) => {
       ) : (
         <>
           <SongDetail
-            artists={(song?.artists || []).map((artist: any) => artist.name)}
+            artists={artists}
             thumbnail={(album?.thumbnail as Thumbnail).url || ''}
             title={song?.name || ''}
           />
@@ -102,6 +122,8 @@ const MusicController = ({}: IProps) => {
             playing={playing}
             progressValue={progressValue}
             nextSongId={nextSongId}
+            isFirstSong={song?.id === previousSongId}
+            previousSongId={previousSongId}
             toggleLoop={toggleLoop}
             togglePlaying={togglePlaying}
             seek={seek}
