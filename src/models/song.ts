@@ -9,7 +9,7 @@ export class Song {
     this.attributes = attributes;
   }
 }
-interface Media {
+export interface Media {
   id: number;
   url: string;
 }

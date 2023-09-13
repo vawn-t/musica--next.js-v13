@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback } from 'react';
+import { MouseEvent, memo, useCallback } from 'react';
 import { VolumeHigh, VolumeMute } from 'iconsax-react';
 
 import ProgressBar from './ProgressBar';
@@ -60,4 +60,4 @@ const VolumeControls = ({
   );
 };
 
-export default VolumeControls;
+export default memo(VolumeControls);

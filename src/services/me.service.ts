@@ -47,17 +47,16 @@ export const addAlbumToCollection = async (albumId: number) => {
   try {
     const albums = await getMyCollection();
     const currentAlbums = albums.map((album) => ({ id: album.id }));
+    let updatedAlbums = [];
 
-    // Check duplicate album id
-    const updatedAlbums = currentAlbums.reduce(
-      (acc, album) => {
-        if (album.id !== albumId) {
-          acc.push(album);
-        }
-        return acc;
-      },
-      [{ id: albumId }]
-    );
+    const albumExists = currentAlbums.find((album) => album.id === albumId);
+
+    if (albumExists) {
+      return MessageType.existed;
+    } else {
+      updatedAlbums = [...currentAlbums, { id: albumId }];
+      // continue with the rest of your code
+    }
 
     await PUT<AddToCollectionRequest>(ME.info, {
       albums: updatedAlbums

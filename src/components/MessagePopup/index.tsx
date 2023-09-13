@@ -3,22 +3,30 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { MessageType } from '@/constants';
+import { usePathname } from 'next/navigation';
 
 interface IProps {
   status: MessageType;
 }
 
 const MessagePopup = ({ status }: IProps) => {
+  const pathName = usePathname();
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     const displayInterval: any = setInterval(() => {
       setHidden(true);
+
+      if (typeof window !== 'undefined') {
+        // Remove search param
+        window.history.replaceState(null, '', pathName);
+      }
     }, 3000);
 
     return () => {
       clearInterval(displayInterval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -27,11 +35,13 @@ const MessagePopup = ({ status }: IProps) => {
         hidden: hidden
       })}
     >
-      <div className='relative bg-alt rounded-lg shadow'>
+      <div className='relative bg-light rounded-lg shadow'>
         <div
-          className={`p-4 text-center font-bold capitalize ${
-            status === MessageType.error ? 'text-red-500' : 'text-dark'
-          }`}
+          className={classNames('p-4 text-center font-bold capitalize', {
+            ['text-red-500']: status === MessageType.error,
+            ['text-primary']: status === MessageType.success,
+            ['text-secondary']: status === MessageType.existed
+          })}
         >
           {status}!
         </div>

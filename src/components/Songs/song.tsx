@@ -38,9 +38,7 @@ const Song = ({
   isPlaying = false,
   duration
 }: IProps) => {
-  // TODO: must handle
   const handlePlay = async () => {
-    // TODO: Should update album id
     await updateCurrentPlayer({ song: id, album: albumId });
 
     mutate(APIKey.me);
@@ -58,9 +56,7 @@ const Song = ({
       </Typography>
       <Typography className='row-span-2 col-span-4 flex items-center'>
         {name} ~{' '}
-        {artists // TODO: should fix
-          .map((artist: Artist) => artist.attributes.name)
-          .join(', ')}
+        {artists.map((artist: Artist) => artist.attributes.name).join(', ')}
       </Typography>
       <VoiceSquare
         className={classNames(

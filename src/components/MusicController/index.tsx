@@ -1,5 +1,6 @@
 'use client';
 
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 
 // Hooks
@@ -12,29 +13,84 @@ import SongDetail from './SongDetail';
 import Spinner from '@components/Loading/Spinner';
 
 // Services
-import { getCurrentPLayer } from '@/services/me.service';
+import { getCurrentPLayer, updateCurrentPlayer } from '@/services/me.service';
+import { increaseAlbumPlayCount } from '@/services/album.service';
 
 // Constants
 import { APIKey } from '@constants/index';
 
 // Models
-import { Thumbnail } from '@models/album';
-import { useCallback } from 'react';
-import { increaseAlbumPlayCount } from '@/services/album.service';
+import { Song, Thumbnail } from '@/models/index';
 
 interface IProps {}
 
 const MusicController = ({}: IProps) => {
-  const { data: { song, album } = {}, isLoading } = useSWR(
-    APIKey.me,
-    getCurrentPLayer
+  const {
+    data: { song, album } = {},
+    isLoading,
+    mutate
+  } = useSWR(APIKey.me, getCurrentPLayer);
+
+  const [currentAlbumId, setCurrentAlbumId] = useState<number>(-1);
+  const [songsQueue, setSongsQueue] = useState<Song[]>([]);
+  const [nextSongId, setNextSongId] = useState<number>(-1);
+  const [previousSongId, setPreviousSonsId] = useState<number>(-1);
+
+  const artists = useMemo(
+    () => (song?.artists || []).map((artist: any) => artist.name),
+    [song?.artists]
   );
 
-  const handleEnded = useCallback(() => {
+  useEffect(() => {
+    if (album && album?.songs.length && album.id !== currentAlbumId) {
+      setCurrentAlbumId(album.id);
+      setSongsQueue(album?.songs);
+    }
+  }, [album, currentAlbumId]);
+
+  useEffect(() => {
+    if (song) {
+      setNextSongId(getNextSongId(song.id, songsQueue));
+      setPreviousSonsId(getPreviousSongId(song.id, songsQueue));
+    }
+  }, [song, songsQueue]);
+
+  const handleEnded = useCallback(async () => {
     if (!!album) {
       increaseAlbumPlayCount(album.id, ++album.plays);
     }
-  }, [album]);
+
+    await updateCurrentPlayer({ song: nextSongId, album: currentAlbumId });
+    mutate();
+  }, [album, currentAlbumId, mutate, nextSongId]);
+
+  const getNextSongId = (currentSongId: number, songsQueue: Song[]): number => {
+    if (!songsQueue.length) {
+      return currentSongId;
+    }
+
+    const currentSongIndex = songsQueue.findIndex(
+      (song) => song.id === currentSongId
+    );
+
+    // return to first song if last song
+    return songsQueue[currentSongIndex + 1]?.id ?? songsQueue[0].id;
+  };
+
+  const getPreviousSongId = (
+    currentSongId: number,
+    songsQueue: Song[]
+  ): number => {
+    if (!songsQueue.length) {
+      return currentSongId;
+    }
+    const currentSongIndex = songsQueue.findIndex(
+      (song) => song.id === currentSongId
+    );
+
+    // return to first song if fist song
+    return songsQueue[currentSongIndex - 1]?.id ?? songsQueue[0].id;
+  };
 
   const [
     muted,
@@ -56,14 +112,18 @@ const MusicController = ({}: IProps) => {
       ) : (
         <>
           <SongDetail
-            artists={(song?.artists || []).map((artist: any) => artist.name)}
+            artists={artists}
             thumbnail={(album?.thumbnail as Thumbnail).url || ''}
             title={song?.name || ''}
           />
           <SongControls
+            albumId={currentAlbumId}
             loop={loop}
             playing={playing}
             progressValue={progressValue}
+            nextSongId={nextSongId}
+            isFirstSong={song?.id === previousSongId}
+            previousSongId={previousSongId}
             toggleLoop={toggleLoop}
             togglePlaying={togglePlaying}
             seek={seek}
