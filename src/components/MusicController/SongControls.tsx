@@ -14,24 +14,32 @@ import ProgressBar from './ProgressBar';
 import Button from '@components/Button';
 
 // Constants
-import { MAX_RANGE } from '@constants/index';
+import { APIKey, MAX_RANGE } from '@constants/index';
 
 // Utils
 import { progressPositionCalculate } from '@utils/index';
+import { updateCurrentPlayer } from '@/services/me.service';
+import { mutate } from 'swr';
 
 interface IProps {
+  albumId: number;
   loop: boolean;
   playing: boolean;
   progressValue: number;
+  nextSongId: number;
+  previousSongId?: number;
   toggleLoop: () => void;
   togglePlaying: () => void;
   seek: (value: number) => void;
 }
 
 const SongControls = ({
+  albumId,
   loop,
   playing,
   progressValue,
+  nextSongId,
+  previousSongId,
   toggleLoop,
   togglePlaying,
   seek
@@ -56,7 +64,17 @@ const SongControls = ({
   // TODO: Need to handles
   const toggleShuffled = () => {};
   const prevSong = () => {};
-  const nextSong = () => {};
+
+  const nextSong = async () => {
+    if (albumId && nextSongId >= 0) {
+      await updateCurrentPlayer({ song: nextSongId, album: albumId });
+
+      // seek progress bar to 0
+      seek(0);
+
+      mutate(APIKey.me);
+    }
+  };
 
   return (
     <div className='flex flex-col gap-4 sm:grow'>

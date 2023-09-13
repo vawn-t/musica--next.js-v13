@@ -1,7 +1,9 @@
 import {
   AlbumAttributes,
+  Artist,
   ArtistAttributes,
   Banner,
+  Media,
   Song,
   SongAttributes,
   Thumbnail
@@ -59,7 +61,13 @@ type GetAlbumsResponse = {
 };
 
 type MeResponse = {
-  song: SongAttributes;
+  song: {
+    id: number;
+    artists: Artist[];
+    duration: number;
+    name: string;
+    media?: Media;
+  };
   album: {
     id: number;
     description: string;

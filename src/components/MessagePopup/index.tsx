@@ -26,6 +26,7 @@ const MessagePopup = ({ status }: IProps) => {
     return () => {
       clearInterval(displayInterval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
