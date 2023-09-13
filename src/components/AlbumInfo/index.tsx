@@ -14,6 +14,7 @@ import { TagType } from '@constants/index';
 type Props = {
   albumId: number;
   description: string;
+  firstSongId: number;
   name: string;
   totalSong: number;
   totalDuration: string;
@@ -23,6 +24,7 @@ type Props = {
 const AlbumInfo = ({
   albumId,
   description,
+  firstSongId,
   name,
   totalDuration,
   totalSong,
@@ -48,7 +50,7 @@ const AlbumInfo = ({
         <Typography className='text-light pt-3'>
           {totalSong} songs ~ {totalDuration}
         </Typography>
-        <AlbumButtons albumId={albumId} />
+        <AlbumButtons albumId={albumId} firstSongId={firstSongId} />
       </div>
     </section>
   );

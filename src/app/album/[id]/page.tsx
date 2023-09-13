@@ -30,6 +30,7 @@ const Album = async ({ params, searchParams }: IProp) => {
         <AlbumInfo
           albumId={id}
           description={albumAttributes.description}
+          firstSongId={albumAttributes.songs[0].id}
           totalDuration={formatDuration(albumAttributes.duration)}
           totalSong={albumAttributes.songs.length}
           name={albumAttributes.name}
