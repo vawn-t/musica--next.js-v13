@@ -3,7 +3,7 @@ type UpdateCurrentPlayerRequest = {
   album: number;
 };
 
-type AddToCollectionRequest = {
+type UpdateToCollectionRequest = {
   albums: {
     id: number;
   }[];
@@ -17,6 +17,6 @@ type IncreasePLaysCountRequest = {
 
 export type {
   UpdateCurrentPlayerRequest,
-  AddToCollectionRequest,
+  UpdateToCollectionRequest,
   IncreasePLaysCountRequest
 };

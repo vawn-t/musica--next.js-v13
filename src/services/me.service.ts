@@ -16,7 +16,7 @@ import { fetcher, PUT, swrFetcher } from './clientRequest';
 import type {
   GetMyCollection,
   MeResponse,
-  AddToCollectionRequest,
+  UpdateToCollectionRequest,
   UpdateCurrentPlayerRequest
 } from '@/types';
 
@@ -33,7 +33,7 @@ export const updateCurrentPlayer = async (
 export const getMyCollection = async () => {
   const data = await fetcher<GetMyCollection>(
     COLLECTION.getMyCollection,
-    FetchType.isr
+    FetchType.isr // TODO: should update to isrTag
   );
 
   const albums: Album[] = data.albums.map(
@@ -43,29 +43,15 @@ export const getMyCollection = async () => {
   return albums;
 };
 
-export const addAlbumToCollection = async (albumId: number) => {
+export const updateAlbumToCollection = async (
+  albums: UpdateToCollectionRequest
+) => {
   try {
-    const albums = await getMyCollection();
-    const currentAlbums = albums.map((album) => ({ id: album.id }));
-    let updatedAlbums = [];
-
-    const albumExists = currentAlbums.find((album) => album.id === albumId);
-
-    if (albumExists) {
-      return MessageType.existed;
-    } else {
-      updatedAlbums = [...currentAlbums, { id: albumId }];
-      // continue with the rest of your code
-    }
-
-    await PUT<AddToCollectionRequest>(ME.info, {
-      albums: updatedAlbums
-    });
+    await PUT<UpdateToCollectionRequest>(ME.info, albums);
 
     return MessageType.success;
   } catch (error) {
     console.error(error);
-
     return MessageType.error;
   }
 };

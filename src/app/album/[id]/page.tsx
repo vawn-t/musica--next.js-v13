@@ -3,15 +3,18 @@ import dynamic from 'next/dynamic';
 
 // Services
 import { getAlbumById } from '@/services/album.service';
+import { getMyCollection } from '@/services/me.service';
 
 // Utils
 import { formatDuration } from '@utils/index';
-import SkeletonCollectionPage from '@/components/Loading/SkeletonCollectionPage';
-import SkeletonRaw from '@/components/Loading/SkeletonRow';
-import MessagePopup from '@/components/MessagePopup';
+
+// Constants
 import { MessageType } from '@/constants';
 
 // Components
+import SkeletonCollectionPage from '@/components/Loading/SkeletonCollectionPage';
+import SkeletonRaw from '@/components/Loading/SkeletonRow';
+import MessagePopup from '@/components/MessagePopup';
 const AlbumInfo = dynamic(() => import('@components/AlbumInfo'));
 const Songs = dynamic(() => import('@components/Songs'));
 
@@ -22,6 +25,7 @@ interface IProp {
 
 const Album = async ({ params, searchParams }: IProp) => {
   const { id, attributes: albumAttributes } = await getAlbumById(params.id);
+  const myCollection = await getMyCollection();
 
   return (
     <section className='flex flex-col gap-6 sm:gap-12'>
@@ -29,6 +33,7 @@ const Album = async ({ params, searchParams }: IProp) => {
       <Suspense fallback={<SkeletonCollectionPage />}>
         <AlbumInfo
           albumId={id}
+          myCollection={myCollection}
           description={albumAttributes.description}
           firstSongId={albumAttributes.songs[0].id}
           totalDuration={formatDuration(albumAttributes.duration)}

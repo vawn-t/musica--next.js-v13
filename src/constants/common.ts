@@ -27,7 +27,6 @@ export enum FetchType {
 
 export enum MessageType {
   error = 'error',
-  existed = 'existed',
   success = 'success'
 }
 
