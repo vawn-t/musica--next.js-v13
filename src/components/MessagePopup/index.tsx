@@ -37,9 +37,11 @@ const MessagePopup = ({ status }: IProps) => {
     >
       <div className='relative bg-light rounded-lg shadow'>
         <div
-          className={`p-4 text-center font-bold capitalize ${
-            status === MessageType.error ? 'text-red-500' : 'text-primary'
-          }`}
+          className={classNames('p-4 text-center font-bold capitalize', {
+            ['text-red-500']: status === MessageType.error,
+            ['text-primary']: status === MessageType.success,
+            ['text-secondary']: status === MessageType.existed
+          })}
         >
           {status}!
         </div>
