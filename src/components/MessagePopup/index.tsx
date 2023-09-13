@@ -27,10 +27,10 @@ const MessagePopup = ({ status }: IProps) => {
         hidden: hidden
       })}
     >
-      <div className='relative bg-alt rounded-lg shadow'>
+      <div className='relative bg-light rounded-lg shadow'>
         <div
           className={`p-4 text-center font-bold capitalize ${
-            status === MessageType.error ? 'text-red-500' : 'text-dark'
+            status === MessageType.error ? 'text-red-500' : 'text-primary'
           }`}
         >
           {status}!
