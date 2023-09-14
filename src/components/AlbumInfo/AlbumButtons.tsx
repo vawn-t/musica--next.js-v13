@@ -2,35 +2,70 @@
 
 import { useCallback, useMemo } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { MusicSquareAdd, PlayCircle } from 'iconsax-react';
+import { MusicSquareAdd, MusicSquareRemove, PlayCircle } from 'iconsax-react';
 import { mutate } from 'swr';
 
 // Components
 import Button from '@components/Button';
 
 // Models
+import { Album } from '@models/index';
+
+// Services
 import {
-  addAlbumToCollection,
+  updateAlbumToCollection,
   updateCurrentPlayer
 } from '@/services/me.service';
 
 // Constants
-import { APIKey } from '@constants/index';
+import { APIKey, NAVIGATION } from '@constants/index';
+
+// Utils
+import { isAddedAlbum } from '@/utils';
+
+// Types
+import type { UpdateToCollectionRequest } from '@/types';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 interface IProp {
   albumId: number;
+  myCollection: Album[];
   firstSongId: number;
 }
 
-const AlbumButtons = ({ albumId, firstSongId }: IProp) => {
+const AlbumButtons = ({ albumId, myCollection = [], firstSongId }: IProp) => {
   const currentPath = usePathname();
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
 
-  const handleAddToMyCollection = useCallback(async () => {
-    const result = await addAlbumToCollection(albumId);
+  const { albumExists, currentAlbums } = isAddedAlbum(myCollection, albumId);
 
-    push(`${currentPath}/?modal=${result}`);
-  }, [albumId, currentPath, push]);
+  const updateMyCollection = useCallback(
+    async (payload: UpdateToCollectionRequest) => {
+      const result = await updateAlbumToCollection(payload);
+
+      // should refresh to load new data
+      refresh();
+
+      push(`${currentPath}/?popup=${result}`);
+    },
+    [currentPath, push, refresh]
+  );
+
+  const handleAddToMyCollection = useCallback(() => {
+    const updatedAlbums = [...currentAlbums, { id: albumId }];
+
+    const payload = { albums: updatedAlbums };
+
+    updateMyCollection(payload);
+  }, [albumId, currentAlbums, updateMyCollection]);
+
+  const handleRemoveFromMyCollection = useCallback(() => {
+    const updatedAlbums = currentAlbums.filter((album) => album.id !== albumId);
+
+    const payload = { albums: updatedAlbums };
+
+    updateMyCollection(payload);
+  }, [albumId, currentAlbums, updateMyCollection]);
 
   const handlePlayAll = useCallback(async () => {
     await updateCurrentPlayer({ song: firstSongId, album: albumId });
@@ -45,12 +80,19 @@ const AlbumButtons = ({ albumId, firstSongId }: IProp) => {
         handleClick: handlePlayAll
       },
       {
-        name: 'Add to my collection',
-        icon: MusicSquareAdd,
-        handleClick: handleAddToMyCollection
+        name: `${albumExists ? 'Remove from' : 'Add to'} my collection`,
+        icon: albumExists ? MusicSquareRemove : MusicSquareAdd,
+        handleClick: albumExists
+          ? handleRemoveFromMyCollection
+          : handleAddToMyCollection
       }
     ],
-    [handleAddToMyCollection, handlePlayAll]
+    [
+      handlePlayAll,
+      albumExists,
+      handleRemoveFromMyCollection,
+      handleAddToMyCollection
+    ]
   );
 
   return (

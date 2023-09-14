@@ -6,7 +6,9 @@ import {
   FetchType,
   APIKey,
   ME,
-  MessageType
+  MessageType,
+  TagKey,
+  REVALIDATE
 } from '@constants/index';
 
 // Services
@@ -14,9 +16,9 @@ import { fetcher, PUT, swrFetcher } from './clientRequest';
 
 // Types
 import type {
-  GetMyCollection,
+  GetMyCollectionResponse,
   MeResponse,
-  AddToCollectionRequest,
+  UpdateToCollectionRequest,
   UpdateCurrentPlayerRequest
 } from '@/types';
 
@@ -31,9 +33,10 @@ export const updateCurrentPlayer = async (
 ) => await PUT<UpdateCurrentPlayerRequest>(ME.info, payload);
 
 export const getMyCollection = async () => {
-  const data = await fetcher<GetMyCollection>(
+  const data = await fetcher<GetMyCollectionResponse>(
     COLLECTION.getMyCollection,
-    FetchType.isr
+    FetchType.default,
+    [TagKey.updateAlbum]
   );
 
   const albums: Album[] = data.albums.map(
@@ -43,29 +46,18 @@ export const getMyCollection = async () => {
   return albums;
 };
 
-export const addAlbumToCollection = async (albumId: number) => {
+export const updateAlbumToCollection = async (
+  albums: UpdateToCollectionRequest
+) => {
   try {
-    const albums = await getMyCollection();
-    const currentAlbums = albums.map((album) => ({ id: album.id }));
-    let updatedAlbums = [];
+    await PUT<UpdateToCollectionRequest>(ME.info, albums);
 
-    const albumExists = currentAlbums.find((album) => album.id === albumId);
-
-    if (albumExists) {
-      return MessageType.existed;
-    } else {
-      updatedAlbums = [...currentAlbums, { id: albumId }];
-      // continue with the rest of your code
-    }
-
-    await PUT<AddToCollectionRequest>(ME.info, {
-      albums: updatedAlbums
-    });
+    // force data relate to album should update-to-date
+    await fetch(REVALIDATE.tag(TagKey.updateAlbum));
 
     return MessageType.success;
   } catch (error) {
     console.error(error);
-
     return MessageType.error;
   }
 };

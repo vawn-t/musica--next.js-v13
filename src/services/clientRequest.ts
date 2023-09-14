@@ -1,9 +1,9 @@
-import { FetchType } from '@constants/index';
+import { FetchType, TagKey } from '@constants/index';
 
 export const fetcher = async <T>(
   endPoint: string,
   method?: FetchType,
-  tags?: string[]
+  tags?: TagKey[]
 ): Promise<T> => {
   let res;
   switch (method) {
@@ -17,23 +17,16 @@ export const fetcher = async <T>(
     case FetchType.isr:
       // This request should be cached with a lifetime of 30 seconds.
       res = await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {
-        next: { revalidate: 30 }
+        next: { revalidate: 30, tags: [...(tags || [])] }
       });
       break;
 
-    case FetchType.isrTag:
-      if (!tags?.length) {
-        throw new Error('tags at should not be empty or undefined');
-      }
-      res = await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {
-        next: { tags: [...tags] }
-      });
-      break;
-
+    case FetchType.default:
     default:
       // This request should be cached until manually invalidated.
       res = await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {
-        cache: 'force-cache'
+        cache: 'force-cache',
+        next: { tags: [...(tags || [])] }
       });
       break;
   }
@@ -44,14 +37,6 @@ export const fetcher = async <T>(
 
   return res.json();
 };
-
-// TODO: should handle type for payload
-export const POST = async (endPoint: string, payload: any = {}) =>
-  await fetch(endPoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
 
 export const PUT = async <T>(endPoint: string, payload: T) =>
   await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {

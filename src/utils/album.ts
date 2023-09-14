@@ -49,3 +49,20 @@ export const createAlbum = ({
 export const createAlbums = (albums: AlbumResponse[]): Album[] => {
   return albums.map((album) => createAlbum(album));
 };
+
+/**
+ * Checks if an album with the given ID exists in the collection.
+ *
+ * @param {Album[]} collection - The collection of albums.
+ * @param {number} currentAlbumId - The ID of the current album.
+ * @return {{albumExists: boolean, currentAlbums: {id: number}[]}} - An object indicating if the album exists and the current albums in the collection.
+ */
+export const isAddedAlbum = (collection: Album[], currentAlbumId: number) => {
+  const currentAlbums = collection.map((album) => ({ id: album.id }));
+
+  const albumExists = currentAlbums.some(
+    (album) => album.id === currentAlbumId
+  );
+
+  return { albumExists, currentAlbums };
+};

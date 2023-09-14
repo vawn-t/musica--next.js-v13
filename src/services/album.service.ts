@@ -1,8 +1,9 @@
 // Constants
-import { ALBUM, AlbumOrderOption, FetchType } from '@constants/index';
+import { ALBUM, AlbumOrderOption, FetchType, TagKey } from '@constants/index';
 
 // Types
 import type {
+  GetAlbumInfoResponse,
   GetAlbumResponse,
   GetAlbumsResponse,
   IncreasePLaysCountRequest
@@ -31,7 +32,8 @@ export const getAlbumsOrderBy = async (option: AlbumOrderOption) => {
 export const getAlbumById = async (id: number) => {
   const { data } = await fetcher<GetAlbumResponse>(
     ALBUM.getAlbumById(id),
-    FetchType.ssr
+    FetchType.default,
+    [TagKey.updateAlbum]
   );
 
   const album = createAlbum(data);
@@ -46,3 +48,6 @@ export const increaseAlbumPlayCount = async (
   await PUT<IncreasePLaysCountRequest>(ALBUM.increaseAlbumPlayCount(albumId), {
     data: { plays: playsCount }
   });
+
+export const getAlbumInfo = async (id: number) =>
+  await fetcher<GetAlbumInfoResponse>(ALBUM.getAlbumInfoById(id));

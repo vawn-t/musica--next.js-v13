@@ -39,9 +39,6 @@ const SongControls = ({
   togglePlaying,
   seek
 }: IProps) => {
-  // TODO: add shuffle logic
-  const [isShuffled, setIsShuffled] = useState(false);
-
   const handleSeek = useCallback(
     (event: MouseEvent<HTMLProgressElement>) => {
       seek(

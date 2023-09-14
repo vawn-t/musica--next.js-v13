@@ -2,30 +2,27 @@ import {
   AlbumAttributes,
   Artist,
   ArtistAttributes,
-  Banner,
   Media,
   Song,
   SongAttributes,
   Thumbnail
 } from '@models/index';
 
-type ResponseAttributes<T, U> = {
-  id: number;
-  attributes: T & U;
-};
-
-type SubResponseAttributes<T> = {
-  data: {
-    attributes: T;
-  };
-};
-
-type BannerAdditionalAttribute = {
-  background: SubResponseAttributes<{ url: string }>;
-};
-
 type BannerResponse = {
-  data: ResponseAttributes<Banner, BannerAdditionalAttribute>;
+  data: {
+    attributes: {
+      description: string;
+      title: string;
+      url: string;
+      background: {
+        data: {
+          attributes: {
+            url: string;
+          };
+        };
+      };
+    };
+  };
 };
 
 type AlbumResponse = {
@@ -79,17 +76,25 @@ type MeResponse = {
   };
 };
 
-type GetMyCollection = {
+type GetMyCollectionResponse = {
   albums: { id: number & AlbumAttributes }[];
+};
+
+type GetAlbumInfoResponse = {
+  data: {
+    attributes: {
+      name: string;
+      description: string;
+    };
+  };
 };
 
 export type {
   AlbumResponse,
   BannerResponse,
   MeResponse,
-  ResponseAttributes,
-  SubResponseAttributes,
   GetAlbumResponse,
   GetAlbumsResponse,
-  GetMyCollection
+  GetMyCollectionResponse,
+  GetAlbumInfoResponse
 };

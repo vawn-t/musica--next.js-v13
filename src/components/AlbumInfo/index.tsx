@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Image from 'next/image';
 
 // Components
@@ -6,13 +7,17 @@ import AlbumButtons from './AlbumButtons';
 
 // Utils
 import imageLoader from '@/utils/imageLoader';
-import { generateDataURL } from '@/utils';
+import { generateDataURL } from '@utils/index';
 
 // Constants
 import { TagType } from '@constants/index';
 
+// Models
+import { Album } from '@models/index';
+
 type Props = {
   albumId: number;
+  myCollection: Album[];
   description: string;
   firstSongId: number;
   name: string;
@@ -23,6 +28,7 @@ type Props = {
 
 const AlbumInfo = ({
   albumId,
+  myCollection,
   description,
   firstSongId,
   name,
@@ -50,10 +56,14 @@ const AlbumInfo = ({
         <Typography className='text-light pt-3'>
           {totalSong} songs ~ {totalDuration}
         </Typography>
-        <AlbumButtons albumId={albumId} firstSongId={firstSongId} />
+        <AlbumButtons
+          myCollection={myCollection}
+          albumId={albumId}
+          firstSongId={firstSongId}
+        />
       </div>
     </section>
   );
 };
 
-export default AlbumInfo;
+export default memo(AlbumInfo);

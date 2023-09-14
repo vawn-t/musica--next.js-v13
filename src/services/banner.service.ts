@@ -21,7 +21,6 @@ export const getFirstBanner = async () => {
     description,
     title,
     url,
-    background,
     imgUrl: background.data.attributes.url
   });
 
