@@ -4,7 +4,7 @@ import classNames from 'classnames';
 interface IProps {
   children: ReactNode;
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button = ({ children, className = '', onClick }: IProps) => (

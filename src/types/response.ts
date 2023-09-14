@@ -1,42 +1,100 @@
-import { Album, Banner } from '@/models';
+import {
+  AlbumAttributes,
+  Artist,
+  ArtistAttributes,
+  Media,
+  Song,
+  SongAttributes,
+  Thumbnail
+} from '@models/index';
 
-type ResponseAttributes<T, U> = {
-  id: number;
-  attributes: T & U;
-};
-
-type SubResponseAttributes<T> = {
+type BannerResponse = {
   data: {
-    attributes: T;
+    attributes: {
+      description: string;
+      title: string;
+      url: string;
+      background: {
+        data: {
+          attributes: {
+            url: string;
+          };
+        };
+      };
+    };
   };
 };
 
-type SubResponseAttributesArray<T> = {
+type AlbumResponse = {
+  id: number;
+  attributes: AlbumAttributes & {
+    songs: {
+      data: {
+        id: number;
+        attributes: SongAttributes & {
+          artists?: {
+            data: {
+              id: number;
+              attributes: ArtistAttributes;
+            }[];
+          };
+        };
+      }[];
+    };
+    thumbnail: {
+      data: {
+        attributes: { url: string };
+      };
+    };
+  };
+};
+
+type GetAlbumResponse = {
+  data: AlbumResponse;
+};
+
+type GetAlbumsResponse = {
+  data: AlbumResponse[];
+};
+
+type MeResponse = {
+  song: {
+    id: number;
+    artists: Artist[];
+    duration: number;
+    name: string;
+    media?: Media;
+  };
+  album: {
+    id: number;
+    description: string;
+    duration: number;
+    name: string;
+    songs: Song[];
+    thumbnail: Thumbnail | string;
+    plays: number;
+  };
+};
+
+type GetMyCollectionResponse = {
+  albums: { id: number & AlbumAttributes }[];
+};
+
+type GetAlbumInfoResponse = {
   data: {
-    attributes: T;
-  }[];
-};
-
-type BannerAdditionalAttribute = {
-  background: SubResponseAttributes<{ url: string }>;
-};
-
-type BannerResponse = {
-  data: ResponseAttributes<Banner, BannerAdditionalAttribute>;
-};
-
-type AlbumAdditionalAttributes = {
-  thumbnail: SubResponseAttributes<{ url: string }>;
-  songs?: SubResponseAttributesArray<{ duration: number }>;
-};
-
-type AlbumsResponse = {
-  data: ResponseAttributes<Album, AlbumAdditionalAttributes>[];
+    attributes: {
+      name: string;
+      description: string;
+    };
+  };
 };
 
 export type {
-  AlbumsResponse,
-  AlbumAdditionalAttributes,
+  AlbumResponse,
   BannerResponse,
-  ResponseAttributes
+  MeResponse,
+  GetAlbumResponse,
+  GetAlbumsResponse,
+  GetMyCollectionResponse,
+  GetAlbumInfoResponse
 };

@@ -19,6 +19,17 @@ export enum AlbumOrderOption {
   release = 'publishedAt'
 }
 
+export enum FetchType {
+  default,
+  ssr,
+  isr
+}
+
+export enum MessageType {
+  error = 'error',
+  success = 'success'
+}
+
 /** CONSTANTS **/
 
 export const MAX_RANGE = 100;

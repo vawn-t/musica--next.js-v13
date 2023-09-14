@@ -1,59 +1,28 @@
-'use client';
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 
-import CollectionCards from '@components/CollectionCards';
-import Button from '@components/Button';
-import { Album } from '@/models';
+// Components
+const CollectionCards = dynamic(() => import('@components/CollectionCards'));
+const Button = dynamic(() => import('@components/Button'));
+const SkeletonImage = dynamic(
+  () => import('@components/Loading/SkeletonImage')
+);
 
-const Collection = () => {
+// Services
+import { getMyCollection } from '@/services/me.service';
+
+const Collection = async () => {
+  const albums = await getMyCollection();
+
   return (
     <section className='pb-32'>
-      <Button
-        className='py-3 px-4 mb-7 text-dark bg-secondary text-base rounded-xl'
-        onClick={() => {}}
-      >
+      <Button className='w-auto py-3 px-4 mb-7 text-dark bg-secondary text-base rounded-xl'>
         My collection
       </Button>
-      <CollectionCards
-        cards={
-          [
-            {
-              id: 1,
-              name: 'Card 1',
-              thumbnail:
-                'https://res.cloudinary.com/drwsfgt0t/image/upload/v1692929785/ab67616d00001e0219b6ab951ea24234ed711054_46afb682e1.jpg',
-              duration: 502
-            },
-            {
-              id: 2,
-              name: 'Card 2',
-              thumbnail:
-                'https://res.cloudinary.com/drwsfgt0t/image/upload/v1692929785/ab67616d00001e0219b6ab951ea24234ed711054_46afb682e1.jpg',
-              duration: 502
-            },
-            {
-              id: 3,
-              name: 'Card 3',
-              thumbnail:
-                'https://res.cloudinary.com/drwsfgt0t/image/upload/v1692929785/ab67616d00001e0219b6ab951ea24234ed711054_46afb682e1.jpg',
-              duration: 502
-            },
-            {
-              id: 4,
-              name: 'Card 4',
-              thumbnail:
-                'https://res.cloudinary.com/drwsfgt0t/image/upload/v1692929785/ab67616d00001e0219b6ab951ea24234ed711054_46afb682e1.jpg',
-              duration: 502
-            },
-            {
-              id: 5,
-              name: 'Card 5',
-              thumbnail:
-                'https://res.cloudinary.com/drwsfgt0t/image/upload/v1692929785/ab67616d00001e0219b6ab951ea24234ed711054_46afb682e1.jpg',
-              duration: 502
-            }
-          ] as Album[]
-        }
-      />
+
+      <Suspense fallback={<SkeletonImage />}>
+        <CollectionCards cards={albums} />
+      </Suspense>
     </section>
   );
 };

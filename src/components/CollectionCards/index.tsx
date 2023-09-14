@@ -1,4 +1,4 @@
-import { Album } from '@/models';
+import { Album, Thumbnail } from '@models/index';
 import CollectionCard from './CollectionCard';
 
 interface IProps {
@@ -7,12 +7,12 @@ interface IProps {
 
 const CollectionCards = ({ cards }: IProps) => (
   <div className='flex flex-col flex-wrap sm:flex-row gap-6'>
-    {cards.map((card) => (
+    {cards.map(({ id, attributes }) => (
       <CollectionCard
-        key={card.id}
-        id={card.id}
-        name={card.name}
-        thumbnail={card.thumbnail}
+        key={id}
+        id={id}
+        name={attributes.name}
+        thumbnail={(attributes.thumbnail as Thumbnail).url}
       />
     ))}
   </div>

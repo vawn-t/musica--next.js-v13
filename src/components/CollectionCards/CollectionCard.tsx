@@ -1,11 +1,16 @@
+'use client';
+
 import { useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Play } from 'iconsax-react';
 
+// Utils
 import { generateDataURL } from '@/utils';
 import imageLoader from '@utils/imageLoader';
-import { TagType, goAlbum } from '@constants/index';
+
+// Constants
+import { TagType, DIRECTION } from '@constants/index';
 
 // Components
 import Button from '@components/Button/index';
@@ -21,7 +26,7 @@ const CollectionCard = ({ id, thumbnail, name }: IProps) => {
 
   return (
     <Link
-      href={goAlbum(id)}
+      href={DIRECTION.goAlbum(id)}
       className='group flex w-full h-60 sm:w-56 sm:h-56 cursor-pointer relative truncate rounded-lg [&:nth-child(4)]:break-after-auto'
     >
       <Image

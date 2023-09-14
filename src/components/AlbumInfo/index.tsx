@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Image from 'next/image';
 
 // Components
@@ -6,30 +7,39 @@ import AlbumButtons from './AlbumButtons';
 
 // Utils
 import imageLoader from '@/utils/imageLoader';
-import { generateDataURL } from '@/utils';
+import { generateDataURL } from '@utils/index';
 
 // Constants
 import { TagType } from '@constants/index';
 
+// Models
+import { Album } from '@models/index';
+
 type Props = {
+  albumId: number;
+  myCollection: Album[];
   description: string;
+  firstSongId: number;
+  name: string;
   totalSong: number;
-  totalDuration: number;
+  totalDuration: string;
   thumbnail: string;
-  title: string;
 };
 
 const AlbumInfo = ({
+  albumId,
+  myCollection,
   description,
+  firstSongId,
+  name,
   totalDuration,
   totalSong,
-  thumbnail,
-  title
+  thumbnail
 }: Props) => {
   return (
     <section className='flex flex-col sm:flex-row gap-6'>
       <Image
-        alt={title}
+        alt={name}
         className='rounded-3xl'
         src={thumbnail}
         loader={imageLoader}
@@ -40,16 +50,20 @@ const AlbumInfo = ({
       />
       <div className='grow'>
         <Typography className='text-alt font-bold' Tag={TagType.h1}>
-          {title}
+          {name}
         </Typography>
         <Typography className='text-light pt-3'>{description}</Typography>
         <Typography className='text-light pt-3'>
-          {totalSong} songs ~ {totalDuration} hrs+
+          {totalSong} songs ~ {totalDuration}
         </Typography>
-        <AlbumButtons />
+        <AlbumButtons
+          myCollection={myCollection}
+          albumId={albumId}
+          firstSongId={firstSongId}
+        />
       </div>
     </section>
   );
 };
 
-export default AlbumInfo;
+export default memo(AlbumInfo);

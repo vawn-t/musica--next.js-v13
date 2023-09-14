@@ -9,13 +9,13 @@ interface IProps {
 const RowCards = ({ items }: IProps) => {
   return (
     <div className='flex sm:flex-col overflow-auto gap-2'>
-      {items.map((item) => (
+      {items.map(({ id, attributes }) => (
         <RowCard
-          key={item.id}
-          id={item.id}
-          duration={item.duration}
-          name={item.name}
-          thumbnail={item.thumbnail}
+          key={id}
+          id={id}
+          duration={attributes.duration}
+          name={attributes.name}
+          thumbnail={attributes.thumbnail as string}
         />
       ))}
     </div>
