@@ -16,7 +16,7 @@ import { fetcher, PUT, swrFetcher } from './clientRequest';
 
 // Types
 import type {
-  GetMyCollection,
+  GetMyCollectionResponse,
   MeResponse,
   UpdateToCollectionRequest,
   UpdateCurrentPlayerRequest
@@ -33,7 +33,7 @@ export const updateCurrentPlayer = async (
 ) => await PUT<UpdateCurrentPlayerRequest>(ME.info, payload);
 
 export const getMyCollection = async () => {
-  const data = await fetcher<GetMyCollection>(
+  const data = await fetcher<GetMyCollectionResponse>(
     COLLECTION.getMyCollection,
     FetchType.default,
     [TagKey.updateAlbum]

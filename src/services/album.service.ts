@@ -3,6 +3,7 @@ import { ALBUM, AlbumOrderOption, FetchType, TagKey } from '@constants/index';
 
 // Types
 import type {
+  GetAlbumInfoResponse,
   GetAlbumResponse,
   GetAlbumsResponse,
   IncreasePLaysCountRequest
@@ -47,3 +48,6 @@ export const increaseAlbumPlayCount = async (
   await PUT<IncreasePLaysCountRequest>(ALBUM.increaseAlbumPlayCount(albumId), {
     data: { plays: playsCount }
   });
+
+export const getAlbumInfo = async (id: number) =>
+  await fetcher<GetAlbumInfoResponse>(ALBUM.getAlbumInfoById(id));

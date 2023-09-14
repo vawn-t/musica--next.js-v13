@@ -79,17 +79,25 @@ type MeResponse = {
   };
 };
 
-type GetMyCollection = {
+type GetMyCollectionResponse = {
   albums: { id: number & AlbumAttributes }[];
+};
+
+type GetAlbumInfoResponse = {
+  data: {
+    attributes: {
+      name: string;
+      description: string;
+    };
+  };
 };
 
 export type {
   AlbumResponse,
   BannerResponse,
   MeResponse,
-  ResponseAttributes,
-  SubResponseAttributes,
   GetAlbumResponse,
   GetAlbumsResponse,
-  GetMyCollection
+  GetMyCollectionResponse,
+  GetAlbumInfoResponse
 };

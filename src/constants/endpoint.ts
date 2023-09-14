@@ -8,7 +8,8 @@ export const ALBUM = {
   getAlbumsOrderBy: (option: AlbumOrderOption) =>
     `/albums?sort=${option}:desc&populate=*`,
   getAlbumById: (id: number) => `/albums/${id}?populate=deep,3`,
-  increaseAlbumPlayCount: (id: number) => `/albums/${id}`
+  increaseAlbumPlayCount: (id: number) => `/albums/${id}`,
+  getAlbumInfoById: (id: number) => `/albums/${id}`
 };
 
 export const ME = {
