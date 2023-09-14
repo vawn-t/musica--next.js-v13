@@ -102,6 +102,7 @@ const AlbumButtons = ({ albumId, myCollection = [], firstSongId }: IProp) => {
           <Button
             key={name}
             className='flex items-center gap-2 p-3 bg-black/30 rounded-2xl backdrop-blur-md'
+            name={name}
             onClick={handleClick}
           >
             <Icon className='text-secondary' size={16} variant='Bold' />

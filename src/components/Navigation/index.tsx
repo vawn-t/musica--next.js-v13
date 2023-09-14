@@ -19,7 +19,7 @@ interface IProps {}
 
 const Navigation = ({}: IProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
-  
+
   const handleCollapse = useCallback(() => {
     setExpanded((val) => !val);
   }, []);
@@ -37,7 +37,11 @@ const Navigation = ({}: IProps) => {
           />
         </Link>
 
-        <Button className='sm:hidden' onClick={handleCollapse}>
+        <Button
+          className='sm:hidden'
+          name='hamburger button'
+          onClick={handleCollapse}
+        >
           <HambergerMenu size='32' variant='Broken' />
         </Button>
       </div>

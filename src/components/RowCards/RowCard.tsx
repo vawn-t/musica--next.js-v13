@@ -28,7 +28,7 @@ const RowCard = ({ id, name, thumbnail, duration }: IProps) => {
       <Image
         className='rounded w-24 h-24 sm:w-16 sm:h-16'
         src={thumbnail}
-        alt={name}
+        alt='album image'
         loader={imageLoader}
         width={96}
         height={96}

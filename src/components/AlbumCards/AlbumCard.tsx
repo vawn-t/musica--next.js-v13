@@ -23,7 +23,7 @@ const AlbumCard = ({ id, name, thumbnail }: IProps) => {
       <div className='rounded-xl overflow-hidden'>
         <Image
           src={thumbnail}
-          alt={name}
+          alt='album image'
           loader={imageLoader}
           width={160}
           height={160}

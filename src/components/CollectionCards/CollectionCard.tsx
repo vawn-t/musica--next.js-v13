@@ -32,7 +32,7 @@ const CollectionCard = ({ id, thumbnail, name }: IProps) => {
       <Image
         className='object-cover w-full h-auto group-hover:scale-110 duration-300'
         src={thumbnail}
-        alt={name}
+        alt='album image'
         loader={imageLoader}
         width={224}
         height={224}
@@ -47,6 +47,7 @@ const CollectionCard = ({ id, thumbnail, name }: IProps) => {
       </Typography>
       <Button
         className='absolute bottom-6 right-4 sm:hidden group-hover:block hover:scale-125 duration-300'
+        name='play button'
         onClick={handlePlay}
       >
         <Play className='text-secondary' variant='Bold' size={48} />
