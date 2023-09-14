@@ -1,5 +1,5 @@
 // Constants
-import { ALBUM, AlbumOrderOption, FetchType } from '@constants/index';
+import { ALBUM, AlbumOrderOption, FetchType, TagKey } from '@constants/index';
 
 // Types
 import type {
@@ -31,7 +31,8 @@ export const getAlbumsOrderBy = async (option: AlbumOrderOption) => {
 export const getAlbumById = async (id: number) => {
   const { data } = await fetcher<GetAlbumResponse>(
     ALBUM.getAlbumById(id),
-    FetchType.ssr
+    FetchType.default,
+    [TagKey.updateAlbum]
   );
 
   const album = createAlbum(data);

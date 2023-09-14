@@ -6,7 +6,9 @@ import {
   FetchType,
   APIKey,
   ME,
-  MessageType
+  MessageType,
+  TagKey,
+  REVALIDATE
 } from '@constants/index';
 
 // Services
@@ -33,7 +35,8 @@ export const updateCurrentPlayer = async (
 export const getMyCollection = async () => {
   const data = await fetcher<GetMyCollection>(
     COLLECTION.getMyCollection,
-    FetchType.isr // TODO: should update to isrTag
+    FetchType.default,
+    [TagKey.updateAlbum]
   );
 
   const albums: Album[] = data.albums.map(
@@ -48,6 +51,9 @@ export const updateAlbumToCollection = async (
 ) => {
   try {
     await PUT<UpdateToCollectionRequest>(ME.info, albums);
+
+    // force data relate to album should update-to-date
+    await fetch(REVALIDATE.tag(TagKey.updateAlbum));
 
     return MessageType.success;
   } catch (error) {

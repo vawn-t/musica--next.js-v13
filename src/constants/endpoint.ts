@@ -1,4 +1,4 @@
-import { AlbumOrderOption } from '.';
+import { AlbumOrderOption, TagKey } from '.';
 
 export const BANNER = {
   getById: (id: number) => `/banners/${id}?populate=*`
@@ -19,4 +19,8 @@ export const ME = {
 
 export const COLLECTION = {
   getMyCollection: '/users/1?populate[albums][populate][0]=thumbnail'
+};
+
+export const REVALIDATE = {
+  tag: (tag: TagKey) => `/api/revalidate?tag=${tag}`
 };

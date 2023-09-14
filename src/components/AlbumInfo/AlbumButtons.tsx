@@ -18,13 +18,14 @@ import {
 } from '@/services/me.service';
 
 // Constants
-import { APIKey } from '@constants/index';
+import { APIKey, NAVIGATION } from '@constants/index';
 
 // Utils
 import { isAddedAlbum } from '@/utils';
 
 // Types
 import type { UpdateToCollectionRequest } from '@/types';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 interface IProp {
   albumId: number;
@@ -34,7 +35,7 @@ interface IProp {
 
 const AlbumButtons = ({ albumId, myCollection = [], firstSongId }: IProp) => {
   const currentPath = usePathname();
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
 
   const { albumExists, currentAlbums } = isAddedAlbum(myCollection, albumId);
 
@@ -42,9 +43,16 @@ const AlbumButtons = ({ albumId, myCollection = [], firstSongId }: IProp) => {
     async (payload: UpdateToCollectionRequest) => {
       const result = await updateAlbumToCollection(payload);
 
+      // revalidatePath('/api/collection');
+      // revalidatePath('/api/album/' + albumId);
+      // revalidateTag(APIKey.me);
+
+      // should refresh to load new data
+      refresh();
+
       push(`${currentPath}/?modal=${result}`);
     },
-    [currentPath, push]
+    [currentPath, push, refresh]
   );
 
   const handleAddToMyCollection = useCallback(() => {

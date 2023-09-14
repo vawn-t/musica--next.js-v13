@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Image from 'next/image';
 
 // Components
@@ -65,4 +66,4 @@ const AlbumInfo = ({
   );
 };
 
-export default AlbumInfo;
+export default memo(AlbumInfo);

@@ -20,9 +20,9 @@ export enum AlbumOrderOption {
 }
 
 export enum FetchType {
+  default,
   ssr,
-  isr,
-  isrTag
+  isr
 }
 
 export enum MessageType {
