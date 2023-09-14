@@ -23,13 +23,13 @@ interface IProp {
   params: { id: number };
 }
 
-const Album = async ({ params, searchParams }: IProp) => {
+const Album = async ({ params }: IProp) => {
   const { id, attributes: albumAttributes } = await getAlbumById(params.id);
   const myCollection = await getMyCollection();
 
   return (
     <section className='flex flex-col gap-6 sm:gap-12'>
-      {searchParams?.modal && <MessagePopup status={searchParams.modal} />}
+      <MessagePopup />
       <Suspense fallback={<SkeletonCollectionPage />}>
         <AlbumInfo
           albumId={id}

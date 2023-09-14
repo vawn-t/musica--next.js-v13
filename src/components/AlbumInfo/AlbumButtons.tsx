@@ -43,14 +43,10 @@ const AlbumButtons = ({ albumId, myCollection = [], firstSongId }: IProp) => {
     async (payload: UpdateToCollectionRequest) => {
       const result = await updateAlbumToCollection(payload);
 
-      // revalidatePath('/api/collection');
-      // revalidatePath('/api/album/' + albumId);
-      // revalidateTag(APIKey.me);
-
       // should refresh to load new data
       refresh();
 
-      push(`${currentPath}/?modal=${result}`);
+      push(`${currentPath}/?popup=${result}`);
     },
     [currentPath, push, refresh]
   );

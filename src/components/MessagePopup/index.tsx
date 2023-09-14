@@ -1,33 +1,44 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import classNames from 'classnames';
+
+// Constants
 import { MessageType } from '@/constants';
-import { usePathname } from 'next/navigation';
 
-interface IProps {
-  status: MessageType;
-}
+interface IProps {}
 
-const MessagePopup = ({ status }: IProps) => {
+const MessagePopup = ({}: IProps) => {
   const pathName = usePathname();
-  const [hidden, setHidden] = useState(false);
+  const { replace } = useRouter();
+  const { get } = useSearchParams();
+
+  const [hidden, setHidden] = useState(true);
+  const [status, setStatus] = useState<MessageType | null>(null);
 
   useEffect(() => {
+    const status = get('popup') as MessageType;
+
+    if (!status) {
+      setHidden(true);
+      return;
+    }
+
+    setStatus(status);
+    setHidden(false);
+
     const displayInterval: any = setInterval(() => {
       setHidden(true);
 
-      if (typeof window !== 'undefined') {
-        // Remove search param
-        window.history.replaceState(null, '', pathName);
-      }
+      // remove search param
+      replace(pathName);
     }, 3000);
 
     return () => {
       clearInterval(displayInterval);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [get, replace, pathName]);
 
   return (
     <div
