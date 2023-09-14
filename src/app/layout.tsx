@@ -12,7 +12,12 @@ import { quicksand } from './font';
 
 export const metadata: Metadata = {
   title: METADATA.HOME.title,
-  description: METADATA.HOME.description
+  description: METADATA.HOME.description,
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1
+  }
 };
 
 export default function RootLayout({

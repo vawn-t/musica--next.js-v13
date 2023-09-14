@@ -5,6 +5,8 @@ export const METADATA = {
       'Musica is a digital music service that gives you access to great albums.'
   },
   COLLECTION: {
-    title: 'My collection'
-  }
+    title: 'My collection',
+    description: 'This is the place where you can find your favorite albums.'
+  },
+  ERROR: 'Error'
 };

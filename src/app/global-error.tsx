@@ -4,9 +4,14 @@
 import Typography from '@/components/Typography';
 
 // Constants
-import { TagType } from '@/constants';
+import { METADATA, TagType } from '@constants/index';
 
 import { quicksand } from './font';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: METADATA.ERROR
+};
 
 export default function GlobalError({
   error,

@@ -12,7 +12,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: attributes.name,
-    description: attributes.description
+    description: attributes.description,
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 1
+    }
   };
 }
 
