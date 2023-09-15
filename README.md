@@ -7,7 +7,7 @@
 ## TIMELINE
 
 - Estimate time: **12 days (2023/08/28 - 2023/09/14)**
-- Actual time: **13 days (2023/08/28 - 2023/09/15)**
+- Actual time: **12 days (2023/08/28 - 2023/09/14)**
 
 ## TEAM SIZE
 
@@ -26,12 +26,17 @@
 
 ## TECHNICAL STACK
 
-- Next.js: Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more.
-- React/React hooks: Hooks are the new feature introduced in the React 16.8 version. It allows you to use state and other React features without writing a class. Hooks are the functions which "hook into" React state and lifecycle features from function components. It does not work inside classes.
-- TypeScript: TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
-- HTML/CSS
-- [Mockapi](https://mockapi.io/): MockAPI is a simple tool that lets you easily mock up APIs, generate custom data, and preform operations on it using RESTful interface. MockAPI is meant to be used as a prototyping/testing/learning tool.
-- Axios: Axios is a promise-based HTTP Client for node.js and the browser.
+- [Next.js (version 13)](https://nextjs.org/docs)
+- React
+- TypeScript
+- [SWR](https://swr.vercel.app/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [ESLint](https://eslint.org/)
+- Deploy environment:
+  - [Vercel](https://vercel.com/): (Vercel's frontend cloud gives developers frameworks, workflows, and infrastructure to build a faster, more personalized web)
+  - [Render](https://render.com/) (Render is a unified cloud to build and run all your apps and websites with free TLS certificates, a global CDN, DDoS protection, private networks, and auto deploys from Git):
+    - Server: [Strapi](https://strapi.io/) (Strapi is the next-gen headless CMS, open-source, javascript, enabling content-rich experiences to be created, managed and exposed to any digital device.)
+    - Database: [Cloudinary](https://cloudinary.com/) (Streamline media management and improve user experience by automatically delivering images and videos, enhanced and optimized for every user.)
 
 ## REQUIREMENT DETAILS
 
