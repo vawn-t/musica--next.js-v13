@@ -32,7 +32,7 @@ const AlbumCard = ({ id, name, thumbnail }: IProps) => {
           style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
         />
       </div>
-      <Typography Tag={TagType.h5} className='pt-1'>
+      <Typography Tag={TagType.h4} className='pt-1'>
         {name}
       </Typography>
     </Link>

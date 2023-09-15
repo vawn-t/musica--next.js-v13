@@ -37,7 +37,7 @@ export default function RootLayout({
           </Suspense>
         </header>
         <main className='mx-7 pb-36 sm:mx-28 sm:pt-24'>{children}</main>
-        <footer className='fixed w-full bottom-0 h-28 shadow-base border-t border-t-light/30 bg-dark/75 backdrop-blur-md'>
+        <footer className='fixed w-full bottom-0 h-28 shadow-base border-t border-t-light/30 bg-darkAlt/75 backdrop-blur-md'>
           <Suspense fallback={<Spinner />}>
             <MusicController />
           </Suspense>

@@ -38,7 +38,7 @@ const SongDetail = ({ artists = [], thumbnail, title }: IProps) => {
           {title}
         </Typography>
         <Typography
-          className='text-white/40 font-bold truncate'
+          className='text-light/80 font-bold truncate'
           Tag={TagType.h5}
         >
           {artists.join(', ')}
