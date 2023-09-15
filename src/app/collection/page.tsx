@@ -16,7 +16,10 @@ const Collection = async () => {
 
   return (
     <section className='pb-32'>
-      <Button className='w-auto py-3 px-4 mb-7 text-dark bg-secondary text-base rounded-xl'>
+      <Button
+        className='w-auto py-3 px-4 mb-7 text-dark bg-secondary text-base rounded-xl'
+        name='My collection'
+      >
         My collection
       </Button>
 

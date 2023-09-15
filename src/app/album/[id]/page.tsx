@@ -15,6 +15,7 @@ import { MessageType } from '@/constants';
 import SkeletonCollectionPage from '@/components/Loading/SkeletonCollectionPage';
 import SkeletonRaw from '@/components/Loading/SkeletonRow';
 import MessagePopup from '@/components/MessagePopup';
+import Spinner from '@/components/Loading/Spinner';
 const AlbumInfo = dynamic(() => import('@components/AlbumInfo'));
 const Songs = dynamic(() => import('@components/Songs'));
 
@@ -29,7 +30,9 @@ const Album = async ({ params }: IProp) => {
 
   return (
     <section className='flex flex-col gap-6 sm:gap-12'>
-      <MessagePopup />
+      <Suspense fallback={<Spinner />}>
+        <MessagePopup />
+      </Suspense>
       <Suspense fallback={<SkeletonCollectionPage />}>
         <AlbumInfo
           albumId={id}

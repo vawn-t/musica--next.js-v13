@@ -40,7 +40,7 @@ const Home = async () => {
           </Suspense>
         </section>
         <section className='sm:basis-2/6 w-full'>
-          <Typography Tag={TagType.h3} className='font-bold'>
+          <Typography Tag={TagType.h3} className='font-bold pb-4'>
             Recently played
           </Typography>
           <Suspense fallback={<SkeletonCard />}>
