@@ -1,34 +1,120 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js v13 Practice
 
-## Getting Started
+## OVERVIEW
 
-First, run the development server:
+- This document outlines a comprehensive plan for practicing Next.js v13. The objective of this practice is to develop an online music streaming web application that enables users to play songs from available albums.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## TIMELINE
+
+- Estimate time: **12 days (2023/08/28 - 2023/09/14)**
+- Actual time: **13 days (2023/08/28 - 2023/09/15)**
+
+## TEAM SIZE
+
+- 1 developer:
+  - [Van Tran](van.tran@asnet.com.vn)
+
+## TARGETS
+
+- Apply Routes
+- Apply Data Fetching
+- Apply Caching
+- Apply Rendering
+  - Server Components
+  - Client Components
+- File Conventions
+
+## TECHNICAL STACK
+
+- Next.js: Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more.
+- React/React hooks: Hooks are the new feature introduced in the React 16.8 version. It allows you to use state and other React features without writing a class. Hooks are the functions which "hook into" React state and lifecycle features from function components. It does not work inside classes.
+- TypeScript: TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+- HTML/CSS
+- [Mockapi](https://mockapi.io/): MockAPI is a simple tool that lets you easily mock up APIs, generate custom data, and preform operations on it using RESTful interface. MockAPI is meant to be used as a prototyping/testing/learning tool.
+- Axios: Axios is a promise-based HTTP Client for node.js and the browser.
+
+## REQUIREMENT DETAILS
+
+- Read more detail requirement in [here](https://vawn.notion.site/Van-Tran-react-next-js13-practice-982e96ee8e364e769590207155944b1a?pvs=4).
+
+## DESIGN
+
+- [Figma](<https://www.figma.com/file/2HlDcj69jH0cIJvhw4X5iX/Musica-(Edited)?type=design&node-id=0%3A1&mode=design&t=rtRXELnR1pJxVz02-1>)
+
+## TASK MANAGEMENT
+
+- [Trello](https://trello.com/invite/b/FKdtBzQU/ATTIcb4d1d2f919d9fb416b0ff8190551078974F94F6/musica-workplace)
+
+## TEXT EDITOR
+
+- [Visual studio code](https://code.visualstudio.com)
+
+## DIRECTORY STRUCTURE
+
+```
+├── node_modules
+├── public
+└── src
+    ├── app
+    │   ├── albums/[id]
+    │   ├── api/revalidate
+    │   ├── collection
+    │   └── home
+    ├── components
+    │   ├── AlbumCard
+    │   ├── AlbumInfo
+    │   ├── Banner
+    │   ├── Button
+    │   ├── CollectionCards
+    │   ├── Loading
+    │   ├── MessagePopup
+    │   ├── MusicController
+    │   ├── Navigation
+    │   ├── RowCards
+    │   ├── Song
+    │   └── Typography
+    ├── constants
+    ├── hooks
+    ├── models
+    ├── services
+    ├── types
+    └── utils
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## GET STARTED
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Clone project:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+  ```bash
+  $ git clone git@gitlab.asoft-python.com:van.tran/react-training.git
+  ```
 
-## Learn More
+- Checkout branch:
 
-To learn more about Next.js, take a look at the following resources:
+  ```bash
+  $ git checkout develop
+  ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Change directory:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  ```bash
+  $ cd musica
+  ```
 
-## Deploy on Vercel
+- Install packages:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  ```bash
+  $ pnpm i
+  ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Start project
+
+  ```bash
+  $ pnpm dev
+  ```
+
+- Open browser and and type http://localhost:3000 in address bar
+
+## DEPLOYMENT
+
+- https://musica-app-topaz.vercel.app
