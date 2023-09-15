@@ -38,7 +38,7 @@ const Navigation = ({}: IProps) => {
         </Link>
 
         <Button
-          className='sm:hidden'
+          className='sm:hidden p-2'
           name='hamburger button'
           onClick={handleCollapse}
         >

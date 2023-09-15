@@ -17,7 +17,6 @@ const config: Config = {
         darkAlt: '#1A1E1F'
       },
       fontSize: {
-        xs: '10px',
         sm: '12px',
         base: '14px',
         lg: '17px',

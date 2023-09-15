@@ -32,7 +32,7 @@ const Controller = ({
   toggleLoop
 }: IProps) => {
   return (
-    <div className='flex w-full justify-center gap-6 sm:gap-10'>
+    <div className='flex w-full justify-center gap-4 sm:gap-8'>
       <Button
         className='hidden sm:block'
         name='shuffle button'
@@ -41,14 +41,14 @@ const Controller = ({
         <Shuffle size='22' />
       </Button>
       <Button
-        className='hidden sm:block'
+        className='hidden sm:block p-5'
         name={'previous button'}
         onClick={prevSong}
       >
         <Previous size='22' variant='Bold' />
       </Button>
       <Button
-        className='text-secondary'
+        className='text-secondary p-2'
         name={playing ? 'pause' : 'play' + ' button'}
         onClick={togglePlaying}
       >
@@ -58,7 +58,7 @@ const Controller = ({
           <PlayCircle size='36' variant='Bold' />
         )}
       </Button>
-      <Button name='next button' onClick={nextSong}>
+      <Button name='next button' className='p-5' onClick={nextSong}>
         <Next size='22' variant='Bold' />
       </Button>
       <Button
