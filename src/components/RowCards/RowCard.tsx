@@ -40,7 +40,7 @@ const RowCard = ({ id, name, thumbnail, duration }: IProps) => {
         <Typography Tag={TagType.span}>{formatDuration(duration)}</Typography>
       </div>
 
-      <RowCardButton id={id} />
+      <RowCardButton />
     </Link>
   );
 };
