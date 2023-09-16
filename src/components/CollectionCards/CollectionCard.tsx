@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Play } from 'iconsax-react';
 
 // Utils
-import { generateDataURL } from '@/utils';
+import { generatePlaceholder } from '@/utils';
 import imageLoader from '@utils/imageLoader';
 
 // Constants
@@ -37,7 +37,7 @@ const CollectionCard = ({ id, thumbnail, name }: IProps) => {
         width={224}
         height={224}
         loading='lazy'
-        placeholder={`data:image/svg+xml;base64,${generateDataURL(224, 224)}`}
+        placeholder={`data:image/${generatePlaceholder(224, 224)}`}
       />
       <Typography
         Tag={TagType.h2}

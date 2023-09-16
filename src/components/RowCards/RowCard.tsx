@@ -10,7 +10,7 @@ import { TagType, ROUTER } from '@constants/index';
 
 // Utils
 import imageLoader from '@utils/imageLoader';
-import { formatDuration, generateDataURL } from '@utils/index';
+import { formatDuration, generatePlaceholder } from '@utils/index';
 
 interface IProps {
   id: number;
@@ -33,7 +33,7 @@ const RowCard = ({ id, name, thumbnail, duration }: IProps) => {
         width={96}
         height={96}
         loading='lazy'
-        placeholder={`data:image/svg+xml;base64,${generateDataURL(96, 96)}`}
+        placeholder={`data:image/${generatePlaceholder(96, 96)}`}
       />
       <div className='flex flex-col justify-between gap-8 sm:gap-0'>
         <Typography Tag={TagType.h4}>{name}</Typography>

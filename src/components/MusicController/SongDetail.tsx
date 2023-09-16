@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Typography from '@components/Typography';
 
 // Utils
-import { generateDataURL } from '@utils/index';
+import { generatePlaceholder } from '@utils/index';
 import imageLoader from '@utils/imageLoader';
 
 // Constants
@@ -28,7 +28,7 @@ const SongDetail = ({ artists = [], thumbnail, title }: IProps) => {
         width={48}
         height={48}
         loading='lazy'
-        placeholder={`data:image/svg+xml;base64,${generateDataURL(48, 48)}`}
+        placeholder={`data:image/${generatePlaceholder(48, 48)}`}
       />
       <div className='flex flex-col justify-center'>
         <Typography

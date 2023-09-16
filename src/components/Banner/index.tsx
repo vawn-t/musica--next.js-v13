@@ -12,7 +12,7 @@ import { Banner as BannerType } from '@models/index';
 
 // Utils
 import imageLoader from '@utils/imageLoader';
-import { generateDataURL } from '@utils/index';
+import { generatePlaceholder } from '@utils/index';
 
 interface IProps {
   banner: BannerType;
@@ -33,7 +33,7 @@ const Banner = ({ banner: { description, title, url, imgUrl } }: IProps) => {
         fill
         loader={imageLoader}
         sizes='100%'
-        placeholder={`data:image/svg+xml;base64,${generateDataURL(160, 160)}`}
+        placeholder={`data:image/${generatePlaceholder(160, 160)}`}
       />
       <Typography className='font-extrabold' Tag={TagType.h1}>
         {title}

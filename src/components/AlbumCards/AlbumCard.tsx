@@ -9,7 +9,7 @@ import { TagType, ROUTER } from '@constants/index';
 
 // Utils
 import imageLoader from '@utils/imageLoader';
-import { generateDataURL } from '@utils/index';
+import { generatePlaceholder } from '@utils/index';
 
 interface IProps {
   id: number;
@@ -28,7 +28,7 @@ const AlbumCard = ({ id, name, thumbnail }: IProps) => {
           width={160}
           height={160}
           loading='lazy'
-          placeholder={`data:image/svg+xml;base64,${generateDataURL(160, 160)}`}
+          placeholder={`data:image/${generatePlaceholder(160, 160)}`}
           style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
         />
       </div>
