@@ -12,7 +12,7 @@ import { APIKey, MAX_RANGE } from '@constants/index';
 import { progressPositionCalculate } from '@utils/index';
 
 // Services
-import { updateCurrentPlayer } from '@/services/me.service';
+import { updateCurrentPlayer } from '@/services/me';
 
 interface IProps {
   albumId: number;

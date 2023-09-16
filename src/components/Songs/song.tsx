@@ -11,7 +11,7 @@ import Typography from '@components/Typography';
 import { formatDuration } from '@utils/index';
 
 // Services
-import { updateCurrentPlayer } from '@/services/me.service';
+import { updateCurrentPlayer } from '@/services/me';
 
 // Constants
 import { APIKey } from '@constants/index';

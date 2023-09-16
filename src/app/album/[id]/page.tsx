@@ -2,8 +2,8 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumById } from '@/services/album.service';
-import { getMyCollection } from '@/services/me.service';
+import { getAlbumById } from '@/services/album';
+import { getMyCollection } from '@/services/me';
 
 // Utils
 import { formatDuration } from '@utils/index';

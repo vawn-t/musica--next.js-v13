@@ -12,10 +12,7 @@ import Button from '@components/Button';
 import { Album } from '@models/index';
 
 // Services
-import {
-  updateAlbumToCollection,
-  updateCurrentPlayer
-} from '@/services/me.service';
+import { updateAlbumToCollection, updateCurrentPlayer } from '@/services/me';
 
 // Constants
 import { APIKey, NAVIGATION } from '@constants/index';

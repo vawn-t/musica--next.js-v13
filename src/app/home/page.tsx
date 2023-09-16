@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumsOrderBy } from '@services/album.service';
+import { getAlbumsOrderBy } from '@/services/album';
 import { getFirstBanner } from '@/services/banner.service';
 
 // Constants

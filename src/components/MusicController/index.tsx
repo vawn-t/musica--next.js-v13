@@ -13,8 +13,8 @@ import SongDetail from './SongDetail';
 import Spinner from '@components/Loading/Spinner';
 
 // Services
-import { getCurrentPLayer, updateCurrentPlayer } from '@/services/me.service';
-import { increaseAlbumPlayCount } from '@/services/album.service';
+import { getCurrentPLayer, updateCurrentPlayer } from '@/services/me';
+import { increaseAlbumPlayCount } from '@/services/album';
 
 // Constants
 import { APIKey } from '@constants/index';
