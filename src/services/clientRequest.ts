@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { FetchType, TagKey } from '@constants/index';
 
 export const fetcher = async <T>(
@@ -32,6 +33,10 @@ export const fetcher = async <T>(
   }
 
   if (!res.ok) {
+    if (res.status === 404) {
+      notFound();
+    }
+
     throw new Error('Failed to fetch data');
   }
 

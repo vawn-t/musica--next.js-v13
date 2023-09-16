@@ -9,7 +9,7 @@ export default function Error({ error }: { error: Error }) {
   return (
     <div className='h-screen w-full mx-auto text-center'>
       <Typography className='font-extrabold' Tag={TagType.h2}>
-        Something went wrong!
+        Something went wrong on the collection!
       </Typography>
       <Typography>{error.message}</Typography>
       <Link className='text-secondary underline' href='/'>
