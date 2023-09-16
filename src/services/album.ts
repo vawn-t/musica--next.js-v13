@@ -6,6 +6,7 @@ import type {
   GetAlbumInfoResponse,
   GetAlbumResponse,
   GetAlbumsResponse,
+  GetAllAlbumIdsResponse,
   IncreasePLaysCountRequest
 } from '@/types';
 
@@ -27,6 +28,15 @@ export const getAlbumsOrderBy = async (option: AlbumOrderOption) => {
   const albums: Album[] = createAlbums(data);
 
   return albums;
+};
+
+export const getAllAlbumIds = async () => {
+  const { data } = await fetcher<GetAllAlbumIdsResponse>(
+    ALBUM.getAllAlbumIds,
+    FetchType.isr
+  );
+
+  return data;
 };
 
 export const getAlbumById = async (id: number) => {

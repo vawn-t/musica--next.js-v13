@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 // Services
 import { getAlbumsOrderBy } from '@/services/album';
-import { getFirstBanner } from '@/services/banner.service';
+import { getFirstBanner } from '@/services/banner';
 
 // Constants
 import { AlbumOrderOption, TagType } from '@constants/index';

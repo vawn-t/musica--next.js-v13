@@ -9,7 +9,8 @@ export const ALBUM = {
     `/albums?sort=${option}:desc&populate=*`,
   getAlbumById: (id: number) => `/albums/${id}?populate=deep,3`,
   increaseAlbumPlayCount: (id: number) => `/albums/${id}`,
-  getAlbumInfoById: (id: number) => `/albums/${id}`
+  getAlbumInfoById: (id: number) => `/albums/${id}`,
+  getAllAlbumIds: `/albums` //TODO: should update with qs string
 };
 
 export const ME = {

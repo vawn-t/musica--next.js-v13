@@ -6,7 +6,7 @@ import Typography from '@components/Typography';
 import RowCardButton from './RowCardButton';
 
 // Constants
-import { TagType, DIRECTION } from '@constants/index';
+import { TagType, ROUTER } from '@constants/index';
 
 // Utils
 import imageLoader from '@utils/imageLoader';
@@ -22,7 +22,7 @@ interface IProps {
 const RowCard = ({ id, name, thumbnail, duration }: IProps) => {
   return (
     <Link
-      href={DIRECTION.goAlbum(id)}
+      href={ROUTER.goAlbum(id)}
       className='relative flex flex-col sm:flex-row justify-between sm:justify-start gap-4 sm:gap-2 min-w-[20rem] sm:w-full sm:h-24 bg-darkAlt rounded-lg p-4'
     >
       <Image

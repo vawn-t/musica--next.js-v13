@@ -57,6 +57,10 @@ type GetAlbumsResponse = {
   data: AlbumResponse[];
 };
 
+type GetAllAlbumIdsResponse = {
+  data: [{ id: number }];
+};
+
 type MeResponse = {
   song: {
     id: number;
@@ -96,5 +100,6 @@ export type {
   GetAlbumResponse,
   GetAlbumsResponse,
   GetMyCollectionResponse,
-  GetAlbumInfoResponse
+  GetAlbumInfoResponse,
+  GetAllAlbumIdsResponse
 };

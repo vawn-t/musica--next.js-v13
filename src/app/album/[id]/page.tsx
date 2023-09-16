@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumById } from '@/services/album';
+import { getAlbumById, getAllAlbumIds } from '@/services/album';
 import { getMyCollection } from '@/services/me';
 
 // Utils
@@ -22,6 +22,14 @@ const Songs = dynamic(() => import('@components/Songs'));
 interface IProp {
   searchParams: { modal: MessageType } | null | undefined;
   params: { id: number };
+}
+
+export async function generateStaticParams() {
+  const albumIds = await getAllAlbumIds();
+
+  // should convert to string as suggested by the error
+  const params = albumIds.map((album) => ({ id: album.id.toString() }));
+  return params;
 }
 
 const Album = async ({ params }: IProp) => {
