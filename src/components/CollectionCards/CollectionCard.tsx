@@ -1,6 +1,5 @@
 'use client';
 
-import { useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Play } from 'iconsax-react';
@@ -22,8 +21,6 @@ interface IProps {
   thumbnail: string;
 }
 const CollectionCard = ({ id, thumbnail, name }: IProps) => {
-  const handlePlay = useCallback(() => {}, []);
-
   return (
     <Link
       href={ROUTER.goAlbum(id)}
@@ -48,7 +45,6 @@ const CollectionCard = ({ id, thumbnail, name }: IProps) => {
       <Button
         className='absolute bottom-6 right-4 sm:hidden group-hover:block hover:scale-125 duration-300'
         name='play button'
-        onClick={handlePlay}
       >
         <Play className='text-secondary' variant='Bold' size={48} />
       </Button>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { HambergerMenu } from 'iconsax-react';
 
 // Components
-import Button from '@components/Button/index';
+import Button from '@components/Button';
 import Item from './Item';
 
 // Models
@@ -15,9 +15,7 @@ import { Navigation } from '@models/index';
 // Constants
 import { NAVIGATION } from '@constants/index';
 
-interface IProps {}
-
-const Navigation = ({}: IProps) => {
+const Navigation = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const handleCollapse = useCallback(() => {

@@ -13,13 +13,7 @@ export const metadata: Metadata = {
   title: METADATA.ERROR
 };
 
-export default function GlobalError({
-  error,
-  reset
-}: {
-  error: Error;
-  reset: () => void;
-}) {
+const GlobalError = ({ error, reset }: { error: Error; reset: () => void }) => {
   return (
     <html lang='en' className={quicksand.className}>
       <body>
@@ -30,4 +24,6 @@ export default function GlobalError({
       </body>
     </html>
   );
-}
+};
+
+export default GlobalError;

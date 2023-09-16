@@ -54,7 +54,7 @@ const Album = async ({ params }: IProp) => {
         />
       </Suspense>
       <Suspense fallback={<SkeletonRaw />}>
-        <Songs albumId={params.id} songs={albumAttributes.songs} />
+        <Songs songs={albumAttributes.songs} />
       </Suspense>
     </section>
   );

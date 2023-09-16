@@ -15,14 +15,13 @@ import { Album } from '@models/index';
 import { updateAlbumToCollection, updateCurrentPlayer } from '@/services/me';
 
 // Constants
-import { APIKey, NAVIGATION } from '@constants/index';
+import { APIKey } from '@constants/index';
 
 // Utils
 import { isAddedAlbum } from '@/utils';
 
 // Types
 import type { UpdateToCollectionRequest } from '@/types';
-import { revalidatePath, revalidateTag } from 'next/cache';
 
 interface IProp {
   albumId: number;

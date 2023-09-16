@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Typography from '@/components/Typography';
 import { TagType } from '@constants/index';
 
-export default function Error({ error }: { error: Error }) {
+const Error = ({ error }: { error: Error }) => {
   return (
     <div className='h-screen w-full mx-auto text-center'>
       <Typography className='font-extrabold' Tag={TagType.h2}>
@@ -17,4 +17,6 @@ export default function Error({ error }: { error: Error }) {
       </Link>
     </div>
   );
-}
+};
+
+export default Error;
