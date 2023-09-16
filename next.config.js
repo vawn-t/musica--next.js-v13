@@ -12,6 +12,9 @@ const nextConfig = {
     minimumCacheTTL: 60,
     deviceSizes: [480, 768, 1024, 1200, 2048],
     imageSizes: [16, 48, 96, 128, 348]
+  },
+  env: {
+    API_HOST: 'https://musica-app.onrender.com/api'
   }
 };
 

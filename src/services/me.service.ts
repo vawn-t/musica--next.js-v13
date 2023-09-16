@@ -26,7 +26,7 @@ import type {
 import { Album, AlbumAttributes } from '@models/index';
 
 export const getCurrentPLayer: Fetcher<MeResponse, APIKey> = () =>
-  swrFetcher(process.env.NEXT_PUBLIC_API_HOST + ME.getCurrentSong);
+  swrFetcher(process.env.API_HOST + ME.getCurrentSong);
 
 export const updateCurrentPlayer = async (
   payload: UpdateCurrentPlayerRequest

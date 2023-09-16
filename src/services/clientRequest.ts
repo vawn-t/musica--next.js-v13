@@ -9,14 +9,14 @@ export const fetcher = async <T>(
   switch (method) {
     case FetchType.ssr:
       // This request should be re-fetched on every request.
-      res = await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {
+      res = await fetch(process.env.API_HOST + endPoint, {
         cache: 'no-store'
       });
       break;
 
     case FetchType.isr:
       // This request should be cached with a lifetime of 30 seconds.
-      res = await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {
+      res = await fetch(process.env.API_HOST + endPoint, {
         next: { revalidate: 30, tags: [...(tags || [])] }
       });
       break;
@@ -24,7 +24,7 @@ export const fetcher = async <T>(
     case FetchType.default:
     default:
       // This request should be cached until manually invalidated.
-      res = await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {
+      res = await fetch(process.env.API_HOST + endPoint, {
         cache: 'force-cache',
         next: { tags: [...(tags || [])] }
       });
@@ -39,7 +39,7 @@ export const fetcher = async <T>(
 };
 
 export const PUT = async <T>(endPoint: string, payload: T) =>
-  await fetch(process.env.NEXT_PUBLIC_API_HOST + endPoint, {
+  await fetch(process.env.API_HOST + endPoint, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
