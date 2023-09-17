@@ -15,6 +15,11 @@ import { Navigation } from '@models/index';
 // Constants
 import { NAVIGATION } from '@constants/index';
 
+// Utils
+import internalLoader from '@/utils/internalLoader';
+
+import logo from 'public/logo.png';
+
 const Navigation = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -26,13 +31,7 @@ const Navigation = () => {
     <nav className='flex flex-col gap-8'>
       <div className='flex justify-between'>
         <Link href={NAVIGATION[0].route} className='sm:px-4'>
-          <Image
-            priority
-            src='/logo.png'
-            alt='site-logo'
-            width={34}
-            height={34}
-          />
+          <Image priority src={logo} alt='site-logo' loader={internalLoader} />
         </Link>
 
         <Button
