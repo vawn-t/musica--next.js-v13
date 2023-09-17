@@ -5,24 +5,20 @@ import { Song as SongModel } from '@/models';
 import Song from './song';
 
 interface IProps {
-  albumId: number;
   songs: SongModel[];
 }
 
-const Songs = ({ albumId, songs }: IProps) => {
+const Songs = ({ songs }: IProps) => {
   return (
     <section className='flex flex-col gap-4 pb-32'>
       {songs.map(({ id, attributes }, index) => (
         <Song
           key={id}
-          albumId={albumId}
           id={id}
           artists={attributes.artists}
           duration={attributes.duration}
           index={index}
           name={attributes.name}
-          // TODO: handle isPlaying
-          // isPlaying
         />
       ))}
     </section>

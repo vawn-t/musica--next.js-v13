@@ -15,8 +15,15 @@ type IncreasePLaysCountRequest = {
   };
 };
 
+type SyncRecentlyPlayedAlbum = {
+  data: {
+    recentlyPlayedAt: string;
+  };
+};
+
 export type {
   UpdateCurrentPlayerRequest,
   UpdateToCollectionRequest,
-  IncreasePLaysCountRequest
+  IncreasePLaysCountRequest,
+  SyncRecentlyPlayedAlbum
 };

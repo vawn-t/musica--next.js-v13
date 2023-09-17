@@ -3,5 +3,6 @@ export enum APIKey {
 }
 
 export enum TagKey {
-  updateAlbum = 'updateAlbum'
+  UpdateAlbum = 'updateAlbum',
+  SyncPlayedTime = 'syncPlayedTime'
 }

@@ -36,5 +36,5 @@ const toBase64 = (str: string) =>
  * @param {number} h - The height of the image.
  * @return {string} The generated data URL.
  */
-export const generateDataURL = (w: number, h: number) =>
-  `${toBase64(shimmer(w, h))}`;
+export const generatePlaceholder = (w: number, h: number): string =>
+  `svg+xml;base64,${toBase64(shimmer(w, h))}`;

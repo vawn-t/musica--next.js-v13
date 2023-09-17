@@ -19,5 +19,5 @@ export interface AlbumAttributes {
 }
 
 export interface Thumbnail {
-  url: string;
+  hash: string;
 }

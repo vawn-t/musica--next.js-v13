@@ -17,7 +17,7 @@ type BannerResponse = {
       background: {
         data: {
           attributes: {
-            url: string;
+            hash: string;
           };
         };
       };
@@ -43,7 +43,7 @@ type AlbumResponse = {
     };
     thumbnail: {
       data: {
-        attributes: { url: string };
+        attributes: { hash: string };
       };
     };
   };
@@ -55,6 +55,10 @@ type GetAlbumResponse = {
 
 type GetAlbumsResponse = {
   data: AlbumResponse[];
+};
+
+type GetAllAlbumIdsResponse = {
+  data: { id: number }[];
 };
 
 type MeResponse = {
@@ -80,6 +84,14 @@ type GetMyCollectionResponse = {
   albums: { id: number & AlbumAttributes }[];
 };
 
+type CollectionId = {
+  id: number;
+};
+
+type GetMyCollectionIdsResponse = {
+  albums: CollectionId[];
+};
+
 type GetAlbumInfoResponse = {
   data: {
     attributes: {
@@ -92,9 +104,12 @@ type GetAlbumInfoResponse = {
 export type {
   AlbumResponse,
   BannerResponse,
+  CollectionId,
   MeResponse,
   GetAlbumResponse,
   GetAlbumsResponse,
   GetMyCollectionResponse,
-  GetAlbumInfoResponse
+  GetMyCollectionIdsResponse,
+  GetAlbumInfoResponse,
+  GetAllAlbumIdsResponse
 };

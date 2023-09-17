@@ -2,11 +2,11 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumsOrderBy } from '@services/album.service';
-import { getFirstBanner } from '@/services/banner.service';
+import { getAlbumsOrderBy } from '@/services/album';
+import { getFirstBanner } from '@/services/banner';
 
 // Constants
-import { AlbumOrderOption, TagType } from '@constants/index';
+import { AlbumOrderOption, TagKey, TagType } from '@constants/index';
 
 // Components
 const SkeletonCard = dynamic(() => import('@components/Loading/SkeletonCard'));
@@ -22,7 +22,8 @@ const Home = async () => {
   const banner = await getFirstBanner();
 
   const albumsOrderByRecentlyPlayed = await getAlbumsOrderBy(
-    AlbumOrderOption.recentlyPlayed
+    AlbumOrderOption.recentlyPlayed,
+    [TagKey.SyncPlayedTime]
   );
   const albumsOrderByReleased = await getAlbumsOrderBy(
     AlbumOrderOption.release

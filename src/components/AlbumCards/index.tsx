@@ -11,7 +11,7 @@ const AlbumCards = ({ items: cards }: IProps) => (
       <AlbumCard
         key={id}
         id={id}
-        thumbnail={attributes.thumbnail as string}
+        thumbnailHash={attributes.thumbnail as string}
         name={attributes.name}
       />
     ))}

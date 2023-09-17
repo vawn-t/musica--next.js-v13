@@ -13,8 +13,8 @@ import SongDetail from './SongDetail';
 import Spinner from '@components/Loading/Spinner';
 
 // Services
-import { getCurrentPLayer, updateCurrentPlayer } from '@/services/me.service';
-import { increaseAlbumPlayCount } from '@/services/album.service';
+import { getCurrentPLayer, updateCurrentPlayer } from '@/services/me';
+import { increaseAlbumPlayCount } from '@/services/album';
 
 // Constants
 import { APIKey } from '@constants/index';
@@ -22,9 +22,7 @@ import { APIKey } from '@constants/index';
 // Models
 import { Song, Thumbnail } from '@/models/index';
 
-interface IProps {}
-
-const MusicController = ({}: IProps) => {
+const MusicController = () => {
   const {
     data: { song, album } = {},
     isLoading,
@@ -113,7 +111,7 @@ const MusicController = ({}: IProps) => {
         <>
           <SongDetail
             artists={artists}
-            thumbnail={(album?.thumbnail as Thumbnail).url || ''}
+            thumbnail={(album?.thumbnail as Thumbnail).hash || ''}
             title={song?.name || ''}
           />
           <SongControls

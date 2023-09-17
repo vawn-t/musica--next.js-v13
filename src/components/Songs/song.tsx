@@ -1,6 +1,7 @@
 'use client';
 
 import { mutate } from 'swr';
+import { useParams } from 'next/navigation';
 import classNames from 'classnames';
 import { VoiceSquare } from 'iconsax-react';
 
@@ -11,7 +12,7 @@ import Typography from '@components/Typography';
 import { formatDuration } from '@utils/index';
 
 // Services
-import { updateCurrentPlayer } from '@/services/me.service';
+import { updateCurrentPlayer } from '@/services/me';
 
 // Constants
 import { APIKey } from '@constants/index';
@@ -21,7 +22,6 @@ import { Artist } from '@models/index';
 
 interface IProps {
   id: number;
-  albumId: number;
   artists: Artist[];
   name: string;
   index: number;
@@ -31,15 +31,19 @@ interface IProps {
 
 const Song = ({
   id,
-  albumId,
   artists = [],
   name,
   index,
   isPlaying = false,
   duration
 }: IProps) => {
+  const { id: albumId } = useParams();
+
   const handlePlay = async () => {
-    await updateCurrentPlayer({ song: id, album: albumId });
+    await updateCurrentPlayer({
+      song: id,
+      album: Number(albumId)
+    });
 
     mutate(APIKey.me);
   };

@@ -1,4 +1,4 @@
-import { getAlbumInfo } from '@/services/album.service';
+import { getAlbumInfo } from '@/services/album';
 import { Metadata } from 'next';
 
 type Props = {

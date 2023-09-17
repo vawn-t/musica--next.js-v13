@@ -1,4 +1,4 @@
-import { MouseEvent, memo, useCallback, useState } from 'react';
+import { MouseEvent, memo, useCallback } from 'react';
 import { mutate } from 'swr';
 
 // Components
@@ -12,7 +12,7 @@ import { APIKey, MAX_RANGE } from '@constants/index';
 import { progressPositionCalculate } from '@utils/index';
 
 // Services
-import { updateCurrentPlayer } from '@/services/me.service';
+import { updateCurrentPlayer } from '@/services/me';
 
 interface IProps {
   albumId: number;
@@ -75,6 +75,7 @@ const SongControls = ({
   return (
     <div className='flex flex-col gap-4 sm:grow'>
       <Controller
+        albumId={albumId}
         loop={loop}
         playing={playing}
         toggleShuffled={toggleShuffled}

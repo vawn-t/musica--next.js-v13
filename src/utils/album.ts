@@ -2,10 +2,10 @@
 import { createSong } from './song';
 
 // Models
-import { Album, Song } from '@models/index';
+import { Album } from '@models/index';
 
 // Types
-import { AlbumResponse } from '@/types';
+import { AlbumResponse, CollectionId } from '@/types';
 
 /**
  * Creates an album object based on the provided album response.
@@ -33,7 +33,7 @@ export const createAlbum = ({
     id,
     attributes: {
       ...restAttributes,
-      thumbnail: restAttributes.thumbnail.data.attributes.url,
+      thumbnail: restAttributes.thumbnail.data.attributes.hash,
       songs: createdSongs,
       duration: albumDuration
     }
@@ -57,12 +57,11 @@ export const createAlbums = (albums: AlbumResponse[]): Album[] => {
  * @param {number} currentAlbumId - The ID of the current album.
  * @return {{albumExists: boolean, currentAlbums: {id: number}[]}} - An object indicating if the album exists and the current albums in the collection.
  */
-export const isAddedAlbum = (collection: Album[], currentAlbumId: number) => {
-  const currentAlbums = collection.map((album) => ({ id: album.id }));
+export const isAddedAlbum = (
+  collection: CollectionId[],
+  currentAlbumId: number
+) => {
+  const albumExists = collection.some((album) => album.id === currentAlbumId);
 
-  const albumExists = currentAlbums.some(
-    (album) => album.id === currentAlbumId
-  );
-
-  return { albumExists, currentAlbums };
+  return albumExists;
 };

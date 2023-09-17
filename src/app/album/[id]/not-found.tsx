@@ -1,17 +1,15 @@
-'use client';
-
 import Link from 'next/link';
 
 import Typography from '@/components/Typography';
 import { TagType } from '@constants/index';
 
-const Error = ({ error }: { error: Error }) => {
+const NotFound = () => {
   return (
-    <div className='h-screen w-full mx-auto text-center'>
+    <div className='h-screen w-full text-center'>
       <Typography className='font-extrabold' Tag={TagType.h2}>
-        Something went wrong at home page!
+        Not Found
       </Typography>
-      <Typography>{error.message}</Typography>
+      <Typography>The album does not exist!</Typography>
       <Link className='text-secondary underline' href='/'>
         Return Home
       </Link>
@@ -19,4 +17,4 @@ const Error = ({ error }: { error: Error }) => {
   );
 };
 
-export default Error;
+export default NotFound;

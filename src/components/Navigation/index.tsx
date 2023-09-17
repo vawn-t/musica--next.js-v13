@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { HambergerMenu } from 'iconsax-react';
 
 // Components
-import Button from '@components/Button/index';
+import Button from '@components/Button';
 import Item from './Item';
 
 // Models
@@ -15,9 +15,12 @@ import { Navigation } from '@models/index';
 // Constants
 import { NAVIGATION } from '@constants/index';
 
-interface IProps {}
+// Utils
+import internalLoader from '@/utils/internalLoader';
 
-const Navigation = ({}: IProps) => {
+import logo from 'public/logo.png';
+
+const Navigation = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const handleCollapse = useCallback(() => {
@@ -28,13 +31,7 @@ const Navigation = ({}: IProps) => {
     <nav className='flex flex-col gap-8'>
       <div className='flex justify-between'>
         <Link href={NAVIGATION[0].route} className='sm:px-4'>
-          <Image
-            priority
-            src='/logo.png'
-            alt='site-logo'
-            width={34}
-            height={34}
-          />
+          <Image priority src={logo} alt='site-logo' loader={internalLoader} />
         </Link>
 
         <Button

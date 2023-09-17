@@ -1,4 +1,5 @@
 import { AlbumOrderOption, TagKey } from '.';
+import queryString from '@/utils/queryString';
 
 export const BANNER = {
   getById: (id: number) => `/banners/${id}?populate=*`
@@ -7,19 +8,36 @@ export const BANNER = {
 export const ALBUM = {
   getAlbumsOrderBy: (option: AlbumOrderOption) =>
     `/albums?sort=${option}:desc&populate=*`,
-  getAlbumById: (id: number) => `/albums/${id}?populate=deep,3`,
-  increaseAlbumPlayCount: (id: number) => `/albums/${id}`,
-  getAlbumInfoById: (id: number) => `/albums/${id}`
+  getAlbumById: (id: number) =>
+    `/albums/${id}?${queryString({
+      populate: 'deep,3'
+    })}`,
+  albumById: (id: number) => `/albums/${id}`,
+  getAllAlbumIds: `/albums?fields[0]`
 };
 
 export const ME = {
   info: '/users/1',
-  getCurrentSong:
-    '/users/1?populate[song][populate][0]=media&populate[song][populate][1]=artists&populate[album][populate][0]=thumbnail&populate[album][populate][1]=songs'
+  getCurrentSong: `/users/1?${queryString({
+    populate: {
+      song: {
+        populate: ['media', 'artists']
+      },
+      album: {
+        populate: ['thumbnail', 'songs']
+      }
+    }
+  })}`
 };
 
 export const COLLECTION = {
-  getMyCollection: '/users/1?populate[albums][populate][0]=thumbnail'
+  getMyCollection: `/users/1?${queryString({
+    populate: {
+      albums: {
+        populate: ['thumbnail']
+      }
+    }
+  })}`
 };
 
 export const REVALIDATE = {

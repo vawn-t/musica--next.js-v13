@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import {
   Next,
   PauseCircle,
@@ -12,7 +12,11 @@ import classNames from 'classnames';
 // Components
 import Button from '@components/Button';
 
+// Services
+import { syncRecentlyPlayedAlbum } from '@/services/album';
+
 interface IProps {
+  albumId: number;
   loop: boolean;
   playing: boolean;
   toggleShuffled: () => void;
@@ -23,6 +27,7 @@ interface IProps {
 }
 
 const Controller = ({
+  albumId,
   loop,
   playing,
   toggleShuffled,
@@ -31,6 +36,21 @@ const Controller = ({
   togglePlaying,
   toggleLoop
 }: IProps) => {
+  const handlePlay = useCallback(() => {
+    togglePlaying();
+  }, [togglePlaying]);
+
+  useEffect(() => {
+    const updatePlayedTime = async () => {
+      if (playing) {
+        const currentTime = new Date().toISOString();
+        await syncRecentlyPlayedAlbum(albumId, currentTime);
+      }
+    };
+
+    updatePlayedTime();
+  }, [albumId, playing]);
+
   return (
     <div className='flex w-full justify-center gap-4 sm:gap-8'>
       <Button
@@ -50,7 +70,7 @@ const Controller = ({
       <Button
         className='text-secondary p-2'
         name={playing ? 'pause' : 'play' + ' button'}
-        onClick={togglePlaying}
+        onClick={handlePlay}
       >
         {playing ? (
           <PauseCircle size='36' variant='Bold' />

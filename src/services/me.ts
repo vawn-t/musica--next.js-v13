@@ -19,14 +19,15 @@ import type {
   GetMyCollectionResponse,
   MeResponse,
   UpdateToCollectionRequest,
-  UpdateCurrentPlayerRequest
+  UpdateCurrentPlayerRequest,
+  GetMyCollectionIdsResponse
 } from '@/types';
 
 // Models
 import { Album, AlbumAttributes } from '@models/index';
 
 export const getCurrentPLayer: Fetcher<MeResponse, APIKey> = () =>
-  swrFetcher(process.env.NEXT_PUBLIC_API_HOST + ME.getCurrentSong);
+  swrFetcher(process.env.API_HOST + ME.getCurrentSong);
 
 export const updateCurrentPlayer = async (
   payload: UpdateCurrentPlayerRequest
@@ -36,7 +37,7 @@ export const getMyCollection = async () => {
   const data = await fetcher<GetMyCollectionResponse>(
     COLLECTION.getMyCollection,
     FetchType.default,
-    [TagKey.updateAlbum]
+    [TagKey.UpdateAlbum]
   );
 
   const albums: Album[] = data.albums.map(
@@ -46,6 +47,16 @@ export const getMyCollection = async () => {
   return albums;
 };
 
+export const getMyCollectionIds = async () => {
+  const data = await fetcher<GetMyCollectionIdsResponse>(
+    COLLECTION.getMyCollection,
+    FetchType.default,
+    [TagKey.UpdateAlbum]
+  );
+
+  return data.albums.map(({ id }: { id: number }) => ({ id }));
+};
+
 export const updateAlbumToCollection = async (
   albums: UpdateToCollectionRequest
 ) => {
@@ -53,7 +64,7 @@ export const updateAlbumToCollection = async (
     await PUT<UpdateToCollectionRequest>(ME.info, albums);
 
     // force data relate to album should update-to-date
-    await fetch(REVALIDATE.tag(TagKey.updateAlbum));
+    await fetch(REVALIDATE.tag(TagKey.UpdateAlbum));
 
     return MessageType.success;
   } catch (error) {

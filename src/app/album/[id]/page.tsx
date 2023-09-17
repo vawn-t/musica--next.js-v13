@@ -2,8 +2,8 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Services
-import { getAlbumById } from '@/services/album.service';
-import { getMyCollection } from '@/services/me.service';
+import { getAlbumById, getAllAlbumIds } from '@/services/album';
+import { getMyCollectionIds } from '@/services/me';
 
 // Utils
 import { formatDuration } from '@utils/index';
@@ -24,9 +24,15 @@ interface IProp {
   params: { id: number };
 }
 
+export async function generateStaticParams() {
+  const albumIds = await getAllAlbumIds();
+
+  return albumIds.map((album) => ({ id: album.id.toString() }));
+}
+
 const Album = async ({ params }: IProp) => {
   const { id, attributes: albumAttributes } = await getAlbumById(params.id);
-  const myCollection = await getMyCollection();
+  const myCollectionIds = await getMyCollectionIds();
 
   return (
     <section className='flex flex-col gap-6 sm:gap-12'>
@@ -36,7 +42,7 @@ const Album = async ({ params }: IProp) => {
       <Suspense fallback={<SkeletonCollectionPage />}>
         <AlbumInfo
           albumId={id}
-          myCollection={myCollection}
+          myCollectionIds={myCollectionIds}
           description={albumAttributes.description}
           firstSongId={albumAttributes.songs[0].id}
           totalDuration={formatDuration(albumAttributes.duration)}
@@ -46,7 +52,7 @@ const Album = async ({ params }: IProp) => {
         />
       </Suspense>
       <Suspense fallback={<SkeletonRaw />}>
-        <Songs albumId={params.id} songs={albumAttributes.songs} />
+        <Songs songs={albumAttributes.songs} />
       </Suspense>
     </section>
   );

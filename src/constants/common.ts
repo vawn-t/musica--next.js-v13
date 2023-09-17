@@ -1,6 +1,3 @@
-import { Home2, MusicPlaylist } from 'iconsax-react';
-import { Navigation } from '@models/index';
-
 /** ENUMS **/
 
 export enum TagType {

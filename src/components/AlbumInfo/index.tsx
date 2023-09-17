@@ -6,18 +6,17 @@ import Typography from '@components/Typography';
 import AlbumButtons from './AlbumButtons';
 
 // Utils
-import imageLoader from '@/utils/imageLoader';
-import { generateDataURL } from '@utils/index';
+import { generatePlaceholder } from '@utils/index';
 
 // Constants
 import { TagType } from '@constants/index';
 
-// Models
-import { Album } from '@models/index';
+// Types
+import { CollectionId } from '@/types';
 
 type Props = {
   albumId: number;
-  myCollection: Album[];
+  myCollectionIds: CollectionId[];
   description: string;
   firstSongId: number;
   name: string;
@@ -28,7 +27,7 @@ type Props = {
 
 const AlbumInfo = ({
   albumId,
-  myCollection,
+  myCollectionIds,
   description,
   firstSongId,
   name,
@@ -42,11 +41,10 @@ const AlbumInfo = ({
         alt={name}
         className='rounded-3xl'
         src={thumbnail}
-        loader={imageLoader}
         loading='lazy'
         height={284}
         width={284}
-        placeholder={`data:image/svg+xml;base64,${generateDataURL(284, 284)}`}
+        placeholder={`data:image/${generatePlaceholder(284, 284)}`}
       />
       <div className='grow'>
         <Typography className='text-alt font-bold' Tag={TagType.h1}>
@@ -57,7 +55,7 @@ const AlbumInfo = ({
           {totalSong} songs ~ {totalDuration}
         </Typography>
         <AlbumButtons
-          myCollection={myCollection}
+          myCollection={myCollectionIds}
           albumId={albumId}
           firstSongId={firstSongId}
         />
