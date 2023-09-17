@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import {
   Next,
   PauseCircle,
@@ -38,12 +38,18 @@ const Controller = ({
 }: IProps) => {
   const handlePlay = useCallback(() => {
     togglePlaying();
+  }, [togglePlaying]);
 
-    if (!playing) {
-      const currentTime = new Date().toISOString();
-      syncRecentlyPlayedAlbum(albumId, currentTime);
-    }
-  }, [albumId, playing, togglePlaying]);
+  useEffect(() => {
+    const updatePlayedTime = async () => {
+      if (playing) {
+        const currentTime = new Date().toISOString();
+        await syncRecentlyPlayedAlbum(albumId, currentTime);
+      }
+    };
+
+    updatePlayedTime();
+  }, [albumId, playing]);
 
   return (
     <div className='flex w-full justify-center gap-4 sm:gap-8'>
