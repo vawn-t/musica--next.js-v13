@@ -58,7 +58,8 @@ type GetAlbumsResponse = {
 };
 
 type GetAllAlbumIdsResponse = {
-  data: [{ id: number }];
+  // TODO: Need to update API to remove it
+  data: Pick<{ id: number }, 'id'>[];
 };
 
 type MeResponse = {
