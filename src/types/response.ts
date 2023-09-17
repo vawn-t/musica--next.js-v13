@@ -58,8 +58,7 @@ type GetAlbumsResponse = {
 };
 
 type GetAllAlbumIdsResponse = {
-  // TODO: Need to update API to remove it
-  data: Pick<{ id: number }, 'id'>[];
+  data: { id: number }[];
 };
 
 type MeResponse = {
@@ -85,6 +84,14 @@ type GetMyCollectionResponse = {
   albums: { id: number & AlbumAttributes }[];
 };
 
+type CollectionId = {
+  id: number;
+};
+
+type GetMyCollectionIdsResponse = {
+  albums: CollectionId[];
+};
+
 type GetAlbumInfoResponse = {
   data: {
     attributes: {
@@ -97,10 +104,12 @@ type GetAlbumInfoResponse = {
 export type {
   AlbumResponse,
   BannerResponse,
+  CollectionId,
   MeResponse,
   GetAlbumResponse,
   GetAlbumsResponse,
   GetMyCollectionResponse,
+  GetMyCollectionIdsResponse,
   GetAlbumInfoResponse,
   GetAllAlbumIdsResponse
 };

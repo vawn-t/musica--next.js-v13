@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 // Services
 import { getAlbumById, getAllAlbumIds } from '@/services/album';
-import { getMyCollection } from '@/services/me';
+import { getMyCollectionIds } from '@/services/me';
 
 // Utils
 import { formatDuration } from '@utils/index';
@@ -27,14 +27,12 @@ interface IProp {
 export async function generateStaticParams() {
   const albumIds = await getAllAlbumIds();
 
-  // should convert to string as suggested by the error
-  const params = albumIds.map((album) => ({ id: album.id.toString() }));
-  return params;
+  return albumIds.map((album) => ({ id: album.id.toString() }));
 }
 
 const Album = async ({ params }: IProp) => {
   const { id, attributes: albumAttributes } = await getAlbumById(params.id);
-  const myCollection = await getMyCollection();
+  const myCollectionIds = await getMyCollectionIds();
 
   return (
     <section className='flex flex-col gap-6 sm:gap-12'>
@@ -44,7 +42,7 @@ const Album = async ({ params }: IProp) => {
       <Suspense fallback={<SkeletonCollectionPage />}>
         <AlbumInfo
           albumId={id}
-          myCollection={myCollection}
+          myCollectionIds={myCollectionIds}
           description={albumAttributes.description}
           firstSongId={albumAttributes.songs[0].id}
           totalDuration={formatDuration(albumAttributes.duration)}

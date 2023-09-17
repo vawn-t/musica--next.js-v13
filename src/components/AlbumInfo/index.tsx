@@ -11,12 +11,12 @@ import { generatePlaceholder } from '@utils/index';
 // Constants
 import { TagType } from '@constants/index';
 
-// Models
-import { Album } from '@models/index';
+// Types
+import { CollectionId } from '@/types';
 
 type Props = {
   albumId: number;
-  myCollection: Album[];
+  myCollectionIds: CollectionId[];
   description: string;
   firstSongId: number;
   name: string;
@@ -27,7 +27,7 @@ type Props = {
 
 const AlbumInfo = ({
   albumId,
-  myCollection,
+  myCollectionIds,
   description,
   firstSongId,
   name,
@@ -55,7 +55,7 @@ const AlbumInfo = ({
           {totalSong} songs ~ {totalDuration}
         </Typography>
         <AlbumButtons
-          myCollection={myCollection}
+          myCollection={myCollectionIds}
           albumId={albumId}
           firstSongId={firstSongId}
         />

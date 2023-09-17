@@ -8,9 +8,6 @@ import { mutate } from 'swr';
 // Components
 import Button from '@components/Button';
 
-// Models
-import { Album } from '@models/index';
-
 // Services
 import { updateAlbumToCollection, updateCurrentPlayer } from '@/services/me';
 
@@ -21,11 +18,11 @@ import { APIKey } from '@constants/index';
 import { isAddedAlbum } from '@/utils';
 
 // Types
-import type { UpdateToCollectionRequest } from '@/types';
+import type { CollectionId, UpdateToCollectionRequest } from '@/types';
 
 interface IProp {
   albumId: number;
-  myCollection: Album[];
+  myCollection: CollectionId[];
   firstSongId: number;
 }
 
@@ -33,7 +30,7 @@ const AlbumButtons = ({ albumId, myCollection = [], firstSongId }: IProp) => {
   const currentPath = usePathname();
   const { push, refresh } = useRouter();
 
-  const { albumExists, currentAlbums } = isAddedAlbum(myCollection, albumId);
+  const albumExists = isAddedAlbum(myCollection, albumId);
 
   const updateMyCollection = useCallback(
     async (payload: UpdateToCollectionRequest) => {
@@ -48,20 +45,20 @@ const AlbumButtons = ({ albumId, myCollection = [], firstSongId }: IProp) => {
   );
 
   const handleAddToMyCollection = useCallback(() => {
-    const updatedAlbums = [...currentAlbums, { id: albumId }];
+    const updatedAlbums = [...myCollection, { id: albumId }];
 
     const payload = { albums: updatedAlbums };
 
     updateMyCollection(payload);
-  }, [albumId, currentAlbums, updateMyCollection]);
+  }, [albumId, myCollection, updateMyCollection]);
 
   const handleRemoveFromMyCollection = useCallback(() => {
-    const updatedAlbums = currentAlbums.filter((album) => album.id !== albumId);
+    const updatedAlbums = myCollection.filter((album) => album.id !== albumId);
 
     const payload = { albums: updatedAlbums };
 
     updateMyCollection(payload);
-  }, [albumId, currentAlbums, updateMyCollection]);
+  }, [albumId, myCollection, updateMyCollection]);
 
   const handlePlayAll = useCallback(async () => {
     await updateCurrentPlayer({ song: firstSongId, album: albumId });

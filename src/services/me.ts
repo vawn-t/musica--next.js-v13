@@ -19,7 +19,8 @@ import type {
   GetMyCollectionResponse,
   MeResponse,
   UpdateToCollectionRequest,
-  UpdateCurrentPlayerRequest
+  UpdateCurrentPlayerRequest,
+  GetMyCollectionIdsResponse
 } from '@/types';
 
 // Models
@@ -44,6 +45,16 @@ export const getMyCollection = async () => {
   );
 
   return albums;
+};
+
+export const getMyCollectionIds = async () => {
+  const data = await fetcher<GetMyCollectionIdsResponse>(
+    COLLECTION.getMyCollection,
+    FetchType.default,
+    [TagKey.updateAlbum]
+  );
+
+  return data.albums.map(({ id }: { id: number }) => ({ id }));
 };
 
 export const updateAlbumToCollection = async (
