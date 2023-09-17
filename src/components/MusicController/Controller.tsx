@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import Button from '@components/Button';
 
 // Services
-import { syncRecentlyPlatedAlbums } from '@/services/album';
+import { syncRecentlyPlayedAlbum } from '@/services/album';
 
 interface IProps {
   albumId: number;
@@ -41,7 +41,7 @@ const Controller = ({
 
     if (!playing) {
       const currentTime = new Date().toISOString();
-      syncRecentlyPlatedAlbums(albumId, currentTime);
+      syncRecentlyPlayedAlbum(albumId, currentTime);
     }
   }, [albumId, playing, togglePlaying]);
 

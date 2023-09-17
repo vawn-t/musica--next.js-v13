@@ -1,5 +1,11 @@
 // Constants
-import { ALBUM, AlbumOrderOption, FetchType, TagKey } from '@constants/index';
+import {
+  ALBUM,
+  AlbumOrderOption,
+  FetchType,
+  REVALIDATE,
+  TagKey
+} from '@constants/index';
 
 // Types
 import type {
@@ -20,10 +26,14 @@ import { createAlbum, createAlbums } from '@utils/index';
 // Models
 import { Album } from '@models/index';
 
-export const getAlbumsOrderBy = async (option: AlbumOrderOption) => {
+export const getAlbumsOrderBy = async (
+  option: AlbumOrderOption,
+  key?: TagKey[]
+) => {
   const { data } = await fetcher<GetAlbumsResponse>(
     ALBUM.getAlbumsOrderBy(option),
-    FetchType.isr
+    FetchType.isr,
+    key
   );
 
   const albums: Album[] = createAlbums(data);
@@ -44,7 +54,7 @@ export const getAlbumById = async (id: number) => {
   const { data } = await fetcher<GetAlbumResponse>(
     ALBUM.getAlbumById(id),
     FetchType.default,
-    [TagKey.updateAlbum]
+    [TagKey.UpdateAlbum]
   );
 
   const album = createAlbum(data);
@@ -63,13 +73,19 @@ export const increaseAlbumPlayCount = async (
 export const getAlbumInfo = async (id: number) =>
   await fetcher<GetAlbumInfoResponse>(ALBUM.albumById(id));
 
-export const syncRecentlyPlatedAlbums = async (
+export const syncRecentlyPlayedAlbum = async (
   albumId: number,
   date: string
 ) => {
-  await PUT<SyncRecentlyPlayedAlbum>(ALBUM.albumById(albumId), {
+  const res = await PUT<SyncRecentlyPlayedAlbum>(ALBUM.albumById(albumId), {
     data: {
       recentlyPlayedAt: date
     }
   });
+
+  if (!res.ok) {
+    throw new Error('Failed to sync recently played album');
+  }
+
+  await fetch(REVALIDATE.tag(TagKey.SyncPlayedTime));
 };

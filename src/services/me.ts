@@ -37,7 +37,7 @@ export const getMyCollection = async () => {
   const data = await fetcher<GetMyCollectionResponse>(
     COLLECTION.getMyCollection,
     FetchType.default,
-    [TagKey.updateAlbum]
+    [TagKey.UpdateAlbum]
   );
 
   const albums: Album[] = data.albums.map(
@@ -51,7 +51,7 @@ export const getMyCollectionIds = async () => {
   const data = await fetcher<GetMyCollectionIdsResponse>(
     COLLECTION.getMyCollection,
     FetchType.default,
-    [TagKey.updateAlbum]
+    [TagKey.UpdateAlbum]
   );
 
   return data.albums.map(({ id }: { id: number }) => ({ id }));
@@ -64,7 +64,7 @@ export const updateAlbumToCollection = async (
     await PUT<UpdateToCollectionRequest>(ME.info, albums);
 
     // force data relate to album should update-to-date
-    await fetch(REVALIDATE.tag(TagKey.updateAlbum));
+    await fetch(REVALIDATE.tag(TagKey.UpdateAlbum));
 
     return MessageType.success;
   } catch (error) {
