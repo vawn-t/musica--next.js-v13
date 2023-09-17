@@ -75,6 +75,7 @@ const SongControls = ({
   return (
     <div className='flex flex-col gap-4 sm:grow'>
       <Controller
+        albumId={albumId}
         loop={loop}
         playing={playing}
         toggleShuffled={toggleShuffled}

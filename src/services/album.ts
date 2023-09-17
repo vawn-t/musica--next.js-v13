@@ -7,7 +7,8 @@ import type {
   GetAlbumResponse,
   GetAlbumsResponse,
   GetAllAlbumIdsResponse,
-  IncreasePLaysCountRequest
+  IncreasePLaysCountRequest,
+  SyncRecentlyPlayedAlbum
 } from '@/types';
 
 // Services
@@ -55,9 +56,20 @@ export const increaseAlbumPlayCount = async (
   albumId: number,
   playsCount: number
 ) =>
-  await PUT<IncreasePLaysCountRequest>(ALBUM.increaseAlbumPlayCount(albumId), {
+  await PUT<IncreasePLaysCountRequest>(ALBUM.albumById(albumId), {
     data: { plays: playsCount }
   });
 
 export const getAlbumInfo = async (id: number) =>
-  await fetcher<GetAlbumInfoResponse>(ALBUM.getAlbumInfoById(id));
+  await fetcher<GetAlbumInfoResponse>(ALBUM.albumById(id));
+
+export const syncRecentlyPlatedAlbums = async (
+  albumId: number,
+  date: string
+) => {
+  await PUT<SyncRecentlyPlayedAlbum>(ALBUM.albumById(albumId), {
+    data: {
+      recentlyPlayedAt: date
+    }
+  });
+};

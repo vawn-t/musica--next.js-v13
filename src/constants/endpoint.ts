@@ -12,8 +12,7 @@ export const ALBUM = {
     `/albums/${id}?${queryString({
       populate: 'deep,3'
     })}`,
-  increaseAlbumPlayCount: (id: number) => `/albums/${id}`,
-  getAlbumInfoById: (id: number) => `/albums/${id}`,
+  albumById: (id: number) => `/albums/${id}`,
   getAllAlbumIds: `/albums?fields[0]`
 };
 
