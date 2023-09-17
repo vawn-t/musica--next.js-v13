@@ -17,7 +17,7 @@ type BannerResponse = {
       background: {
         data: {
           attributes: {
-            url: string;
+            hash: string;
           };
         };
       };
@@ -43,7 +43,7 @@ type AlbumResponse = {
     };
     thumbnail: {
       data: {
-        attributes: { url: string };
+        attributes: { hash: string };
       };
     };
   };

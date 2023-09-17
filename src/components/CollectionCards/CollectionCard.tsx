@@ -6,7 +6,6 @@ import { Play } from 'iconsax-react';
 
 // Utils
 import { generatePlaceholder } from '@/utils';
-import imageLoader from '@utils/imageLoader';
 
 // Constants
 import { TagType, ROUTER } from '@constants/index';
@@ -30,7 +29,6 @@ const CollectionCard = ({ id, thumbnail, name }: IProps) => {
         className='object-cover w-full h-auto group-hover:scale-110 duration-300'
         src={thumbnail}
         alt='album image'
-        loader={imageLoader}
         width={224}
         height={224}
         loading='lazy'

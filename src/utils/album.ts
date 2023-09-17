@@ -33,7 +33,7 @@ export const createAlbum = ({
     id,
     attributes: {
       ...restAttributes,
-      thumbnail: restAttributes.thumbnail.data.attributes.url,
+      thumbnail: restAttributes.thumbnail.data.attributes.hash,
       songs: createdSongs,
       duration: albumDuration
     }

@@ -6,7 +6,6 @@ import Typography from '@components/Typography';
 
 // Utils
 import { generatePlaceholder } from '@utils/index';
-import imageLoader from '@utils/imageLoader';
 
 // Constants
 import { TagType } from '@/constants';
@@ -24,7 +23,6 @@ const SongDetail = ({ artists = [], thumbnail, title }: IProps) => {
         alt={title}
         className='rounded'
         src={thumbnail}
-        loader={imageLoader}
         width={48}
         height={48}
         loading='lazy'

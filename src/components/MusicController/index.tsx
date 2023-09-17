@@ -113,7 +113,7 @@ const MusicController = ({}: IProps) => {
         <>
           <SongDetail
             artists={artists}
-            thumbnail={(album?.thumbnail as Thumbnail).url || ''}
+            thumbnail={(album?.thumbnail as Thumbnail).hash || ''}
             title={song?.name || ''}
           />
           <SongControls

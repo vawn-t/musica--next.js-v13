@@ -1,21 +1,27 @@
 'use client';
 
 /**
- * Generates a URL for an image with the specified source, width, and quality.
+ * Generates a Cloudinary URL for the given image source, width, and quality.
  *
- * @param {string} src - The source of the image.
- * @param {number} width - The desired width of the image.
- * @param {number} [quality] - The desired quality of the image (default is 75).
- * @returns {string} - The URL for the image.
+ * @param {object} options - The options for generating the URL.
+ * @param {string} options.hash - The source of the image.
+ * @param {number} options.width - The desired width of the image.
+ * @param {number} [options.quality] - The desired quality of the image.
+ * @return {string} The generated Cloudinary URL.
  */
-const imageLoader = ({
-  src,
+function cloudinaryLoader({
+  src: hash,
   width,
   quality
 }: {
   src: string;
   width: number;
   quality?: number;
-}) => `${src}?w=${width}&q=${quality || 75}`;
+}) {
+  const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`];
+  return `https://res.cloudinary.com/drwsfgt0t/image/upload/${params.join(
+    ','
+  )}/${hash}`;
+}
 
-export default imageLoader;
+export default cloudinaryLoader;

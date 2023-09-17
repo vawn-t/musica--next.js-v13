@@ -6,7 +6,6 @@ import Typography from '@components/Typography';
 import AlbumButtons from './AlbumButtons';
 
 // Utils
-import imageLoader from '@/utils/imageLoader';
 import { generatePlaceholder } from '@utils/index';
 
 // Constants
@@ -42,7 +41,6 @@ const AlbumInfo = ({
         alt={name}
         className='rounded-3xl'
         src={thumbnail}
-        loader={imageLoader}
         loading='lazy'
         height={284}
         width={284}

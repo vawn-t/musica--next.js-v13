@@ -12,7 +12,7 @@ const CollectionCards = ({ cards }: IProps) => (
         key={id}
         id={id}
         name={attributes.name}
-        thumbnail={(attributes.thumbnail as Thumbnail).url}
+        thumbnail={(attributes.thumbnail as Thumbnail).hash}
       />
     ))}
   </div>

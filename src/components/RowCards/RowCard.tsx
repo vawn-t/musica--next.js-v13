@@ -9,7 +9,6 @@ import RowCardButton from './RowCardButton';
 import { TagType, ROUTER } from '@constants/index';
 
 // Utils
-import imageLoader from '@utils/imageLoader';
 import { formatDuration, generatePlaceholder } from '@utils/index';
 
 interface IProps {
@@ -29,7 +28,6 @@ const RowCard = ({ id, name, thumbnail, duration }: IProps) => {
         className='rounded w-24 h-24 sm:w-16 sm:h-16'
         src={thumbnail}
         alt='album image'
-        loader={imageLoader}
         width={96}
         height={96}
         loading='lazy'

@@ -2,11 +2,11 @@ export class Banner {
   description: string;
   title: string;
   url: string;
-  imgUrl: string;
+  imgHash: string;
 
-  constructor({ description, title, imgUrl, url }: Banner) {
+  constructor({ description, title, imgHash: imgUrl, url }: Banner) {
     this.description = description;
-    this.imgUrl = imgUrl;
+    this.imgHash = imgUrl;
     this.title = title;
     this.url = url;
   }

@@ -11,14 +11,13 @@ import { TagType } from '@constants/index';
 import { Banner as BannerType } from '@models/index';
 
 // Utils
-import imageLoader from '@utils/imageLoader';
 import { generatePlaceholder } from '@utils/index';
 
 interface IProps {
   banner: BannerType;
 }
 
-const Banner = ({ banner: { description, title, url, imgUrl } }: IProps) => {
+const Banner = ({ banner: { description, title, url, imgHash } }: IProps) => {
   return (
     <Link
       href={url}
@@ -29,11 +28,10 @@ const Banner = ({ banner: { description, title, url, imgUrl } }: IProps) => {
         priority
         alt='Banner'
         className='absolute object-cover -z-10'
-        src={imgUrl}
+        src={imgHash}
         fill
-        loader={imageLoader}
-        sizes='100%'
-        placeholder={`data:image/${generatePlaceholder(160, 160)}`}
+        sizes='(max-width: 640px) 367px, 900px'
+        placeholder={`data:image/${generatePlaceholder(900, 373)}`}
       />
       <Typography className='font-extrabold' Tag={TagType.h1}>
         {title}

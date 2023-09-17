@@ -14,17 +14,16 @@ import { generatePlaceholder } from '@utils/index';
 interface IProps {
   id: number;
   name: string;
-  thumbnail: string;
+  thumbnailHash: string;
 }
 
-const AlbumCard = ({ id, name, thumbnail }: IProps) => {
+const AlbumCard = ({ id, name, thumbnailHash }: IProps) => {
   return (
     <Link href={ROUTER.goAlbum(id)} className='w-40 cursor-pointer truncate'>
       <div className='rounded-xl overflow-hidden'>
         <Image
-          src={thumbnail}
+          src={thumbnailHash}
           alt='album image'
-          loader={imageLoader}
           width={160}
           height={160}
           loading='lazy'
