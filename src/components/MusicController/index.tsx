@@ -22,9 +22,7 @@ import { APIKey } from '@constants/index';
 // Models
 import { Song, Thumbnail } from '@/models/index';
 
-interface IProps {}
-
-const MusicController = ({}: IProps) => {
+const MusicController = () => {
   const {
     data: { song, album } = {},
     isLoading,

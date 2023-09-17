@@ -7,9 +7,7 @@ import classNames from 'classnames';
 // Constants
 import { MessageType } from '@/constants';
 
-interface IProps {}
-
-const MessagePopup = ({}: IProps) => {
+const MessagePopup = () => {
   const pathName = usePathname();
   const { replace } = useRouter();
   const { get } = useSearchParams();

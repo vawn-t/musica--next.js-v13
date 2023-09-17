@@ -8,7 +8,6 @@ import Typography from '@components/Typography';
 import { TagType, ROUTER } from '@constants/index';
 
 // Utils
-import imageLoader from '@utils/imageLoader';
 import { generatePlaceholder } from '@utils/index';
 
 interface IProps {

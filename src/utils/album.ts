@@ -2,7 +2,7 @@
 import { createSong } from './song';
 
 // Models
-import { Album, Song } from '@models/index';
+import { Album } from '@models/index';
 
 // Types
 import { AlbumResponse, CollectionId } from '@/types';

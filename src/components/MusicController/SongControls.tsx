@@ -1,4 +1,4 @@
-import { MouseEvent, memo, useCallback, useState } from 'react';
+import { MouseEvent, memo, useCallback } from 'react';
 import { mutate } from 'swr';
 
 // Components
