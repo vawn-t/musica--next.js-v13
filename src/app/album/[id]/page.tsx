@@ -14,7 +14,7 @@ import { MessageType } from '@/constants';
 // Components
 import SkeletonCollection from '@/components/Loading/SkeletonCollection';
 import SkeletonRaw from '@/components/Loading/SkeletonRow';
-import MessagePopup from '@/components/MessagePopup';
+import MessagePopup from '@/components/Popup';
 import Spinner from '@/components/Loading/Spinner';
 const AlbumInfo = dynamic(() => import('@components/AlbumInfo'));
 const Songs = dynamic(() => import('@components/Songs'));

@@ -2,7 +2,7 @@
 import { createSong } from './song';
 
 // Models
-import { Album } from '@models/index';
+import { Album, Artist } from '@models/index';
 
 // Types
 import { AlbumResponse, CollectionId } from '@/types';
@@ -64,4 +64,8 @@ export const isAddedAlbum = (
   const albumExists = collection.some((album) => album.id === currentAlbumId);
 
   return albumExists;
+};
+
+export const getArtistNames = (artists: Artist[]): string => {
+  return artists.map((artist: Artist) => artist.attributes.name).join(', ');
 };

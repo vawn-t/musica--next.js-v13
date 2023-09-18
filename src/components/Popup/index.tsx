@@ -26,6 +26,7 @@ const MessagePopup = () => {
     setStatus(status);
     setHidden(false);
 
+    // TODO: break out
     const displayInterval: any = setInterval(() => {
       setHidden(true);
 
@@ -36,7 +37,7 @@ const MessagePopup = () => {
     return () => {
       clearInterval(displayInterval);
     };
-  }, [get, replace, pathName]);
+  }, []);
 
   return (
     <div
