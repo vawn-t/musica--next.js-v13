@@ -97,13 +97,7 @@
 - Checkout branch:
 
   ```bash
-  $ git checkout develop
-  ```
-
-- Change directory:
-
-  ```bash
-  $ cd musica
+  $ git checkout next.js-13-practice
   ```
 
 - Install packages:
