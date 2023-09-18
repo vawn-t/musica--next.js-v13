@@ -1,5 +1,5 @@
-import SkeletonHomePage from '@/components/Loading/SkeletonHomePage';
+import SkeletonHome from '@/components/Loading/SkeletonHome';
 
 export default function Loading() {
-  return <SkeletonHomePage />;
+  return <SkeletonHome />;
 }

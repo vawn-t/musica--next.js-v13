@@ -12,7 +12,7 @@ import { formatDuration } from '@utils/index';
 import { MessageType } from '@/constants';
 
 // Components
-import SkeletonCollectionPage from '@/components/Loading/SkeletonCollectionPage';
+import SkeletonCollection from '@/components/Loading/SkeletonCollection';
 import SkeletonRaw from '@/components/Loading/SkeletonRow';
 import MessagePopup from '@/components/MessagePopup';
 import Spinner from '@/components/Loading/Spinner';
@@ -39,7 +39,7 @@ const Album = async ({ params }: IProp) => {
       <Suspense fallback={<Spinner />}>
         <MessagePopup />
       </Suspense>
-      <Suspense fallback={<SkeletonCollectionPage />}>
+      <Suspense fallback={<SkeletonCollection />}>
         <AlbumInfo
           albumId={id}
           myCollectionIds={myCollectionIds}
