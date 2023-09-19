@@ -21,6 +21,7 @@ const Item = ({ name, route, icon: Icon }: IProps) => {
       className={classNames('flex gap-6', {
         ['opacity-25']: pathname !== route
       })}
+      aria-label={name}
     >
       <Icon className='text-secondary' variant='Bold' size={28} />
       <Typography Tag={TagType.h4} className={'sm:hidden font-bold'}>
