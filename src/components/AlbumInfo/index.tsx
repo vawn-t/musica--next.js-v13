@@ -7,6 +7,7 @@ import AlbumButtons from './AlbumButtons';
 
 // Utils
 import { generatePlaceholder } from '@utils/index';
+import cloudinaryLoader from '@/utils/imageLoader';
 
 // Constants
 import { TagType } from '@constants/index';
@@ -41,6 +42,7 @@ const AlbumInfo = ({
         alt={name}
         className='rounded-3xl'
         src={thumbnail}
+        loader={cloudinaryLoader}
         loading='lazy'
         height={284}
         width={284}
