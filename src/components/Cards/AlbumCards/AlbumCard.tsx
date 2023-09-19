@@ -9,6 +9,7 @@ import { TagType, ROUTER } from '@constants/index';
 
 // Utils
 import { generatePlaceholder } from '@utils/index';
+import cloudinaryLoader from '@/utils/imageLoader';
 
 interface IProps {
   id: number;
@@ -25,6 +26,7 @@ const AlbumCard = ({ id, name, thumbnailHash }: IProps) => {
           alt='album image'
           width={160}
           height={160}
+          loader={cloudinaryLoader}
           loading='lazy'
           placeholder={`data:image/${generatePlaceholder(160, 160)}`}
           style={{ objectFit: 'contain', width: '100%', height: 'auto' }}

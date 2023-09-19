@@ -1,5 +1,5 @@
-import SkeletonAlbumPage from '@/components/Loading/SkeletonAlbumPage';
+import SkeletonAlbum from '@/components/Loading/SkeletonAlbum';
 
 export default function Loading() {
-  return <SkeletonAlbumPage />;
+  return <SkeletonAlbum />; //naming
 }

@@ -14,8 +14,8 @@ const SkeletonImage = dynamic(
   () => import('@components/Loading/SkeletonImage')
 );
 const Typography = dynamic(() => import('@components/Typography'));
-const RowCards = dynamic(() => import('@components/RowCards'));
-const AlbumCards = dynamic(() => import('@components/AlbumCards'));
+const RowCards = dynamic(() => import('@/components/Cards/RowCards'));
+const AlbumCards = dynamic(() => import('@/components/Cards/AlbumCards'));
 const BannerComponent = dynamic(() => import('@components/Banner'));
 
 const Home = async () => {

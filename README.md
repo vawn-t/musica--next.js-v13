@@ -123,3 +123,9 @@
 ## DEPLOYMENT
 
 - https://musica-app-topaz.vercel.app
+
+## GOOD TO APPLY
+
+- [million.dev](https://million.dev/)`<For />` and `block()`
+- OG Image Generation Vercel
+- Use library to handle music player

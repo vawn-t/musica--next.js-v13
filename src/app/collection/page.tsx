@@ -2,7 +2,9 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 // Components
-const CollectionCards = dynamic(() => import('@components/CollectionCards'));
+const CollectionCards = dynamic(
+  () => import('@/components/Cards/CollectionCards')
+);
 const Button = dynamic(() => import('@components/Button'));
 const SkeletonImage = dynamic(
   () => import('@components/Loading/SkeletonImage')

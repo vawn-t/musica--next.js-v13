@@ -3,9 +3,9 @@ import { Navigation } from '@models/index';
 
 export const NAVIGATION: Navigation[] = [
   {
-    id: 'app/home',
+    id: 'app/',
     name: 'Home',
-    route: '/home',
+    route: '/',
     icon: Home2
   },
   {

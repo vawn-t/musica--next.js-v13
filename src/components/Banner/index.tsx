@@ -12,6 +12,7 @@ import { Banner as BannerType } from '@models/index';
 
 // Utils
 import { generatePlaceholder } from '@utils/index';
+import cloudinaryLoader from '@/utils/imageLoader';
 
 interface IProps {
   banner: BannerType;
@@ -28,6 +29,7 @@ const Banner = ({ banner: { description, title, url, imgHash } }: IProps) => {
         priority
         alt='Banner'
         className='absolute object-cover -z-10'
+        loader={cloudinaryLoader}
         src={imgHash}
         fill
         sizes='(max-width: 640px) 367px, 900px'
