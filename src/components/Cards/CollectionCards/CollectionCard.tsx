@@ -6,6 +6,7 @@ import { Play } from 'iconsax-react';
 
 // Utils
 import { generatePlaceholder } from '@/utils';
+import cloudinaryLoader from '@/utils/imageLoader';
 
 // Constants
 import { TagType, ROUTER } from '@constants/index';
@@ -31,6 +32,7 @@ const CollectionCard = ({ id, thumbnail, name }: IProps) => {
         alt='album image'
         width={224}
         height={224}
+        loader={cloudinaryLoader}
         loading='lazy'
         placeholder={`data:image/${generatePlaceholder(224, 224)}`}
       />

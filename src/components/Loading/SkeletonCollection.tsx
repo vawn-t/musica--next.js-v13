@@ -1,4 +1,4 @@
-const SkeletonCollectionPage = () => (
+const SkeletonCollection = () => (
   <div
     role='status'
     className='space-y-8 animate-pulse md:space-y-0 md:space-x-6 md:flex md:items-center'
@@ -39,4 +39,4 @@ const SkeletonCollectionPage = () => (
   </div>
 );
 
-export default SkeletonCollectionPage;
+export default SkeletonCollection;

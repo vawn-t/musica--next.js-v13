@@ -9,7 +9,7 @@ import { VoiceSquare } from 'iconsax-react';
 import Typography from '@components/Typography';
 
 // Utils
-import { formatDuration } from '@utils/index';
+import { formatDuration, getArtistNames } from '@utils/index';
 
 // Services
 import { updateCurrentPlayer } from '@/services/me';
@@ -59,8 +59,7 @@ const Song = ({
         {index}
       </Typography>
       <Typography className='row-span-2 col-span-4 flex items-center'>
-        {name} ~{' '}
-        {artists.map((artist: Artist) => artist.attributes.name).join(', ')}
+        {name} ~ {getArtistNames(artists)}
       </Typography>
       <VoiceSquare
         className={classNames(

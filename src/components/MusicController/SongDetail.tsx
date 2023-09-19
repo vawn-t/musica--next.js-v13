@@ -6,6 +6,7 @@ import Typography from '@components/Typography';
 
 // Utils
 import { generatePlaceholder } from '@utils/index';
+import cloudinaryLoader from '@/utils/imageLoader';
 
 // Constants
 import { TagType } from '@/constants';
@@ -25,6 +26,7 @@ const SongDetail = ({ artists = [], thumbnail, title }: IProps) => {
         src={thumbnail}
         width={48}
         height={48}
+        loader={cloudinaryLoader}
         loading='lazy'
         placeholder={`data:image/${generatePlaceholder(48, 48)}`}
       />

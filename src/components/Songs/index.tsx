@@ -2,7 +2,7 @@
 import { Song as SongModel } from '@/models';
 
 // Components
-import Song from './song';
+import Song from './SongComponent';
 
 interface IProps {
   songs: SongModel[];

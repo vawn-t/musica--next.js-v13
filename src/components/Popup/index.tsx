@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import classNames from 'classnames';
 
@@ -15,6 +15,13 @@ const MessagePopup = () => {
   const [hidden, setHidden] = useState(true);
   const [status, setStatus] = useState<MessageType | null>(null);
 
+  const displayIntervalCallback = useCallback(() => {
+    setHidden(true);
+
+    // remove search param
+    replace(pathName);
+  }, [replace, pathName]);
+
   useEffect(() => {
     const status = get('popup') as MessageType;
 
@@ -26,17 +33,12 @@ const MessagePopup = () => {
     setStatus(status);
     setHidden(false);
 
-    const displayInterval: any = setInterval(() => {
-      setHidden(true);
-
-      // remove search param
-      replace(pathName);
-    }, 3000);
+    const displayInterval = setInterval(displayIntervalCallback, 3000);
 
     return () => {
       clearInterval(displayInterval);
     };
-  }, [get, replace, pathName]);
+  }, [get, displayIntervalCallback]);
 
   return (
     <div
